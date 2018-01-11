@@ -325,7 +325,7 @@
           @if(Auth::user())
           <p>{{ Auth::user()->name }}</p>
           @endif
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> En ligne</a>
         </div>
       </div>
       <!-- search form -->
@@ -350,17 +350,16 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span>Alertes</span>
+            <span>Personnel</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">4</span>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/admin/alertes/2"><i class="fa fa-circle-o"></i> Alertes Traitées</a></li>
-            <li><a href="/admin/alertes/1"><i class="fa fa-circle-o"></i> Alertes Validées</a></li>
-            <li><a href="/admin/alertes/0"><i class="fa fa-circle-o"></i> Alertes Non Validées</a></li>
-            <li><a href="/admin/alertes/create"><i class="fa fa-circle-o"></i> Soumettre</a></li>
-            <li><a href="/admin/newcategoriealerte"><i class="fa fa-circle-o"></i> Catégories Alertes</a></li>
+            <li><a href="/admin/alertes/2"><i class="fa fa-circle-o"></i> Personnel administratif</a></li>
+            <li><a href="/admin/alertes/1"><i class="fa fa-circle-o"></i> Personnel permanent</a></li>
+            <li><a href="/admin/alertes/0"><i class="fa fa-circle-o"></i> Personnel contractel</a></li>
+            <li><a href="/admin/alertes/create"><i class="fa fa-circle-o"></i> Ajouter</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -385,9 +384,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Contributeurs</a></li>
-            <li><a href="/users"><i class="fa fa-circle-o"></i> Administration</a></li>
-            <li><a href="/services/create"><i class="fa fa-circle-o"></i> Services</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Administration</a></li>
+            <li><a href="/users"><i class="fa fa-circle-o"></i> Coordination</a></li>
+            <li><a href="/users"><i class="fa fa-circle-o"></i> Utilisateurs simples</a></li>
             <li><a href="/roles/create"><i class="fa fa-circle-o"></i> Rôles</a></li>
           </ul>
         </li>
@@ -400,10 +399,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Alertes</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Evénements</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Anomalies</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Groupes</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Personnel permanent</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Personnel contractuel</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -452,29 +449,6 @@
             </span>
           </a>
         </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-envelope"></i> <span>Annonces</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-list"></i> <span>Partenaires</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-th-list"></i> <span>Publicités</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-        </li>
-        <li><a href=""><i class="fa fa-comments"></i> <span>Commentaires</span></a></li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-map"></i> <span>Circonscriptions</span>
@@ -483,26 +457,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/regions/create"><i class="fa fa-circle-o"></i> Régions</a></li>
-            <li><a href="/poles/create"><i class="fa fa-circle-o"></i> Pôles</a></li>
-            <li><a href="/departements/create"><i class="fa fa-circle-o"></i> Départements</a></li>
+            <li><a href="/departement/create"><i class="fa fa-circle-o"></i> Coordination Départemental</a></li>
+            <li><a href="/poles/create"><i class="fa fa-circle-o"></i> Coordination de Pôle</a></li>
             <li><a href="/communes/create"><i class="fa fa-circle-o"></i> Communes</a></li>
             <li><a href="/circuits/create"><i class="fa fa-circle-o"></i> Circuits</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-gear"></i> <span>Parametres</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="/admin/newsecteur"><i class="fa fa-circle-o"></i> Secteurs d'Intervention</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Badges</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Récompenses</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Contacts</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> A propos</a></li>
           </ul>
         </li>
         <li><a href="#"><i class="fa fa-share"></i> <span>Feedbacks</span></a></li>
