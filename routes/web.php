@@ -22,3 +22,11 @@ Route::get('/admin', function () {
 Route::get('/employe', function () {
     return view('employes.create');
 });
+
+Route::resource('employes', 'EmployeController');
+Route::resource('banques', 'BanqueController');
+Route::resource('communes', 'CommuneController');
+Route::resource('departementales', 'CoordinationDepartementaleController');
+Route::resource('poles', 'CoordinationPoleController');
+Route::resource('services', 'ServiceController');
+Route::resource('corps', 'CorpsMetierController');

@@ -13,7 +13,7 @@ class BanqueController extends Controller
      */
     public function index()
     {
-        //
+        return view('banques.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class BanqueController extends Controller
      */
     public function create()
     {
-        //
+        return view('banques.create');
     }
 
     /**

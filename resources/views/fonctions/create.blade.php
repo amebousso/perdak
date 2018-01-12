@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', 'Corps de Métier')
+@section('title', 'Fonctions')
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -13,11 +13,10 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="/admin"><i class="fa fa-dashboard"></i> Accueil</a></li>
-      <li><a href="/corps">Corps de Mérier</a></li>
+      <li><a href="/fonctions"> Fonctions</a></li>
       <li class="active">Ajouter</li>
     </ol>
   </section>
-
   <!-- Main content -->
   <section class="content">
     <div class="row">
@@ -27,12 +26,12 @@
         <!-- Horizontal Form -->
         <div class="box box-info">
           <div class="box-header with-border">
-            <h3 class="box-title">Information du Corps de Métier</h3>
+            <h3 class="box-title">Information de la fonction</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
             <div class="form-group">
-              <label for="exampleInputlibelle">Titre du corps</label>
+              <label for="exampleInputlibelle">Nom de la fonction</label>
               <input type="text" name="libelle" class="form-control" id="exampleInputlibelle" placeholder="Titre du corps">
             </div>
           </div>

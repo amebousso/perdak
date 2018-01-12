@@ -356,10 +356,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/admin/alertes/2"><i class="fa fa-circle-o"></i> Personnel administratif</a></li>
+            <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel administratif</a></li>
             <li><a href="/admin/alertes/1"><i class="fa fa-circle-o"></i> Personnel permanent</a></li>
             <li><a href="/admin/alertes/0"><i class="fa fa-circle-o"></i> Personnel contractel</a></li>
-            <li><a href="/admin/alertes/create"><i class="fa fa-circle-o"></i> Ajouter</a></li>
+            <li><a href="/employes/create"><i class="fa fa-circle-o"></i> Ajouter</a></li>
           </ul>
         </li>
         <li class="treeview">
