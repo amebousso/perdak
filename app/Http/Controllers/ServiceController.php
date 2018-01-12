@@ -38,7 +38,7 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $service = new Service;
-        $service->libelle = $equest->input('libelle');
+        $service->libelle = $request->input('libelle');
         $service->save();
 
         return redirect()->back()->with('success', 'Service ajoute avec succes');
@@ -80,7 +80,7 @@ class ServiceController extends Controller
     public function update(Request $request, $id)
     {
       $service = Service::find($id);
-      $service->libelle = $equest->input('libelle');
+      $service->libelle = $request->input('libelle');
       $service->save();
 
       return redirect()->back()->with('success', 'Service ajoute avec succes');

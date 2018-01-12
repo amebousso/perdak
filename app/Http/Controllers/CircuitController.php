@@ -72,7 +72,7 @@ class CircuitController extends Controller
     public function edit($id)
     {
       $circuit = Circuit::find($id);
-      $communes = Commune::all();
+      $communes = Commune::all()->pluck('libelle', 'id');
 
       return view('circuits.edit', compact('circuit', 'communes'));
     }

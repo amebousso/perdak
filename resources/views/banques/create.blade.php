@@ -17,7 +17,6 @@
       <li class="active">Ajouter</li>
     </ol>
   </section>
-
   <!-- Main content -->
   <section class="content">
     <div class="row">
@@ -34,6 +33,12 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
+            @if(session()->has('success'))
+            <div class="callout callout-success">
+              <h4>Succès</h4>
+              {!! $success !!}
+            </div>
+            @endif
             <div class="form-group">
               <label for="exampleInputlibelle">Libelle</label>
               <input type="text" name="libelle" class="form-control" id="exampleInputlibelle" placeholder="Nom de la Banque">
@@ -63,5 +68,4 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
 @endsection

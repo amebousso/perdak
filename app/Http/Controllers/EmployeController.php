@@ -40,7 +40,7 @@ class EmployeController extends Controller
         $banques = Banque::all();
         $services = Service::all();
         $poles = CoordinationDePole::all();
-        $departementales = CoordinationDepartementale::all();
+        //$departementales = CoordinationDepartementale::all();
         $corps = CorpsDeMetier::all();
 
         return view('employes.create', compact('banques', 'services', 'poles', 'departementales', 'corps'));
@@ -145,5 +145,45 @@ class EmployeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function celluleService(Request $request)
+    {
+      # code...
+      $cellules = Cellule::select('id', 'libelle')->where('service_id', $request->input('id'));
+
+      return response()->json($cellules);
+    }
+
+    public function fonctionCorps(Request $request)
+    {
+      # code...
+      $fonctions = Fonction::select('id', 'libelle')->where('corpsdemetier_id', $request->input('id'));
+
+      return response()->json($fonctions);
+    }
+
+    public function departementPole(Request $request)
+    {
+      # code...
+      $departements = CoordinationDepartementale::select('id', 'libelle')->where('pole_id', $request->input('id'));
+
+      return response()->json($departements);
+    }
+
+    public function communeDepartement(Request $request)
+    {
+      # code...
+      $communes = Commune::select('id', 'libelle')->where('departement_id', $request->input('id'));
+
+      return response()->json($communes);
+    }
+
+    public function circuitCommune(Request $request)
+    {
+      # code...
+      $circuit = Circuit::select('id', 'libelle')->where('commune_id', $request->input('id'));
+
+      return response()->json($circuit);
     }
 }

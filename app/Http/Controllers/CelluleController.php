@@ -70,7 +70,7 @@ class CelluleController extends Controller
     public function edit($id)
     {
       $cellule = Cellule::find($id);
-      $services = Service::all();
+      $services = Service::all()->pluck('libelle', 'id');
 
       return view('cellules.edit', compact('cellule', 'services'));
     }

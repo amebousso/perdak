@@ -12,7 +12,7 @@ class Fonction extends Model
 
   public function corpsDeMetier()
   {
-      return $this->belongsTo('App\CorpsDeMetier');
+      return $this->belongsTo('App\CorpsDeMetier', 'corpsdemetier_id');
   }
 
   public function employes()

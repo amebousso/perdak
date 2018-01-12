@@ -12,7 +12,7 @@ class Commune extends Model
 
   public function coordinationDepartement()
   {
-      return $this->belongsTo('App\CoordinationDepartementale');
+      return $this->belongsTo('App\CoordinationDepartementale', 'departement_id');
   }
 
   public function circuits()

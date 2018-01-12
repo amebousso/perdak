@@ -68,7 +68,7 @@ class CommuneController extends Controller
      */
     public function edit($id)
     {
-      $coordinationDepartements = CoordinationDepartementale::all();
+      $coordinationDepartements = CoordinationDepartementale::all()->pluck('libelle', 'id');
       $commune = Commune::find($id);
 
       return view('communes.edit', compact('coordinationDepartements', 'commune'));

@@ -16,7 +16,7 @@ class CorpsMetierController extends Controller
     {
         $corpsDeMetiers = CorpsDeMetier::all();
 
-        return view('corpsMetier.index', compact('CorpsDeMetier'));
+        return view('corpsMetier.index', compact('corpsDeMetiers'));
     }
 
     /**
@@ -52,9 +52,9 @@ class CorpsMetierController extends Controller
      */
     public function show($id)
     {
-        $coprsDeMetier = CorpsDeMetier::find($id);
+        $corpsDeMetier = CorpsDeMetier::find($id);
 
-        return view('corpsMetier.show', compact('corpsMetier'));
+        return view('corpsMetier.show', compact('corpsDeMetier'));
     }
 
     /**
@@ -65,9 +65,9 @@ class CorpsMetierController extends Controller
      */
     public function edit($id)
     {
-      $coprsDeMetier = CorpsDeMetier::find($id);
+      $corpsdeMetier = CorpsDeMetier::find($id);
 
-      return view('corpsMetier.edit', compact('corpsMetier'));
+      return view('corpsMetier.edit', compact('corpsdeMetier'));
     }
 
     /**
@@ -79,9 +79,9 @@ class CorpsMetierController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $coprsDeMetier = CorpsDeMetier::find($id);
-      $corpsDeMetier->libelle = $request->input('libelle');
-      $corpsDeMetier->save();
+      $coprs = CorpsDeMetier::find($id);
+      $corps->libelle = $request->input('libelle');
+      $corps->save();
 
       return redirect()->back()->with('success', 'Corps de metier mis a jour avec succes');
     }

@@ -27,8 +27,8 @@ class FonctionController extends Controller
      */
     public function create()
     {
-        $corpsDeMetiers = CorpsDeMetier::all();
-        return view('fonctions.create', compact('$corpsDeMetiers'));
+        $corpsMetiers = CorpsDeMetier::all();
+        return view('fonctions.create', compact('corpsMetiers'));
     }
 
     /**
@@ -69,9 +69,9 @@ class FonctionController extends Controller
     public function edit($id)
     {
       $fonction = Fonction::find($id);
-      $corpsDeMetiers = CorpsDeMetier::all();
+      $corpsDeMetiers = CorpsDeMetier::all()->pluck('libelle', 'id');
 
-      return view('fonctions.edit', compact('fonction', '$corpsDeMetiers'));
+      return view('fonctions.edit', compact('fonction', 'corpsDeMetiers'));
     }
 
     /**

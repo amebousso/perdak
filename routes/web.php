@@ -19,14 +19,19 @@ Route::get('/admin', function () {
     return view('welcome');
 });
 
-Route::get('/employe', function () {
-    return view('employes.create');
-});
-
 Route::resource('employes', 'EmployeController');
 Route::resource('banques', 'BanqueController');
 Route::resource('communes', 'CommuneController');
-Route::resource('departementales', 'CoordinationDepartementaleController');
-Route::resource('poles', 'CoordinationPoleController');
+Route::resource('circuits', 'CircuitController');
+Route::resource('coordinationDepartementales', 'CoordinationDepartementaleController');
+Route::resource('coordinationPoles', 'CoordinationPoleController');
 Route::resource('services', 'ServiceController');
-Route::resource('corps', 'CorpsMetierController');
+Route::resource('cellules', 'CelluleController');
+Route::resource('corpsMetier', 'CorpsMetierController');
+Route::resource('fonctions', 'FonctionController');
+
+Route::get('/celluleService/{id}', 'EmployeController@celluleService');
+Route::get('/fonctionCorps/{id}', 'EmployeController@fonctionCorps');
+Route::get('/departementPole/{id}', 'EmployeController@departementPole');
+Route::get('/communesDpt/{id}', 'EmployeController@communeDepartement');
+Route::get('/circuitCommune/{id}', 'EmployeController@circuitCommune');

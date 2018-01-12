@@ -13,7 +13,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="/admin"><i class="fa fa-dashboard"></i> Accueil</a></li>
-      <li><a href="#">Personnel</a></li>
+      <li><a href="/employes">Personnel</a></li>
       <li class="active">Ajouter</li>
     </ol>
   </section>
@@ -45,7 +45,7 @@
                 <input type="date" name="dateNaissance" class="form-control" id="exampleInputNaissance" placeholder="Date de naissance">
               </div>
               <div class="form-group">
-                <label for="exampleInputLieu">Nom</label>
+                <label for="exampleInputLieu">Lieu de Naissance</label>
                 <input type="text" name="lieuNaissance" class="form-control" id="exampleInputLieu" placeholder="Lieu de naissance">
               </div>
               <div class="form-group">
@@ -89,7 +89,7 @@
               </div>
               <div class="form-group">
                 <label>Cellule</label>
-                <select class="form-control" name="cellule_id">
+                <select class="form-control" name="cellule_id" id="cellule">
                   <option>::: Cellule :::</option>
 
                 </select>
@@ -105,7 +105,7 @@
               </div>
               <div class="form-group">
                 <label>Fonction</label>
-                <select class="form-control" name="fonction_id">
+                <select class="form-control" name="fonction_id" id="fonction">
                   <option>:::Fonction:::</option>
                 </select>
               </div>
@@ -145,11 +145,17 @@
           <div class="box-body">
             <div class="form-group">
               <label>Coordination</label>
-              <select class="form-control" id="coordination">
+              <select class="form-control" id="departement">
                 <option>:::: Sélectionne la coordination ::::</option>
-                <?php foreach ($departementales as $departement): ?>
-                  <option value="{!! $departement->id !!}">{!! $departement->libelle !!}</option>
+                <?php foreach ($poles as $pole): ?>
+                  <option value="{!! $pole->id !!}">{!! $pole->libelle !!}</option>
                 <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Coordination départementale</label>
+              <select class="form-control" id="departement">
+                <option>::: Sélectionne la Coordination :::</option>
               </select>
             </div>
             <div class="form-group">
@@ -160,7 +166,7 @@
             </div>
             <div class="form-group">
               <label>Circuit d'affectation</label>
-              <select class="form-control" name="circuit_id">
+              <select class="form-control" name="circuit_id" id="circuit">
                 <option>::: Circuit :::</option>
               </select>
             </div>
@@ -263,3 +269,111 @@
 </div>
 <!-- /.content-wrapper -->
 @endsection
+@section('script')
+	<script type="text/javascript">
+		$(function() {
+  		// Changement de région
+  		$('#service').on('change', function(e) {
+  			var service_id = e.target.value;
+  			//departement_id = false;
+  			celluleUpdate(service_id);
+  		});
+
+  		$('#corps').on('change', function(e){
+  			var corps_id = e.target.value;
+
+  			fonctionUpdate(corps_id);
+  		});
+  		 // Requête Ajax pour les departements
+	    function celluleUpdate(celluleId) {
+	        $.get('{{ url('celluleService') }}/'+ celluleId + "'", function(data) {
+	            $('#cellule').empty();
+	            $.each(data, function(index, cellule) {
+	                $('#cellule').append($('<option>', {
+	                    value: cellule.id,
+	                    text : cellule.libelle
+	                }));
+	            });
+	            //var departement_id = $('#departement option:selected').val();
+	            //communeUpdate(departement_id);
+	        });
+	    }
+	    // Requête Ajax pour les communes
+	    function fonctionUpdate(fonctionId) {
+	        $.get('{{ url('fonctionCorps') }}/'+ fonctionId + "'", function(data) {
+	            $('#fonction').empty();
+	            $.each(data, function(index, fonction) {
+	                $('#fonction').append($('<option>', {
+	                    value: fonction.id,
+	                    text : fonction.libelle
+	                }));
+	            });
+	        });
+	    }
+
+      // Changement de région
+  		$('#pole').on('change', function(e) {
+  			var pole_id = e.target.value;
+  			//departement_id = false;
+  			departementUpdate(pole_id);
+  		});
+
+  		$('#departement').on('change', function(e){
+  			var departement_id = e.target.value;
+
+  			communeUpdate(departement_id);
+  		});
+
+      $('#commune').on('change', function(e){
+  			var commune_id = e.target.value;
+
+  			circuitUpdate(commune_id);
+  		});
+
+
+  		 // Requête Ajax pour les departements
+	    function departementUpdate(poleId) {
+	        $.get('{{ url('departementPole') }}/'+ poleId + "'", function(data) {
+	            $('#departement').empty();
+	            $.each(data, function(index, departements) {
+	                $('#departement').append($('<option>', {
+	                    value: departements.id,
+	                    text : departements.libelle
+	                }));
+	            });
+	            var departement_id = $('#departement option:selected').val();
+	            communeUpdate(departement_id);
+	        });
+	    }
+
+	    // Requête Ajax pour les communes
+	    function communeUpdate(departementId) {
+	        $.get('{{ url('communesDpt') }}/'+ departementId + "'", function(data) {
+	            $('#commune').empty();
+	            $.each(data, function(index, communes) {
+	                $('#commune').append($('<option>', {
+	                    value: communes.id,
+	                    text : communes.libelle
+	                }));
+	            });
+              var commune_id = $('#commune option:selected').val();
+	            circuitUpdate(commune_id);
+	        });
+	    }
+
+      // Requête Ajax pour les circuits
+	    function circuitUpdate(communeId) {
+	        $.get('{{ url('circuitCommune') }}/'+ communeId + "'", function(data) {
+	            $('#circuit').empty();
+	            $.each(data, function(index, circuit) {
+	                $('#circuit').append($('<option>', {
+	                    value: circuit.id,
+	                    text : circuit.libelle
+	                }));
+	            });
+	        });
+	    }
+
+  	});
+	</script>
+@stop

@@ -13,7 +13,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="/admin"><i class="fa fa-dashboard"></i> Accueil</a></li>
-      <li><a href="/corps">Corps de Mérier</a></li>
+      <li><a href="/corpsMetier">Corps de Métier</a></li>
       <li class="active">Ajouter</li>
     </ol>
   </section>
@@ -21,7 +21,7 @@
   <!-- Main content -->
   <section class="content">
     <div class="row">
-      {!! Form::open(['route' => 'corps.store', 'role' => 'form']) !!}
+      {!! Form::open(['route' => 'corpsMetier.store', 'role' => 'form']) !!}
       <!-- right column -->
       <div class="col-md-6">
         <!-- Horizontal Form -->

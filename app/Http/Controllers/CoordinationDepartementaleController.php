@@ -15,7 +15,7 @@ class CoordinationDepartementaleController extends Controller
      */
     public function index()
     {
-        $coordinationDepartements = CoordinationDepartementale()::all();
+        $coordinationDepartements = CoordinationDepartementale::all();
 
         return view('coordinationDepartementales.index', compact('coordinationDepartements'));
     }
@@ -71,7 +71,7 @@ class CoordinationDepartementaleController extends Controller
     public function edit($id)
     {
       $coordinationDepartement = CoordinationDepartementale::find($id);
-      $poles = CoordinationDePole::all();
+      $poles = CoordinationDePole::all()->pluck('libelle', 'id');
 
       return view('coordinationDepartementales.edit', compact('coordinationDepartement', 'poles'));
     }

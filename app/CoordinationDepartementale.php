@@ -12,7 +12,7 @@ class CoordinationDepartementale extends Model
 
   public function coordinationPole()
   {
-      return $this->belongsTo('App\CoordinationDePole');
+      return $this->belongsTo('App\CoordinationDePole', 'pole_id');
   }
 
   public function communes()
