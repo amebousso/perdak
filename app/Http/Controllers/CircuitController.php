@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Service;
+use App\Commune;
+use App\Circuit;
 
-class ServiceController extends Controller
+class CircuitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        $circuits = Circuit::all();
 
-        return view('services.index', compact('services'));
+        return view('circuits.index', compact('circuits'));
     }
 
     /**
@@ -26,7 +27,9 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('services.create');
+        $communes = Commune::all();
+
+        return view('circuits.create', compact('communes'));
     }
 
     /**
@@ -37,11 +40,14 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $service = new Service;
-        $service->libelle = $equest->input('libelle');
-        $service->save();
+        $circuit = new Circuit;
+        $circuit->code = $request->input('code');
+        $circuit->libelle = $request->input('libelle');
+        $circuit->commune_id = $request->input('commune_id');
+        $circuit->save();
 
-        return redirect()->back()->with('success', 'Service ajoute avec succes');
+        return redirect()->back()->with('success', 'Circuit ajoute avec succes');
+
     }
 
     /**
@@ -52,9 +58,9 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        $service = Service::find($id);
+        $circuit = Circuit::find($id);
 
-        return view('services.show', compact('service'));
+        return view('circuits.show', compact('circuit'));
     }
 
     /**
@@ -65,9 +71,10 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-      $service = Service::find($id);
+      $circuit = Circuit::find($id);
+      $communes = Commune::all();
 
-      return view('services.edit', compact('service'));
+      return view('circuits.edit', compact('circuit', 'communes'));
     }
 
     /**
@@ -79,11 +86,13 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $service = Service::find($id);
-      $service->libelle = $equest->input('libelle');
-      $service->save();
+      $circuit = Circuit::find($id);
+      $circuit->code = $request->input('code');
+      $circuit->libelle = $request->input('libelle');
+      $circuit->commune_id = $request->input('commune_id');
+      $circuit->save();
 
-      return redirect()->back()->with('success', 'Service ajoute avec succes');
+      return redirect()->back()->with('success', 'Circuit ajoute avec succes');
     }
 
     /**

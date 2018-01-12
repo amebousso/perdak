@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Banque;
 
 class BanqueController extends Controller
 {
@@ -13,7 +14,8 @@ class BanqueController extends Controller
      */
     public function index()
     {
-        return view('banques.index');
+        $banques = Banque::all();
+        return view('banques.index', ['banques' => $banques]);
     }
 
     /**
@@ -34,7 +36,13 @@ class BanqueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $banque = new Banque;
+        $banque->code = $request->input('code');
+        $banque->iban = $request->input('iban');
+        $banque->libelle = $request->input('libelle');
+        $banque->save();
+
+        return redirect()->back()->with('success', 'Banque ajoutee avec succes');
     }
 
     /**
@@ -45,7 +53,7 @@ class BanqueController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('banques.show', ['banque' => Banque::find($id)]);
     }
 
     /**
@@ -56,7 +64,7 @@ class BanqueController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('banques.edit', ['banque' => Banque::find($id)]);
     }
 
     /**
@@ -68,7 +76,13 @@ class BanqueController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $banque = Banque::find($id);
+      $banque->code = $request->input('code');
+      $banque->iban = $request->input('iban');
+      $banque->libelle = $request->input('libelle');
+      $banque->save();
+
+      return redirect()->back()->with('success', 'Banque mise a jour avec succes');
     }
 
     /**

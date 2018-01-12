@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\CoordinationDePole;
 
 class CoordinationPoleController extends Controller
 {
@@ -13,7 +14,9 @@ class CoordinationPoleController extends Controller
      */
     public function index()
     {
-        //
+        $poles = CoordinationDePole::all();
+
+        return view('coordinationPoles.index', compact('poles'));
     }
 
     /**
@@ -23,7 +26,7 @@ class CoordinationPoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('coordinationPoles.create');
     }
 
     /**
@@ -34,7 +37,11 @@ class CoordinationPoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pole = new CoordinationDePole();
+        $pole->libelle = $request->input('libelle');
+        $pole->save();
+
+        return redirect()->back()->with('success', 'Coordination de Pole ajoutee avec succes');
     }
 
     /**
@@ -45,7 +52,9 @@ class CoordinationPoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $pole = CoordinationDePole::find($id);
+
+        return view('coordinationPoles.show', compact('pole'));
     }
 
     /**
@@ -56,7 +65,9 @@ class CoordinationPoleController extends Controller
      */
     public function edit($id)
     {
-        //
+      $pole = CoordinationDePole::find($id);
+
+      return view('coordinationPoles.edit', compact('pole'));
     }
 
     /**
@@ -68,7 +79,11 @@ class CoordinationPoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $pole = CoordinationDePole::find($id);
+      $pole->libelle = $request->input('libelle');
+      $pole->save();
+
+      return redirect()->back()->with('success', 'Coordination de Pole mise a jour avec succes');
     }
 
     /**

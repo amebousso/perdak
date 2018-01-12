@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\CoordinationDepartementale;
+use App\CoordinationDePole;
 
 class CoordinationDepartementaleController extends Controller
 {
@@ -13,7 +15,9 @@ class CoordinationDepartementaleController extends Controller
      */
     public function index()
     {
-        //
+        $coordinationDepartements = CoordinationDepartementale()::all();
+
+        return view('coordinationDepartementales.index', compact('coordinationDepartements'));
     }
 
     /**
@@ -23,7 +27,9 @@ class CoordinationDepartementaleController extends Controller
      */
     public function create()
     {
-        //
+        $poles = CoordinationDePole::all();
+
+        return view('coordinationDepartementales.create', compact('poles'));
     }
 
     /**
@@ -34,7 +40,13 @@ class CoordinationDepartementaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $coordinationDepartement = new CoordinationDepartementale();
+        $coordinationDepartement->libelle = $request->input('libelle');
+        $coordinationDepartement->pole_id = $request->input('pole_id');
+
+        $coordinationDepartement->save();
+
+        return redirect()->back()->with('success', 'Coordination departementale ajoutee');
     }
 
     /**
@@ -45,7 +57,9 @@ class CoordinationDepartementaleController extends Controller
      */
     public function show($id)
     {
-        //
+        $coordinationDepartement = CoordinationDepartementale::find($id);
+
+        return view('coordinationDepartementales.show', compact('coordinationDepartement'));
     }
 
     /**
@@ -56,7 +70,10 @@ class CoordinationDepartementaleController extends Controller
      */
     public function edit($id)
     {
-        //
+      $coordinationDepartement = CoordinationDepartementale::find($id);
+      $poles = CoordinationDePole::all();
+
+      return view('coordinationDepartementales.edit', compact('coordinationDepartement', 'poles'));
     }
 
     /**
@@ -68,7 +85,13 @@ class CoordinationDepartementaleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $coordinationDepartement = CoordinationDepartementale::find($id);
+      $coordinationDepartement->libelle = $request->input('libelle');
+      $coordinationDepartement->pole_id = $request->input('pole_id');
+
+      $coordinationDepartement->save();
+
+      return redirect()->back()->with('success', 'Coordination departementale mise a jour');
     }
 
     /**

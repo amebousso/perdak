@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Service;
+use App\Fonction;
+use App\CorpsDeMetier;
 
-class ServiceController extends Controller
+class FonctionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        $fonctions = Fonction::all();
 
-        return view('services.index', compact('services'));
+        return view('fonctions.index', compact('fonctions'));
     }
 
     /**
@@ -26,7 +27,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('services.create');
+        $corpsDeMetiers = CorpsDeMetier::all();
+        return view('fonctions.create', compact('$corpsDeMetiers'));
     }
 
     /**
@@ -37,11 +39,12 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $service = new Service;
-        $service->libelle = $equest->input('libelle');
-        $service->save();
+        $fonction = new Fonction;
+        $fonction->libelle = $request->input('libelle');
+        $fonction->corpsdemetier_id = $request->input('corpsdemetier_id');
+        $fonction->save();
 
-        return redirect()->back()->with('success', 'Service ajoute avec succes');
+        return redirect()->back()->with('success', 'fonction ajoutee avec succes');
     }
 
     /**
@@ -52,9 +55,9 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        $service = Service::find($id);
+        $fonction = Fonction::find($id);
 
-        return view('services.show', compact('service'));
+        return view('fonctions.show', compact('fonction'));
     }
 
     /**
@@ -65,9 +68,10 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-      $service = Service::find($id);
+      $fonction = Fonction::find($id);
+      $corpsDeMetiers = CorpsDeMetier::all();
 
-      return view('services.edit', compact('service'));
+      return view('fonctions.edit', compact('fonction', '$corpsDeMetiers'));
     }
 
     /**
@@ -79,11 +83,12 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $service = Service::find($id);
-      $service->libelle = $equest->input('libelle');
-      $service->save();
+      $fonction = Fonction::find($id);
+      $fonction->libelle = $request->input('libelle');
+      $fonction->corpsdemetier_id = $request->input('corpsdemetier_id');
+      $fonction->save();
 
-      return redirect()->back()->with('success', 'Service ajoute avec succes');
+      return redirect()->back()->with('success', 'fonction ajoutee avec succes');
     }
 
     /**

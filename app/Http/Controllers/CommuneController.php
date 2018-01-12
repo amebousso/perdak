@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Commune;
+use App\CoordinationDepartementale;
 
 class CommuneController extends Controller
 {
@@ -13,7 +15,8 @@ class CommuneController extends Controller
      */
     public function index()
     {
-        //
+        $communes = Commune::all();
+         return view('communes.index', compact('communes'));
     }
 
     /**
@@ -23,7 +26,9 @@ class CommuneController extends Controller
      */
     public function create()
     {
-        //
+        $coordinationDepartements = CoordinationDepartementale::all();
+
+        return view('communes.create', compact('coordinationDepartements'));
     }
 
     /**
@@ -34,7 +39,12 @@ class CommuneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $commune = new Commune;
+        $commune->libelle = $request->input('libelle');
+        $commune->departement_id = $request->input('departement_id');
+        $commune->save();
+
+        return redirect()->back()->with('success', 'commune ajoutee avec succes');
     }
 
     /**
@@ -45,7 +55,9 @@ class CommuneController extends Controller
      */
     public function show($id)
     {
-        //
+      $commune = Commune::find($id);
+
+      return view('communes.show', compact('commune'));
     }
 
     /**
@@ -56,7 +68,10 @@ class CommuneController extends Controller
      */
     public function edit($id)
     {
-        //
+      $coordinationDepartements = CoordinationDepartementale::all();
+      $commune = Commune::find($id);
+
+      return view('communes.edit', compact('coordinationDepartements', 'commune'));
     }
 
     /**
@@ -68,7 +83,12 @@ class CommuneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $commune = Commune::find($id);
+      $commune->libelle = $request->input('libelle');
+      $commune->departement_id = $request->input('departement_id');
+      $commune->save();
+
+      return redirect()->back()->with('success', 'commune mise a jour avec succes');
     }
 
     /**

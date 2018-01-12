@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Service;
+use App\Cellule;
 
-class ServiceController extends Controller
+class CelluleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        $cellules =  Cellule::all();
 
-        return view('services.index', compact('services'));
+        return view('cellules.index', compact('cellules'));
     }
 
     /**
@@ -26,7 +27,9 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('services.create');
+        $services = Service::all();
+
+        return view('cellules.create', compact('services'));
     }
 
     /**
@@ -37,11 +40,12 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $service = new Service;
-        $service->libelle = $equest->input('libelle');
-        $service->save();
+        $cellule = new Cellule;
+        $cellule->libelle = $request->input('libelle');
+        $cellule->service_id = $request->input('service_id');
+        $cellule->save();
 
-        return redirect()->back()->with('success', 'Service ajoute avec succes');
+        return redirect()->back()->with('success', 'Cellule de service ajoutee avec succes');
     }
 
     /**
@@ -52,9 +56,9 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        $service = Service::find($id);
+        $cellule = Cellule::find($id);
 
-        return view('services.show', compact('service'));
+        return view('cellules.show', compact('cellule'));
     }
 
     /**
@@ -65,9 +69,10 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-      $service = Service::find($id);
+      $cellule = Cellule::find($id);
+      $services = Service::all();
 
-      return view('services.edit', compact('service'));
+      return view('cellules.edit', compact('cellule', 'services'));
     }
 
     /**
@@ -79,11 +84,12 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $service = Service::find($id);
-      $service->libelle = $equest->input('libelle');
-      $service->save();
+      $cellule = Cellule::find($id);
+      $cellule->libelle = $request->input('libelle');
+      $cellule->service_id = $request->input('service_id');
+      $cellule->save();
 
-      return redirect()->back()->with('success', 'Service ajoute avec succes');
+      return redirect()->back()->with('success', 'Cellule de service mise a jour avec succes');
     }
 
     /**

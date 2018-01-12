@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\CorpsDeMetier;
 
 class CorpsMetierController extends Controller
 {
@@ -13,7 +14,9 @@ class CorpsMetierController extends Controller
      */
     public function index()
     {
-        //
+        $corpsDeMetiers = CorpsDeMetier::all();
+
+        return view('corpsMetier.index', compact('CorpsDeMetier'));
     }
 
     /**
@@ -23,7 +26,7 @@ class CorpsMetierController extends Controller
      */
     public function create()
     {
-        //
+        return view('corpsMetier.create');
     }
 
     /**
@@ -34,7 +37,11 @@ class CorpsMetierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $corpsDeMetier = new CorpsDeMetier();
+        $corpsDeMetier->libelle = $request->input('libelle');
+        $corpsDeMetier->save();
+
+        return redirect()->back()->with('success', 'Corps de metier ajoute avec succes');
     }
 
     /**
@@ -45,7 +52,9 @@ class CorpsMetierController extends Controller
      */
     public function show($id)
     {
-        //
+        $coprsDeMetier = CorpsDeMetier::find($id);
+
+        return view('corpsMetier.show', compact('corpsMetier'));
     }
 
     /**
@@ -56,7 +65,9 @@ class CorpsMetierController extends Controller
      */
     public function edit($id)
     {
-        //
+      $coprsDeMetier = CorpsDeMetier::find($id);
+
+      return view('corpsMetier.edit', compact('corpsMetier'));
     }
 
     /**
@@ -68,7 +79,11 @@ class CorpsMetierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $coprsDeMetier = CorpsDeMetier::find($id);
+      $corpsDeMetier->libelle = $request->input('libelle');
+      $corpsDeMetier->save();
+
+      return redirect()->back()->with('success', 'Corps de metier mis a jour avec succes');
     }
 
     /**
