@@ -42,9 +42,9 @@
               @foreach($employes as $employe)
               <tbody>
                 <tr>
-                  <td>{{ $employe->prenom }}</td>
-                  <td>{{ $employe->nom }}</td>
-                  <td>{{ $employe->matricule }}</td>
+                  <td>{{ link_to('employes/'. $employe->id, $employe->prenom, ['class' => 'primary']) }}</td>
+                  <td>{{ link_to('employes/'. $employe->id, $employe->nom, ['class' => 'primary']) }}</td>
+                  <td>{{ link_to('employes/'. $employe->id, $employe->matricule, ['class' => 'primary']) }}</td>
                   <td>{{ $employe->cni }}</td>
                   <td>{{ $employe->dateNaissance }}</td>
                   <td>{{ $employe->profession }}</td>

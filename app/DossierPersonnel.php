@@ -17,6 +17,6 @@ class DossierPersonnel extends Model
 
   public function employe()
   {
-      return $this->hasOne('App\Employe');
+      return $this->belongsTo('App\Employe');
   }
 }

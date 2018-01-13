@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
+use File;
 
 use App\Adresse;
 use App\Employe;
@@ -18,6 +19,7 @@ use App\CorpsDeMetier;
 use App\Fonction;
 use App\Commune;
 use App\Circuit;
+use App\DossierPersonnel;
 
 class EmployeController extends Controller
 {
@@ -59,6 +61,8 @@ class EmployeController extends Controller
         $employe = new Employe;
         $infobanque = new InfosBancaire;
         $adresse = new Adresse;
+        $photo = new Photo;
+        $dossier = new DossierPersonnel;
 
         $employe->prenom = $request->input('prenom');
         $employe->nom = $request->input('nom');
@@ -66,18 +70,18 @@ class EmployeController extends Controller
         $employe->lieuNaissance = $request->input('lieuNaissance');
         $employe->matricule = $request->input('matricule');
         $employe->cni = $request->input('cni');
-        $employe->professeion = $request->input('professeion');
+        $employe->profession = $request->input('profession');
         $employe->ipress = $request->input('ipress');
         $employe->sexe = $request->input('sexe');
         $employe->situationMatrimoniale = $request->input('situationMatrimoniale');
-        $employe->nombreEnfants = $request->input('nombreEnfants');
+        $employe->nombreEnfants = $request->input('nombreEnfant');
         $employe->niveauEtude = $request->input('niveauEtude');
         $employe->fonction_id = $request->input('fonction_id');
         $employe->cellule_id = $request->input('cellule_id');
 
         $employe->save();
 
-        $infobanque->code_guichet = $request->input('code_guichet');
+        $infobanque->codeGuichet = $request->input('codeGuichet');
         $infobanque->numero_compte = $request->input('numero_compte');
         $infobanque->cleRIB = $request->input('cleRIB');
         $infobanque->banque_id = $request->input('banque');
@@ -98,6 +102,37 @@ class EmployeController extends Controller
 
         $adresse->save();
 
+        if ($request->hasFile('photo')) {
+              # code...
+              $file = $request->file('photo');
+              // Making counting of uploaded images
+              // start count how many uploaded
+
+              $ext = $file->getClientOriginalExtension();
+              $filename = $employe->matricule.'_'.$employe->prenom.'.'.$ext;
+              $path = public_path('images/employes/profiles/'. $filename);
+              $destinationPath = public_path('images/employes/originales/');
+              Image::make($file->getRealPath())->resize(240, 240)->save($path);
+
+              $upload_success = $file->move($destinationPath, $filename);
+              $imageInfo = @getimagesize($file->getRealPath());
+
+              $photo->url = $filename;
+              $photo->extension = $ext;
+              $photo->largeur = $imageInfo[1];
+              $photo->hauteur = $imageInfo[2];
+              $photo->employe_id = $employe->id;
+
+              $photo->save();
+          }
+          $nomDossier = $employe->matricule.'_'. $employe->prenom.'_'.$employe->nom;
+          $path = public_path('dossiers/'.$nomDossier);
+          File::makeDirectory($path, 0777, true);
+
+          $dossier->libelle = $nomDossier;
+          $dossier->employe_id = $employe->id;
+          $dossier->save();
+
         return redirect()->back()->with('success', 'Personnel ajouté avec succès');
     }
 
@@ -110,9 +145,9 @@ class EmployeController extends Controller
     public function show($id)
     {
         $employe = Employe::find($id);
-        $adresse = Adresse::where('employe_id', $id);
-        $infobanque = InfosBancaire::where('employe_id', $id);
-        return view('employe.show', compact('employe', 'adresse', 'infobanque'));
+        $dossiers = public_path('dossiers/'.$employe->dossierPersonnel->libelle);
+        $files = File::allFiles($dossiers);
+        return view('employes.show', compact('employe'));
     }
 
     /**
@@ -152,7 +187,7 @@ class EmployeController extends Controller
     public function celluleServices($id)
     {
       # code...
-      $cellules = Cellule::select('id', 'libelle')->where('service_id', $id);
+      $cellules = Cellule::all()->where('service_id', $id);
 
       return response()->json($cellules);
     }
@@ -160,7 +195,7 @@ class EmployeController extends Controller
     public function fonctionsCorps($id)
     {
       # code...
-      $fonctions = Fonction::select('id', 'libelle')->where('corpsdemetier_id', $id);
+      $fonctions = Fonction::all()->where('corpsdemetier_id', $id);
 
       return response()->json($fonctions);
     }
@@ -168,7 +203,7 @@ class EmployeController extends Controller
     public function departementPoles($id)
     {
       # code...
-      $departements = CoordinationDepartementale::select('id', 'libelle')->where('pole_id', $id);
+      $departements = CoordinationDepartementale::all()->where('pole_id', $id);
 
       return response()->json($departements);
     }
@@ -176,7 +211,7 @@ class EmployeController extends Controller
     public function communeDepartements($id)
     {
       # code...
-      $communes = Commune::select('id', 'libelle')->where('departement_id', $id);
+      $communes = Commune::all()->where('departement_id', $id);
 
       return response()->json($communes);
     }
@@ -184,7 +219,7 @@ class EmployeController extends Controller
     public function circuitCommunes($id)
     {
       # code...
-      $circuit = Circuit::select('id', 'libelle')->where('commune_id', $id);
+      $circuit = Circuit::all()->where('commune_id', $id);
 
       return response()->json($circuit);
     }

@@ -126,7 +126,7 @@
                 <input type="text" name="niveauEtude" class="form-control" id="exampleInputEtude" placeholder="Niveau d'étude">
               </div>
               <div class="form-group">
-                <label for="exampleInputFile">Photo</label>
+                <label for="exampleInputFile">Photo de l'employé</label>
                 <input type="file" name="photo" id="exampleInputFile">
               </div>
             </div>
@@ -187,9 +187,9 @@
                 <option value="Sénégal">Sénégal</option>
               </select>
             </div>
-            <div class="form-group" name="region" id="region">
+            <div class="form-group">
               <label>Région</label>
-              <select class="form-control">
+              <select class="form-control" name="region" id="region">
                 <option value="Dakar">Dakar</option>
               </select>
             </div>
