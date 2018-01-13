@@ -41,3 +41,8 @@ Route::get('/circuitCommune/{id}', 'EmployeController@circuitCommunes');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/employe/sousdossier', 'EmployeController@sousDossier');
+Route::post('/employe/sousdossier', 'EmployeController@sousDossier');
+Route::post('/employe/{id}', 'EmployeController@afficherEmploye');
+Route::get('/employe/{id}', 'EmployeController@afficherEmploye');

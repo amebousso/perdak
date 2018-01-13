@@ -52,12 +52,12 @@
                 <label>Sexe</label>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="sexe"> Masculin
+                    <input type="radio" name="sexe" value="Masculin"> Masculin
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="sexe"> Féminin
+                    <input type="radio" name="sexe" value="Féminin"> Féminin
                   </label>
                 </div>
               </div>

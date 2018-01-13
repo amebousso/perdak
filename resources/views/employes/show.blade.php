@@ -3,6 +3,25 @@
 @section('title', 'Personnel UCG')
 
 @section('content')
+<style type="text/css">
+  .example {
+    float: left;
+    margin: 15px;
+  }
+
+  .demo {
+    width: 300px;
+    height: 500px;
+    border-top: solid 1px #BBB;
+    border-left: solid 1px #BBB;
+    border-bottom: solid 1px #FFF;
+    border-right: solid 1px #FFF;
+    background: #FFF;
+    overflow: scroll;
+    padding: 5px;
+  }
+
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -42,7 +61,7 @@
 
             </ul>
 
-            <a href="#" class="btn btn-primary btn-block"><b>Imprimer le badge</b></a>
+            <a href="#" class="btn btn-primary btn-block" onClick="window.print();return false"><b>Imprimer le badge</b></a>
           </div>
           <!-- /.box-body -->
         </div>
@@ -98,7 +117,7 @@
           <ul class="nav nav-tabs">
             <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
             <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-            <li><a href="#settings" data-toggle="tab">Settings</a></li>
+            <li><a href="#dossiers" data-toggle="tab">Dossier du Personnel</a></li>
           </ul>
           <div class="tab-content">
             <div class="active tab-pane" id="activity">
@@ -164,7 +183,6 @@
                 </form>
               </div>
               <!-- /.post -->
-
               <!-- Post -->
               <div class="post">
                 <div class="user-block">
@@ -311,59 +329,32 @@
               </ul>
             </div>
             <!-- /.tab-pane -->
-
-            <div class="tab-pane" id="settings">
-              <form class="form-horizontal">
+            <div class="tab-pane" id="dossiers">
+              <form class="form-horizontal"  action="/employe/sousdossier">
                 <div class="form-group">
-                  <label for="inputName" class="col-sm-2 control-label">Name</label>
-
+                  <label for="inputName" class="col-sm-2 control-label">Sous dossier</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputName" placeholder="Name">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputName" placeholder="Name">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-                  <div class="col-sm-10">
-                    <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                    <input type="text" name="sousdossier" class="form-control" id="inputName" placeholder="Name">
+                    <input type="hidden" name="dossier" value="{{ $employe->dossierPersonnel->id }}" >
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-danger">Submit</button>
+                    <button type="submit" class="btn btn-danger">Valider</button>
                   </div>
                 </div>
               </form>
+              <div class="box box-success">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Dossiers: {{ $employe->dossierPersonnel->libelle }}</h3>
+                </div>
+                <div class="box-body">
+                  <div class="example">
+                 			<div id="fileTreeDemo_1" class="demo"></div>
+                 	 </div>
+                </div>
+                <!-- /.box-body -->
+              </div>
             </div>
             <!-- /.tab-pane -->
           </div>
@@ -374,9 +365,79 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
+    <div class="badgeUser" style="display: none;">
+      <div class="box box-primary">
+        <div class="box-body box-profile">
+          <table>
+            <tr>
+              <td width="40%">
+                <p class="text-center">
+                  <img src="/images/drapeau.png" alt="" align="center" height="30" />
+                </p>
+                <h5 class="text-center">Ministère de Gouvernance Territoriale, du Développement et de l'Aménagement du Territoire </h5>
+                <h1 class="text-center">UCG</h1>
+                <h5 class="text-center">Unité de Coordination de la Gestion des Déchets Solides</h5>
+              </td>
+              <td width="60%">
+                <a href="#" class="pull-right">{!! QrCode::size(150)->generate(url('/employe/'.$employe->id)); !!}</a>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%">
+                <img class="profile-user-img img-responsive img-circle" src="/images/employes/originales/{{ $employe->photo->url }}" alt="User profile picture">
+              </td>
+              <td width="60%">
+                <ul class="list-group list-group-unbordered">
+                  <li class="list-group-item">
+                    <b>Prénom:</b> <a class="pull-right">{{ $employe->prenom }}</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Nom:</b> <a class="pull-right">{{ $employe->nom }}</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Matricule:</b> <a class="pull-right">{{ $employe->matricule }}</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Fonction:</b> <a class="pull-right">{{ $employe->fonction->corpsDeMetier->libelle }}</a>
+                  </li>
 
+                </ul>
+              </td>
+            </tr>
+          </table>
+
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
   </section>
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 @endsection
+@section('script')
+<script src="/js/fileTree/jquery.easing.js" type="text/javascript"></script>
+<script src="/js/fileTree/jqueryFileTree.js" type="text/javascript"></script>
+<link href="/js/fileTree/jqueryFileTree.css" rel="stylesheet" type="text/css" media="screen" />
+<?php
+  $dossiers = public_path('dossiers/'.$employe->dossierPersonnel->libelle.'/');
+  //$files = \File::allFiles($dossiers);
+
+ ?>
+ <?php echo "
+<script type='text/javascript'>
+  $(document).ready( function() {
+
+    $('#fileTreeDemo_1').fileTree({ root: '".$dossiers."', script: '/js/fileTree/connectors/jqueryFileTree.php' }, function(file) {
+      alert(file);
+    });
+
+    $('#fileTreeDemo_2').fileTree({ root: '".$dossiers."', script: '/js/fileTree/connectors/jqueryFileTree.php', folderEvent: 'click', expandSpeed: 750, collapseSpeed: 750, multiFolder: false }, function(file) {
+      alert(file);
+    });
+
+  });
+</script>
+"; ?>
+@stop

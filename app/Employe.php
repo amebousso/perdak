@@ -40,8 +40,8 @@ class Employe extends Model
       return $this->belongsTo('App\Fonction');
   }
 
-  public function circuits()
+  public function circuit()
   {
-      return $this->belongsToMany('App\Circuit', 'circuit_employe', 'circuit_id', 'employe_id');
+      return $this->belongsTo('App\Circuit');
   }
 }

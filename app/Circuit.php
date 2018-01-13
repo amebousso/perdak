@@ -17,6 +17,6 @@ class Circuit extends Model
 
   public function employes()
   {
-      return $this->belongsToMany('App\Employe', 'circuit_employe', 'circuit_id', 'employe_id');
+      return $this->hasMany('App\Employe');
   }
 }
