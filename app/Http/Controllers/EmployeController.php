@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
+
 use App\Adresse;
 use App\Employe;
 use App\Banque;
@@ -147,42 +149,42 @@ class EmployeController extends Controller
         //
     }
 
-    public function celluleService(Request $request)
+    public function celluleServices($id)
     {
       # code...
-      $cellules = Cellule::select('id', 'libelle')->where('service_id', $request->input('id'));
+      $cellules = Cellule::select('id', 'libelle')->where('service_id', $id);
 
       return response()->json($cellules);
     }
 
-    public function fonctionCorps(Request $request)
+    public function fonctionsCorps($id)
     {
       # code...
-      $fonctions = Fonction::select('id', 'libelle')->where('corpsdemetier_id', $request->input('id'));
+      $fonctions = Fonction::select('id', 'libelle')->where('corpsdemetier_id', $id);
 
       return response()->json($fonctions);
     }
 
-    public function departementPole(Request $request)
+    public function departementPoles($id)
     {
       # code...
-      $departements = CoordinationDepartementale::select('id', 'libelle')->where('pole_id', $request->input('id'));
+      $departements = CoordinationDepartementale::select('id', 'libelle')->where('pole_id', $id);
 
       return response()->json($departements);
     }
 
-    public function communeDepartement(Request $request)
+    public function communeDepartements($id)
     {
       # code...
-      $communes = Commune::select('id', 'libelle')->where('departement_id', $request->input('id'));
+      $communes = Commune::select('id', 'libelle')->where('departement_id', $id);
 
       return response()->json($communes);
     }
 
-    public function circuitCommune(Request $request)
+    public function circuitCommunes($id)
     {
       # code...
-      $circuit = Circuit::select('id', 'libelle')->where('commune_id', $request->input('id'));
+      $circuit = Circuit::select('id', 'libelle')->where('commune_id', $id);
 
       return response()->json($circuit);
     }

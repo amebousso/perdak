@@ -8,6 +8,11 @@ class AccueilController extends Controller
 {
     public function __construct ($value='')
     {
-      # code...
+      $this->middleware('auth');
+    }
+
+    public function index()
+    {
+      return view('welcome');
     }
 }

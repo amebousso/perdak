@@ -19,6 +19,8 @@ Route::get('/admin', function () {
     return view('welcome');
 });
 
+Route::get('/accueil', 'AccueilController@index');
+
 Route::resource('employes', 'EmployeController');
 Route::resource('banques', 'BanqueController');
 Route::resource('communes', 'CommuneController');
@@ -30,8 +32,12 @@ Route::resource('cellules', 'CelluleController');
 Route::resource('corpsMetier', 'CorpsMetierController');
 Route::resource('fonctions', 'FonctionController');
 
-Route::get('/celluleService/{id}', 'EmployeController@celluleService');
-Route::get('/fonctionCorps/{id}', 'EmployeController@fonctionCorps');
-Route::get('/departementPole/{id}', 'EmployeController@departementPole');
-Route::get('/communesDpt/{id}', 'EmployeController@communeDepartement');
-Route::get('/circuitCommune/{id}', 'EmployeController@circuitCommune');
+Route::get('/celluleService/{id}', 'EmployeController@celluleServices');
+Route::get('/fonctionCorps/{id}', 'EmployeController@fonctionsCorps');
+Route::get('/departementPole/{id}', 'EmployeController@departementPoles');
+Route::get('/communesDpt/{id}', 'EmployeController@communeDepartements');
+Route::get('/circuitCommune/{id}', 'EmployeController@circuitCommunes');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

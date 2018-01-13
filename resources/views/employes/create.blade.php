@@ -144,9 +144,9 @@
           </div>
           <div class="box-body">
             <div class="form-group">
-              <label>Coordination</label>
-              <select class="form-control" id="departement">
-                <option>:::: Sélectionne la coordination ::::</option>
+              <label>Coordination de Pôle</label>
+              <select class="form-control" id="pole">
+                <option>:::: Sélectionne le pôle ::::</option>
                 <?php foreach ($poles as $pole): ?>
                   <option value="{!! $pole->id !!}">{!! $pole->libelle !!}</option>
                 <?php endforeach; ?>
@@ -286,7 +286,7 @@
   		});
   		 // Requête Ajax pour les departements
 	    function celluleUpdate(celluleId) {
-	        $.get('{{ url('celluleService') }}/'+ celluleId + "'", function(data) {
+	        $.get('{{ url('celluleService') }}/'+ celluleId, function(data) {
 	            $('#cellule').empty();
 	            $.each(data, function(index, cellule) {
 	                $('#cellule').append($('<option>', {
@@ -300,7 +300,7 @@
 	    }
 	    // Requête Ajax pour les communes
 	    function fonctionUpdate(fonctionId) {
-	        $.get('{{ url('fonctionCorps') }}/'+ fonctionId + "'", function(data) {
+	        $.get('{{ url('fonctionCorps') }}/'+ fonctionId, function(data) {
 	            $('#fonction').empty();
 	            $.each(data, function(index, fonction) {
 	                $('#fonction').append($('<option>', {
@@ -333,7 +333,7 @@
 
   		 // Requête Ajax pour les departements
 	    function departementUpdate(poleId) {
-	        $.get('{{ url('departementPole') }}/'+ poleId + "'", function(data) {
+	        $.get('{{ url('departementPole') }}/'+ poleId, function(data) {
 	            $('#departement').empty();
 	            $.each(data, function(index, departements) {
 	                $('#departement').append($('<option>', {
@@ -348,7 +348,7 @@
 
 	    // Requête Ajax pour les communes
 	    function communeUpdate(departementId) {
-	        $.get('{{ url('communesDpt') }}/'+ departementId + "'", function(data) {
+	        $.get('{{ url('communesDpt') }}/'+ departementId, function(data) {
 	            $('#commune').empty();
 	            $.each(data, function(index, communes) {
 	                $('#commune').append($('<option>', {
@@ -363,7 +363,7 @@
 
       // Requête Ajax pour les circuits
 	    function circuitUpdate(communeId) {
-	        $.get('{{ url('circuitCommune') }}/'+ communeId + "'", function(data) {
+	        $.get('{{ url('circuitCommune') }}/'+ communeId, function(data) {
 	            $('#circuit').empty();
 	            $.each(data, function(index, circuit) {
 	                $('#circuit').append($('<option>', {
