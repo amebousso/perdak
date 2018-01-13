@@ -31,6 +31,7 @@ Route::resource('services', 'ServiceController');
 Route::resource('cellules', 'CelluleController');
 Route::resource('corpsMetier', 'CorpsMetierController');
 Route::resource('fonctions', 'FonctionController');
+Route::resource('users', 'UserController');
 
 Route::get('/celluleService/{id}', 'EmployeController@celluleServices');
 Route::get('/fonctionCorps/{id}', 'EmployeController@fonctionsCorps');
@@ -38,6 +39,10 @@ Route::get('/departementPole/{id}', 'EmployeController@departementPoles');
 Route::get('/communesDpt/{id}', 'EmployeController@communeDepartements');
 Route::get('/circuitCommune/{id}', 'EmployeController@circuitCommunes');
 
-Auth::routes();
+//Auth::routes();
+
+//Route::get('auth/login', 'Auth\LoginController@getLogin');
+Route::post('/auth/login', 'Auth\LoginController@postLogin');
+Route::get('/auth/logout', 'Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -20,10 +20,10 @@ class CreateAdressesTable extends Migration
             $table->string('departement');
             $table->string('commune');
             $table->string('quartier');
-            $table->string('codePostal');
+            $table->string('codePostal')->nullable();
             $table->string('telephone1');
-            $table->string('telephone2');
-            $table->string('telephone3');
+            $table->string('telephone2')->nullable();;
+            $table->string('telephone3')->nullable();;
             $table->timestamps();
         });
     }

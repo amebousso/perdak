@@ -272,12 +272,11 @@
                   @if(Auth::user())
                   {{ Auth::user()->name }} - {{ Auth::user()->role->libelle }}
                   @endif
-                  <small>Member since Nov. 2012</small>
                 </p>
               </li>
               <!-- Menu Body -->
               <li class="user-body">
-                <div class="row">
+                <!--div class="row">
                   <div class="col-xs-4 text-center">
                     <a href="#">Followers</a>
                   </div>
@@ -288,8 +287,8 @@
                     <a href="#">Friends</a>
                   </div>
                 </div>
-                <!-- /.row -->
-              </li>
+                </.row>
+              </li-->
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
@@ -298,8 +297,7 @@
                   @endif
                 </div>
                 <div class="pull-right">
-                  <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Déconnecter</a>
-                  <form id="logout-form" action="#" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                  <a href="{{ url('/auth/logout') }}"   class="btn btn-default btn-flat">Déconnecter</a>
                 </div>
               </li>
             </ul>

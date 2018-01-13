@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\IsCoordonnateurPole;
 
 class Kernel extends HttpKernel
 {
@@ -59,6 +60,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'superAdmin' => \App\Http\Middleware\IsSuperAdmin::class,
         'admin' => \App\Http\Middleware\IsAdministrateur::class,
+        'coordoPole' => \App\Http\Middleware\IsCoordonnateurPole::class,
         'coordo' => \App\Http\Middleware\IsCoordonnateur::class,
     ];
 }
