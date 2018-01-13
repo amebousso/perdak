@@ -19,4 +19,9 @@ class CoordinationDepartementale extends Model
   {
       return $this->hasMany('App\Commune');
   }
+
+  public function users()
+  {
+      return $this->hasMany(App\User::class);
+  }
 }

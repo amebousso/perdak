@@ -14,4 +14,9 @@ class CoordinationDePole extends Model
   {
       return $this->hasMany('App\CoordinationDepartementale');
   }
+
+  public function users()
+  {
+      return $this->hasMany(App\User::class);
+  }
 }

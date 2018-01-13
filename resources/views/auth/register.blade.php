@@ -12,6 +12,36 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">Role</label>
+
+                            <div class="col-md-6">
+                              <select class="form-control" name="role_id">
+
+                              </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">Pole</label>
+
+                            <div class="col-md-6">
+                              <select class="form-control" name="pole_id">
+
+                              </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">Departement</label>
+
+                            <div class="col-md-6">
+                              <select class="form-control" name="departement_id">
+
+                              </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">

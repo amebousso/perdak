@@ -36,13 +36,13 @@
   <div class="login-box-body">
     <p class="login-box-msg">Connectez vous pour ouvrir une session</p>
 
-    <form action="#" method="post">
+    {!! Form::open(array('url' => '/auth/login', 'method' => 'POST')) !!}
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="email" class="form-control" name="email" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" name="password" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -59,7 +59,7 @@
         </div>
         <!-- /.col -->
       </div>
-    </form>
+    {!! Form::close() !!}
 
     <!--div class="social-auth-links text-center">
       <p>- OR -</p>

@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\RedirectResponse;
 
-class IsCoordonnateur
+class IsCoordonnateurPole
 {
     /**
      * Handle an incoming request.
@@ -16,7 +15,7 @@ class IsCoordonnateur
      */
     public function handle($request, Closure $next)
     {
-      if (session('statut') === 'coordo' || session('statut') === 'coordoPole' || session('statut') === 'admin' || session('statut') === 'superAdmin') {
+      if (session(session('statut') === 'coordoPole' || 'statut') === 'admin' || session('statut') === 'superAdmin') {
         return $next($request);
       }
 

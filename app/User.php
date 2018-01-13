@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\CoordinationDepartementale;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id',
+        'name', 'email', 'password', 'role_id', 'zone_id',
     ];
 
     /**
@@ -30,5 +31,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo('App\Role');
+    }
+
+    public function departement()
+    {
+        return $this->belongsTo(App\CoordinationDepartementale::class);
     }
 }
