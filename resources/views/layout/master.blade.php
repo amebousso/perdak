@@ -43,9 +43,9 @@
     <!-- Logo -->
     <a href="/admin" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>P</b>UCG</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Per</b>UCG</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -259,7 +259,8 @@
               <img src="/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <span class="hidden-xs">
                 @if(Auth::user())
-                {{ Auth::user()->name }}
+                  {{ Auth::user()->name }}
+                  
                 @endif
               </span>
             </a>
@@ -270,7 +271,7 @@
 
                 <p>
                   @if(Auth::user())
-                  {{ Auth::user()->name }} - {{ Auth::user()->role->libelle }}
+                    {{ Auth::user()->name }} - {{ Auth::user()->role->libelle }}
                   @endif
                 </p>
               </li>
@@ -347,7 +348,7 @@
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-files-o"></i>
+            <i class="fa fa-users"></i>
             <span>Personnel</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">4</span>
@@ -355,23 +356,48 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel administratif</a></li>
-            <li><a href="/admin/alertes/1"><i class="fa fa-circle-o"></i> Personnel permanent</a></li>
-            <li><a href="/admin/alertes/0"><i class="fa fa-circle-o"></i> Personnel contractel</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Personnel permanent</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Personnel contractel</a></li>
             <li><a href="/employes/create"><i class="fa fa-circle-o"></i> Ajouter</a></li>
           </ul>
         </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
-            <span>Anomalies</span>
+            <span>Coordinations</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Anomalies Traitées</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Anomalies Non Traitées</a></li>
-            <li><a href="/admin/newcategorieanomalie"><i class="fa fa-circle-o"></i> Catégories Anomalies</a></li>
+            <li><a href="/coordinationPoles"><i class="fa fa-circle-o"></i> Liste des Pôles</a></li>
+            <li><a href="/coordinationDepartementales"><i class="fa fa-circle-o"></i> Coordinations Departementales</a></li>
+            <li><a href="/coordinationPoles/create"><i class="fa fa-circle-o"></i> Ajouter un Pôle</a></li>
+            <li><a href="/coordinationDepartementales/create"><i class="fa fa-circle-o"></i> Ajouter une coordination</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-map"></i> <span>Corps de Métier</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/corpsMetier/create"><i class="fa fa-circle-o"></i> Ajouter un corps</a></li>
+            <li><a href="/fonctions/create"><i class="fa fa-circle-o"></i> Ajouter une fonction</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-map"></i> <span>Services</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/services/create"><i class="fa fa-circle-o"></i> Ajouter un service</a></li>
+            <li><a href="/cellules/create"><i class="fa fa-circle-o"></i> Ajouter une cellule</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -382,10 +408,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Administration</a></li>
-            <li><a href="/users"><i class="fa fa-circle-o"></i> Coordination</a></li>
-            <li><a href="/users"><i class="fa fa-circle-o"></i> Utilisateurs simples</a></li>
-            <li><a href="/roles/create"><i class="fa fa-circle-o"></i> Rôles</a></li>
+            <li><a href="/users"><i class="fa fa-circle-o"></i> Liste des utilisateurs</a></li>
+            <li><a href="/users/create"><i class="fa fa-circle-o"></i> Ajouter un utilisateur</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Rôles</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -401,45 +426,9 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Personnel contractuel</a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Articles</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> Liste des Articles</a></li>
-            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Ecrire un Article</a></li>
-            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Mots clés</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-group"></i> <span>Groupes</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="/groupes"><i class="fa fa-circle-o"></i> Liste des Groupes</a></li>
-            <li><a href="/groupes/create"><i class="fa fa-circle-o"></i> Créer un Groupe</a></li>
-            <li><a href="/typegroupes/create"><i class="fa fa-circle-o"></i> Types de Groupe</a></li>
-
-          </ul>
-        </li>
         <li>
-          <a href="/evenements">
-            <i class="fa fa-calendar"></i> <span>Evénéments</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-envelope"></i> <span>Messages</span>
+          <a href="/banques">
+            <i class="fa fa-envelope"></i> <span>Les Banques</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-yellow">12</small>
               <small class="label pull-right bg-green">16</small>
@@ -455,15 +444,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/departement/create"><i class="fa fa-circle-o"></i> Coordination Départemental</a></li>
-            <li><a href="/poles/create"><i class="fa fa-circle-o"></i> Coordination de Pôle</a></li>
             <li><a href="/communes/create"><i class="fa fa-circle-o"></i> Communes</a></li>
             <li><a href="/circuits/create"><i class="fa fa-circle-o"></i> Circuits</a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="fa fa-share"></i> <span>Feedbacks</span></a></li>
-        <li><a href="#"><i class="fa fa-image"></i> <span>Albums</span></a></li>
-        <li><a href="#"><i class="fa fa-archive"></i> <span>Archives</span></a></li>
+
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>

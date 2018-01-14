@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -51,9 +52,9 @@ class LoginController extends Controller
           );
 
           if ($throttles && $this->hasTooManyLoginAttempts($request)) {
-  			       return redirect()->back()
-          				->with('error', 'Nombre d\'essayé maximum atteint, veuillez patienter !')
-          				->withInput($request->only('email'));
+  			       return redirect('/'); //redirect()->back()('/accueil')
+          				//->with('error', 'Nombre d\'essayé maximum atteint, veuillez patienter !')
+          				//->withInput($request->only('email'));
           }
 
       		$credentials = [
@@ -61,35 +62,35 @@ class LoginController extends Controller
       			'password'  => $request->input('password')
       		];
 
-      		if(!$auth->validate($credentials)) {
+      		if(!Auth::validate($credentials)) {
       			if ($throttles) {
       	            $this->incrementLoginAttempts($request);
       	        }
 
-      			return redirect()->back()
-      				->with('error', 'Votre email est érroné, veuillez réessayer !')
-      				->withInput($request->only('email'));
+      			return redirect('/');//redirect()->back()
+      				//('/accueil')->with('error', 'Votre email est érroné, veuillez réessayer !')
+      				//->withInput($request->only('email'));
       		}
 
-      		$user = $auth->getLastAttempted();
+      		$user = Auth::getLastAttempted();
 
       		if ($throttles) {
               $this->clearLoginAttempts($request);
           }
 
-      		$auth->login($user, $request->has('remember'));
+      		Auth::login($user, $request->has('remember'));
 
       		if($request->session()->has('user_id'))	{
       				$request->session()->forget('user_id');
       		}
-
+          $request->session()->put('statut', $user->role->slug);
       		return redirect('/accueil');
     }
 
     public function getLogout(Guard $auth)
     {
         $auth->logout();
-
+        session()->forget('statut');
         return redirect('/');
     }
 }

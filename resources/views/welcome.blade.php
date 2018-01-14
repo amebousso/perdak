@@ -57,7 +57,7 @@
             <div class="inner">
               <h3>20</h3>
 
-              <p>Utilisateurs</p>
+              <p>Personnel</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -78,66 +78,6 @@
               <i class="ion ion-pie-graph"></i>
             </div>
             <a href="#" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-teal-gradient">
-            <div class="inner">
-              <h3>65</h3>
-
-              <p>Evénements</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-calendar"></i>
-            </div>
-            <a href="/evenements/" class="small-box-footer">Voir plus <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-info">
-            <div class="inner">
-              <h3>65</h3>
-
-              <p>Articles</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-calendar"></i>
-            </div>
-            <a href="/articles" class="small-box-footer">Voir Plus <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-gray">
-            <div class="inner">
-              <h3>65</h3>
-
-              <p>Groupes</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-calendar"></i>
-            </div>
-            <a href="/groupes" class="small-box-footer">Voir Plus <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-purple">
-            <div class="inner">
-              <h3>65</h3>
-
-              <p>Commentaires</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-calendar"></i>
-            </div>
-            <a href="#" class="small-box-footer">Voir Plus <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
       </div>

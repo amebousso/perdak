@@ -35,13 +35,8 @@
           <div class="box-body">
             <div class="form-group">
                 <label class="col-md-6 control-label">Role</label>
-
-                <select class="form-control" name="role_id" id="role">
-                  <option>:::: Sélectionne un role :::::</option>
-                  <?php foreach ($roles as $role): ?>
-                    <option value="{!! $role->id !!}">{!! $role->libelle !!}</option>
-                  <?php endforeach; ?>
-                </select>
+                {{ Form::select('role_id', $roles, $user->role_id, ['class' => 'form-control']) }}
+                
             </div>
             <div class="form-group" id="form-pole">
                 <label class="col-md-6 control-label">Pole</label>

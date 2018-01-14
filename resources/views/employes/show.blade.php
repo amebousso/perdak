@@ -20,7 +20,9 @@
     overflow: scroll;
     padding: 5px;
   }
-
+  .badgeUser{
+    display:block;
+  }
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -194,42 +196,7 @@
                   <span class="description">Posted 5 photos - 5 days ago</span>
                 </div>
                 <!-- /.user-block -->
-                <div class="row margin-bottom">
-                  <div class="col-sm-6">
-                    <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <img class="img-responsive" src="../../dist/img/photo2.png" alt="Photo">
-                        <br>
-                        <img class="img-responsive" src="../../dist/img/photo3.jpg" alt="Photo">
-                      </div>
-                      <!-- /.col -->
-                      <div class="col-sm-6">
-                        <img class="img-responsive" src="../../dist/img/photo4.jpg" alt="Photo">
-                        <br>
-                        <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
-                      </div>
-                      <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                  </div>
-                  <!-- /.col -->
-                </div>
-                <!-- /.row -->
 
-                <ul class="list-inline">
-                  <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-                  <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-                  </li>
-                  <li class="pull-right">
-                    <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                      (5)</a></li>
-                </ul>
-
-                <input class="form-control input-sm" type="text" placeholder="Type a comment">
               </div>
               <!-- /.post -->
             </div>
@@ -365,7 +332,7 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
-    <div class="badgeUser" style="display: none;">
+    <div class="badgeUser">
       <div class="box box-primary">
         <div class="box-body box-profile">
           <table>

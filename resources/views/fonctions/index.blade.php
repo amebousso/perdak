@@ -25,6 +25,7 @@
         <div class="box box-primary">
           <div class="box-header">
             <h3 class="box-title">Les fonctions </h3>
+            <a href="/fonctions/create" class="btn btn-success pull-right">Ajouter une fonction</a>
           </div>
           <!-- /.box-header -->
           <div class="box-body">

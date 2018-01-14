@@ -25,6 +25,7 @@
         <div class="box box-primary">
           <div class="box-header">
             <h3 class="box-title">Les coordinations départementales </h3>
+            <a href="/coordinationDepartementales/create" class="btn btn-success pull-right">Ajouter une coordination Departementale</a>
           </div>
           <!-- /.box-header -->
           <div class="box-body">

@@ -11,12 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
-
 Route::get('/admin', function () {
     return view('welcome');
+});
+
+Route::get('/', function () {
+    return view('login');
 });
 
 Route::get('/accueil', 'AccueilController@index');
@@ -39,13 +39,13 @@ Route::get('/departementPole/{id}', 'EmployeController@departementPoles');
 Route::get('/communesDpt/{id}', 'EmployeController@communeDepartements');
 Route::get('/circuitCommune/{id}', 'EmployeController@circuitCommunes');
 
-//Auth::routes();
+Auth::routes();
 
-//Route::get('auth/login', 'Auth\LoginController@getLogin');
+Route::get('/auth/login', 'Auth\LoginController@getLogin');
 Route::post('/auth/login', 'Auth\LoginController@postLogin');
 Route::get('/auth/logout', 'Auth\LoginController@logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/employe/sousdossier', 'EmployeController@sousDossier');
 Route::post('/employe/sousdossier', 'EmployeController@sousDossier');

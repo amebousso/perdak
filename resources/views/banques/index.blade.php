@@ -25,6 +25,7 @@
         <div class="box box-primary">
           <div class="box-header">
             <h3 class="box-title">Les banques </h3>
+            <a href="/banques/create" class="btn btn-success pull-right">Ajouter une banque</a>
           </div>
           <!-- /.box-header -->
           <div class="box-body">

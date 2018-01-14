@@ -15,7 +15,7 @@ class IsCoordonnateurPole
      */
     public function handle($request, Closure $next)
     {
-      if (session(session('statut') === 'coordoPole' || 'statut') === 'admin' || session('statut') === 'superAdmin') {
+      if (session('statut') === 'coordoPole' || session('statut') === 'admin' || session('statut') === 'superAdmin') {
         return $next($request);
       }
 

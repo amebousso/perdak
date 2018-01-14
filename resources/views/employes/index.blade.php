@@ -25,6 +25,7 @@
         <div class="box box-primary">
           <div class="box-header">
             <h3 class="box-title">Le personnel </h3>
+            <a href="/employes/create" class="btn btn-success pull-right">Ajouter un personnel</a>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -37,6 +38,7 @@
                   <th>CNI</th>
                   <th>Date Naissance</th>
                   <th>Profession</th>
+                  <th></th>
                 </tr>
               </thead>
               @foreach($employes as $employe)
@@ -48,18 +50,21 @@
                   <td>{{ $employe->cni }}</td>
                   <td>{{ $employe->dateNaissance }}</td>
                   <td>{{ $employe->profession }}</td>
-
+                  <td>
+                    {{ link_to_route('employes.edit', 'Modifier', [$employe->id], ["class" => "btn btn-info"]) }}
+                  </td>
                 </tr>
               </tbody>
               @endforeach
               <tfoot>
                 <tr>
-                  <th>Categorie</th>
-                  <th>Description</th>
-                  <th>Lieu</th>
-                  <th>Plaignant</th>
-                  <th>Statut</th>
-                  <th>Date</th>
+                  <th>Prénom</th>
+                  <th>Nom</th>
+                  <th>Matricule</th>
+                  <th>CNI</th>
+                  <th>Date Naissance</th>
+                  <th>Profession</th>
+                  <th></th>
                 </tr>
               </tfoot>
             </table>
@@ -84,7 +89,7 @@
     $('#example2').DataTable({
       'paging'      : true,
       'lengthChange': false,
-      'searching'   : false,
+      'searching'   : true,
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false
