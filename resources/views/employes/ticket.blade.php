@@ -55,6 +55,9 @@
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
+                  <b>Secteur</b> <a class="pull-right">{{ $employe->fonction->libelle }}</a>
+                </li>
+                <li class="list-group-item">
                   <b>Cellule</b> <a class="pull-right">{{ $employe->cellule->libelle }}</a>
                 </li>
                 <li class="list-group-item">
@@ -63,7 +66,12 @@
                 <li class="list-group-item">
                   <b>Sexe</b> <a class="pull-right">{{ $employe->sexe }}</a>
                 </li>
-
+                <li class="list-group-item">
+                  <b>Circuit</b> <a class="pull-right">{{ $employe->circuit->libelle }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Commune</b> <a class="pull-right">{{ $employe->circuit->commune->libelle }}</a>
+                </li>
               </ul>
 
             </div>
