@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use App\CoordinationDePole;
+use App\CoordinationDepartementale;
 
 class UserController extends Controller
 {
@@ -16,7 +17,8 @@ class UserController extends Controller
    */
    public function __construct ()
    {
-     $this->middleware('superAdmin');
+     $this->middleware('auth');
+     $this->middleware('superAdmin', ['except' => ['edit', 'update', 'show']]);
    }
     /**
      * Display a listing of the resource.
@@ -37,7 +39,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        $poles = CoordinationDePole::all();
+        $poles = CoordinationDepartementale::all();
 
         return view('users.create', compact('roles', 'poles'));
     }

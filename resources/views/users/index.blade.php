@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', 'Personnel UCG')
+@section('title', 'Utilisateurs UCG')
 
 @section('content')
 <div class="content-wrapper">
@@ -8,7 +8,7 @@
   <section class="content-header">
     <h1>
       Personnel
-      <small>Liste du personnel</small>
+      <small>Liste des Utilisateurs</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>

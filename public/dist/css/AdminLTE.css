@@ -23,6 +23,11 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+.badgeUser{
+  display:none;
+}
+
 /* Layout */
 .wrapper {
   height: 100%;

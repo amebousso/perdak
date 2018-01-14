@@ -20,9 +20,7 @@
     overflow: scroll;
     padding: 5px;
   }
-  .badgeUser{
-    display:block;
-  }
+
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -44,7 +42,7 @@
         <!-- Profile Image -->
         <div class="box box-primary">
           <div class="box-body box-profile">
-            <img class="profile-user-img img-responsive img-circle" src="/images/employes/originales/{{ $employe->photo->url }}" alt="User profile picture">
+            <img class="profile-user-img img-responsive img-circle" src="/images/employes/originales/<?php if($employe->photo){echo $employe->photo->url;}else{ echo "";} ?>" alt="User profile picture">
 
             <h3 class="profile-username text-center">{{ $employe->prenom .' '. $employe->nom }}</h3>
 
@@ -126,7 +124,7 @@
               <!-- Post -->
               <div class="post">
                 <div class="user-block">
-                  <img class="img-circle img-bordered-sm" src="/images/employes/profiles/{{ $employe->photo->url }}" alt="user image">
+                  <img class="img-circle img-bordered-sm" src="/images/employes/profiles/<?php if($employe->photo){echo $employe->photo->url;}else{ echo "";} ?>" alt="user image">
                       <span class="username">
                         <a href="#">Jonathan Burke Jr.</a>
                         <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
@@ -302,7 +300,7 @@
                   <label for="inputName" class="col-sm-2 control-label">Sous dossier</label>
                   <div class="col-sm-10">
                     <input type="text" name="sousdossier" class="form-control" id="inputName" placeholder="Name">
-                    <input type="hidden" name="dossier" value="{{ $employe->dossierPersonnel->id }}" >
+                    <input type="hidden" name="dossier" value=" <?php if($employe->dossierPersonnel){echo $employe->dossierPersonnel->id;}else{ echo "1";} ?>" >
                   </div>
                 </div>
                 <div class="form-group">
@@ -313,7 +311,7 @@
               </form>
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Dossiers: {{ $employe->dossierPersonnel->libelle }}</h3>
+                  <h3 class="box-title">Dossiers: <?php if($employe->dossierPersonnel){echo $employe->dossierPersonnel->libelle;}else{ echo "Personnel";} ?></h3>
                 </div>
                 <div class="box-body">
                   <div class="example">
@@ -351,7 +349,7 @@
             </tr>
             <tr>
               <td width="40%">
-                <img class="profile-user-img img-responsive img-circle" src="/images/employes/originales/{{ $employe->photo->url }}" alt="User profile picture">
+                <img class="profile-user-img img-responsive " src="/images/employes/originales/<?php if($employe->photo){echo $employe->photo->url;}else{ echo "";} ?>" alt="User profile picture">
               </td>
               <td width="60%">
                 <ul class="list-group list-group-unbordered">
@@ -388,7 +386,12 @@
 <script src="/js/fileTree/jqueryFileTree.js" type="text/javascript"></script>
 <link href="/js/fileTree/jqueryFileTree.css" rel="stylesheet" type="text/css" media="screen" />
 <?php
-  $dossiers = public_path('dossiers/'.$employe->dossierPersonnel->libelle.'/');
+  if($employe->dossierPersonnel){
+    $doss = $employe->dossierPersonnel->libelle;
+  }else{
+    $doss = "Personnel";
+  }
+  $dossiers = public_path('dossiers/'. $doss.'/');
   //$files = \File::allFiles($dossiers);
 
  ?>

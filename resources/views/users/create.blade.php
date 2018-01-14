@@ -46,20 +46,20 @@
             <div class="form-group" id="form-pole">
                 <label class="col-md-6 control-label">Pole</label>
 
-                <select class="form-control" name="pole_id" id="pole">
+                <select class="form-control" name="zone_id" id="pole">
                   <option>:::: Sélectionne un pole :::::</option>
                   <?php foreach ($poles as $pole): ?>
                     <option value="{!! $pole->id !!}">{!! $pole->libelle !!}</option>
                   <?php endforeach; ?>
                 </select>
             </div>
-            <div class="form-group" id='form-departement'>
+            <!--div class="form-group" id='form-departement'>
                 <label class="col-md-6 control-label">Coordination Departementale</label>
 
                 <select class="form-control" name="zone_id" id="departement">
 
                 </select>
-            </div>
+            </div-->
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-6 control-label">Name</label>
 

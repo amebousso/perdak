@@ -9,7 +9,7 @@
   <section class="content-header">
     <h1>
       Gestion des Utilisateurs
-      <small>Ajouter</small>
+      <small>Modifier</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="/admin"><i class="fa fa-dashboard"></i> Accueil</a></li>
@@ -20,7 +20,7 @@
   <!-- Main content -->
   <section class="content">
     <div class="row">
-      {!! Form::open(['route' => 'users.store', 'role' => 'form']) !!}
+      {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'put', 'role' => 'form']) !!}
       <!-- left column -->
 
       <!-- right column -->
@@ -36,30 +36,23 @@
             <div class="form-group">
                 <label class="col-md-6 control-label">Role</label>
                 {{ Form::select('role_id', $roles, $user->role_id, ['class' => 'form-control']) }}
-                
+
             </div>
             <div class="form-group" id="form-pole">
-                <label class="col-md-6 control-label">Pole</label>
+                <label class="col-md-6 control-label">Coordination</label>
+                {{ Form::select('zone_id', $poles, $user-zone_id, ['class' => 'form-control']) }}
 
-                <select class="form-control" name="pole_id" id="pole">
-                  <option>:::: Sélectionne un pole :::::</option>
-                  <?php foreach ($poles as $pole): ?>
-                    <option value="{!! $pole->id !!}">{!! $pole->libelle !!}</option>
-                  <?php endforeach; ?>
-                </select>
             </div>
-            <div class="form-group" id='form-departement'>
+            <!--div class="form-group" id='form-departement'>
                 <label class="col-md-6 control-label">Coordination Departementale</label>
 
                 <select class="form-control" name="zone_id" id="departement">
 
                 </select>
-            </div>
+            </div-->
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-6 control-label">Name</label>
-
-                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
+                {{ Form::text('name', null, ['class' => 'form-control', 'id' => 'name']) }}
                 @if ($errors->has('name'))
                     <span class="help-block">
                         <strong>{{ $errors->first('name') }}</strong>
@@ -68,9 +61,7 @@
             </div>
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                 <label for="email" class="col-md-6 control-label">Adresse Mail</label>
-
-                <input id="name" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
+                {{ Form::email('email', null, ['class' => 'form-control', 'id' => 'email']) }}
                 @if ($errors->has('email'))
                     <span class="help-block">
                         <strong>{{ $errors->first('email') }}</strong>

@@ -35,6 +35,6 @@ class User extends Authenticatable
 
     public function departement()
     {
-        return $this->belongsTo(App\CoordinationDepartementale::class);
+        return $this->belongsTo('App\CoordinationDepartementale', 'zone_id');
     }
 }
