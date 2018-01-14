@@ -29,7 +29,8 @@ class AccueilController extends Controller
 
     public function index()
     {
-
+      $nbrEmployesTotal = Employe::count();
+      $nbrEmployesCoordination = Employe::count();
       return view('welcome');
     }
 }

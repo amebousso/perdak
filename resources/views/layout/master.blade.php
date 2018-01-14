@@ -260,7 +260,7 @@
               <span class="hidden-xs">
                 @if(Auth::user())
                   {{ Auth::user()->name }}
-                  
+
                 @endif
               </span>
             </a>
@@ -323,8 +323,9 @@
         <div class="pull-left info">
           @if(Auth::user())
           <p>{{ Auth::user()->name }}</p>
-          @endif
           <a href="#"><i class="fa fa-circle text-success"></i> En ligne</a>
+          @endif
+
         </div>
       </div>
       <!-- search form -->
@@ -400,6 +401,8 @@
             <li><a href="/cellules/create"><i class="fa fa-circle-o"></i> Ajouter une cellule</a></li>
           </ul>
         </li>
+        @if(Auth::user() && session('statut') === 'superAdmin')
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-user"></i> <span>Utilisateurs</span>
@@ -413,6 +416,8 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Rôles</a></li>
           </ul>
         </li>
+        @endif
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>

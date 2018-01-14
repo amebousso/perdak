@@ -31,9 +31,9 @@ class EmployeController extends Controller
      */
      public function __construct ()
      {
-       $this->middleware('auth');
+       $this->middleware('auth')->except('afficherEmploye');
      }
-     
+
     public function index()
     {
         $employes = Employe::all();

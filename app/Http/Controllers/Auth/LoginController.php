@@ -84,6 +84,7 @@ class LoginController extends Controller
       				$request->session()->forget('user_id');
       		}
           $request->session()->put('statut', $user->role->slug);
+          //$request->session()->put('coordination', $user->departement->libelle);
       		return redirect('/accueil');
     }
 
