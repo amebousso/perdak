@@ -34,9 +34,21 @@ class EmployeController extends Controller
        $this->middleware('auth')->except('afficherEmploye');
      }
 
-    public function index()
+    public function index(Request $request)
     {
-        $employes = Employe::all();
+        $statut = session( 'statut') ? session( 'statut') : '';
+        if($statut == 'coordo') {
+          $employes = Employe::select()->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                       ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                       ->where('communes.departement_id', (int)$request->user()->zone_id)->get();
+        } else if($statut == 'coordoPole') {
+          $employes = Employe::select()->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                       ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                       ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
+                                       ->join('coordination_de_poles', 'coordination_departementales.pole_id', '=', 'coordination_de_poles.id')->get();
+        } else{
+          $employes = Employe::all();
+        }
         return view('employes.index', compact('employes'));
     }
 

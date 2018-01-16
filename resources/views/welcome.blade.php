@@ -9,11 +9,11 @@
     <section class="content-header">
       <h1>
         Tableau de bord
-        <small>Control panel</small>
+        <small>Panneau de Contrôle</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
-        <li class="active">Dashboard</li>
+        <li class="active">Tableau de bord</li>
       </ol>
     </section>
 
