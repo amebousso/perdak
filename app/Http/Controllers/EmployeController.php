@@ -84,6 +84,7 @@ class EmployeController extends Controller
         $employe->niveauEtude = $request->input('niveauEtude');
         $employe->fonction_id = $request->input('fonction_id');
         $employe->cellule_id = $request->input('cellule_id');
+        $employe->circuit_id = $request->input('circuit_id');
 
         $employe->save();
 
@@ -208,6 +209,7 @@ class EmployeController extends Controller
       $employe->niveauEtude = $request->input('niveauEtude');
       $employe->fonction_id = $request->input('fonction_id');
       $employe->cellule_id = $request->input('cellule_id');
+      $employe->circuit_id = $request->input('circuit_id');
 
       $employe->save();
 
