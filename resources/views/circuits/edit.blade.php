@@ -22,6 +22,12 @@
   <section class="content">
     <div class="row">
       {!! Form::model($circuit, ['route' => ['circuits.update', $circuit->id], 'method' => 'put', 'role' => 'form']) !!}
+      @if(session()->has('success'))
+      <div class="alert alert-success col-md-8">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> {{ session('success') }}
+      </div>
+      @endif
       <!-- right column -->
       <div class="col-md-6">
         <!-- Horizontal Form -->

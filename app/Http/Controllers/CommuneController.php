@@ -49,7 +49,7 @@ class CommuneController extends Controller
         $commune->departement_id = $request->input('departement_id');
         $commune->save();
 
-        return redirect()->back()->with('success', 'commune ajoutee avec succes');
+        return redirect('/communes')->with('success', 'commune ajoutée avec succès');
     }
 
     /**
@@ -93,7 +93,7 @@ class CommuneController extends Controller
       $commune->departement_id = $request->input('departement_id');
       $commune->save();
 
-      return redirect()->back()->with('success', 'commune mise a jour avec succes');
+      return redirect('/communes')->with('success', 'commune mise a jour avec succes');
     }
 
     /**

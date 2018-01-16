@@ -139,7 +139,7 @@ class EmployeController extends Controller
           $dossier->employe_id = $employe->id;
           $dossier->save();
 
-        return redirect()->back()->with('success', 'Personnel ajouté avec succès');
+        return redirect('/employes')->with('success', 'Personnel ajouté avec succès');
     }
 
     /**
@@ -264,7 +264,7 @@ class EmployeController extends Controller
         $dossier->employe_id = $employe->id;
         $dossier->save();*/
 
-      return redirect()->back()->with('success', 'Personnel ajouté avec succès');
+      return redirect('/employes')->with('success', 'Modification enregistrée avec succès');
     }
 
     /**
@@ -294,7 +294,7 @@ class EmployeController extends Controller
       $sousD->dossierPersonnel_id = $dossier->id;
       $sousD->save();
 
-      return redirect()->back();
+      return redirect()->back()->with('success', 'Sous dossier créé avec succès');
     }
 
     public function afficherEmploye($id)

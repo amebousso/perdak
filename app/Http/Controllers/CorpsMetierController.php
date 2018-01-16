@@ -46,7 +46,7 @@ class CorpsMetierController extends Controller
         $corpsDeMetier->libelle = $request->input('libelle');
         $corpsDeMetier->save();
 
-        return redirect()->back()->with('success', 'Corps de metier ajoute avec succes');
+        return redirect('/corpsMetier')->with('success', 'Corps de metier ajouté avec succès');
     }
 
     /**
@@ -88,7 +88,7 @@ class CorpsMetierController extends Controller
       $corps->libelle = $request->input('libelle');
       $corps->save();
 
-      return redirect()->back()->with('success', 'Corps de metier mis a jour avec succes');
+      return redirect('/corpsMetier')->with('success', 'Corps de métier mis à jour avec succès');
     }
 
     /**

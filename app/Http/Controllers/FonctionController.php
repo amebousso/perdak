@@ -15,9 +15,9 @@ class FonctionController extends Controller
      */
      public function __construct ()
      {
-       $this->middleware('auth');
+       $this->middleware('admin');
      }
-     
+
     public function index()
     {
         $fonctions = Fonction::all();
@@ -49,7 +49,7 @@ class FonctionController extends Controller
         $fonction->corpsdemetier_id = $request->input('corpsdemetier_id');
         $fonction->save();
 
-        return redirect()->back()->with('success', 'fonction ajoutee avec succes');
+        return redirect('/fonctions')->with('success', 'fonction ajoutée avec succès');
     }
 
     /**
@@ -93,7 +93,7 @@ class FonctionController extends Controller
       $fonction->corpsdemetier_id = $request->input('corpsdemetier_id');
       $fonction->save();
 
-      return redirect()->back()->with('success', 'fonction ajoutee avec succes');
+      return redirect('/fonctions')->with('success', 'fonction mise à jour avec succes');
     }
 
     /**

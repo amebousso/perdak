@@ -15,9 +15,9 @@ class CelluleController extends Controller
      */
      public function __construct ()
      {
-       $this->middleware('auth');
+       $this->middleware('admin');
      }
-     
+
     public function index()
     {
         $cellules =  Cellule::all();
@@ -50,7 +50,7 @@ class CelluleController extends Controller
         $cellule->service_id = $request->input('service_id');
         $cellule->save();
 
-        return redirect()->back()->with('success', 'Cellule de service ajoutee avec succes');
+        return redirect('/cellules')->with('success', 'Cellule de service ajoutee avec succes');
     }
 
     /**
@@ -94,7 +94,7 @@ class CelluleController extends Controller
       $cellule->service_id = $request->input('service_id');
       $cellule->save();
 
-      return redirect()->back()->with('success', 'Cellule de service mise a jour avec succes');
+      return redirect('/cellules')->with('success', 'Cellule de service mise a jour avec succes');
     }
 
     /**

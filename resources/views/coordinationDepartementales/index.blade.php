@@ -20,6 +20,18 @@
   <!-- Main content -->
   <section class="content">
     <div class="row">
+      @if(session()->has('success'))
+      <div class="alert alert-success col-md-8">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> {{ session('success') }}
+      </div>
+      @endif
+      @if(session()->has('warning'))
+      <div class="alert alert-warning col-md-8">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Attention!</strong> {{ session('warning') }}
+      </div>
+      @endif
       <!-- right column -->
       <div class="col-md-12">
         <div class="box box-primary">

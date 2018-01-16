@@ -51,7 +51,7 @@ class CircuitController extends Controller
         $circuit->commune_id = $request->input('commune_id');
         $circuit->save();
 
-        return redirect()->back()->with('success', 'Circuit ajoute avec succes');
+        return redirect('/circuits')->with('success', 'Circuit ajouté avec succes');
 
     }
 
@@ -97,7 +97,7 @@ class CircuitController extends Controller
       $circuit->commune_id = $request->input('commune_id');
       $circuit->save();
 
-      return redirect()->back()->with('success', 'Circuit ajoute avec succes');
+      return redirect('/circuits')->with('success', 'Circuit modifié avec succes');
     }
 
     /**

@@ -14,9 +14,9 @@ class ServiceController extends Controller
      */
      public function __construct ()
      {
-       $this->middleware('auth');
+       $this->middleware('admin');
      }
-     
+
     public function index()
     {
         $services = Service::all();
@@ -46,7 +46,7 @@ class ServiceController extends Controller
         $service->libelle = $request->input('libelle');
         $service->save();
 
-        return redirect()->back()->with('success', 'Service ajoute avec succes');
+        return redirect('/services')->with('success', 'Service ajouté avec succes');
     }
 
     /**
@@ -88,7 +88,7 @@ class ServiceController extends Controller
       $service->libelle = $request->input('libelle');
       $service->save();
 
-      return redirect()->back()->with('success', 'Service ajoute avec succes');
+      return redirect('/services')->with('success', 'Service modifié avec succes');
     }
 
     /**

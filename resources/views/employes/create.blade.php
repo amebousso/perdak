@@ -22,6 +22,12 @@
   <section class="content">
     <div class="row">
       {!! Form::open(['route' => 'employes.store', 'role' => 'form', 'file' => 'true', 'enctype' => 'multipart/form-data']) !!}
+      @if(session()->has('success'))
+      <div class="alert alert-success col-md-8">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> {{ session('success') }}
+      </div>
+      @endif
       <!-- left column -->
         <div class="col-md-6">
         <!-- general form elements -->

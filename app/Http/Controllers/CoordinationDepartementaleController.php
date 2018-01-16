@@ -51,7 +51,7 @@ class CoordinationDepartementaleController extends Controller
 
         $coordinationDepartement->save();
 
-        return redirect()->back()->with('success', 'Coordination departementale ajoutee');
+        return redirect('/coordinationDepartementales')->with('success', 'Coordination departementale ajoutée avec succès');
     }
 
     /**
@@ -96,7 +96,7 @@ class CoordinationDepartementaleController extends Controller
 
       $coordinationDepartement->save();
 
-      return redirect()->back()->with('success', 'Coordination departementale mise a jour');
+      return redirect('/coordinationDepartementales')->with('success', 'Coordination departementale mise à jour avec succès');
     }
 
     /**

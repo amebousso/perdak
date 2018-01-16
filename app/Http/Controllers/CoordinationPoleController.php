@@ -46,7 +46,7 @@ class CoordinationPoleController extends Controller
         $pole->libelle = $request->input('libelle');
         $pole->save();
 
-        return redirect()->back()->with('success', 'Coordination de Pole ajoutee avec succes');
+        return redirect('/coordinationPoles')->with('success', 'Coordination de Pole ajoutée avec succes');
     }
 
     /**
@@ -88,7 +88,7 @@ class CoordinationPoleController extends Controller
       $pole->libelle = $request->input('libelle');
       $pole->save();
 
-      return redirect()->back()->with('success', 'Coordination de Pole mise a jour avec succes');
+      return redirect('/coordinationPoles')->with('success', 'Coordination de Pôle mise à jour avec succès');
     }
 
     /**

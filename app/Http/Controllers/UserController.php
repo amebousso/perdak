@@ -60,7 +60,7 @@ class UserController extends Controller
         $user->zone_id = $request->input('zone_id');
         $user->save();
 
-        return redirect()->back()->with('success', 'Utilisateur ajoute avec succes');
+        return redirect('/users')->with('success', 'Utilisateur ajouté avec succes');
     }
 
     /**
@@ -117,7 +117,7 @@ class UserController extends Controller
       $user->password = bcrypt($request->input('password'));
       $user->save();
 
-      return redirect()->back()->with('success', 'Profile mis a jour avec succes');
+      return redirect('/users/'.$id)->with('success', 'Profile mis a jour avec succes');
     }
 
 
@@ -153,7 +153,7 @@ class UserController extends Controller
       $user->zone_id = $request->input('zone_id');
       $user->save();
 
-      return redirect()->back()->with('success', 'Utilisateur mis a jour avec succes');
+      return redirect('/users')->with('success', 'Utilisateur mis a jour avec succes');
     }
 
     /**

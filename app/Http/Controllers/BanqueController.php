@@ -14,9 +14,9 @@ class BanqueController extends Controller
      */
      public function __construct ()
      {
-       $this->middleware('auth');
+       $this->middleware('admin');
      }
-     
+
     public function index()
     {
         $banques = Banque::all();
@@ -47,7 +47,7 @@ class BanqueController extends Controller
         $banque->libelle = $request->input('libelle');
         $banque->save();
 
-        return redirect()->back()->with('success', 'Banque ajoutee avec succes');
+        return redirect('/banques')->with('success', 'Banque ajoutée avec succes');
     }
 
     /**
@@ -87,7 +87,7 @@ class BanqueController extends Controller
       $banque->libelle = $request->input('libelle');
       $banque->save();
 
-      return redirect()->back()->with('success', 'Banque mise a jour avec succes');
+      return redirect('/banques')->with('success', 'Banque mise a jour avec succes');
     }
 
     /**
