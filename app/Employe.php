@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Employe extends Model
 {
   protected $fillable = [
-      'prenom', 'nom', 'dateNaissance', 'lieuNaissance', 'matricule', 'cni', 'profession', 'ipress', 'sexe', 'situationMatrimoniale', 'nombreEnfants', 'niveauEtude', 'fonction_id', 'cellule_id',
+      'prenom', 'nom', 'dateNaissance', 'lieuNaissance', 'matricule', 'cni', 'profession', 'ipress', 'sexe', 'situationMatrimoniale', 'nombreEnfants', 'niveauEtude', 'fonction_id', 'cellule_id', 'circuit_id'
   ];
 
   public function adresse()

@@ -210,7 +210,7 @@
       <!-- search form -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="q" class="form-control" placeholder="Recherche...">
           <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -229,66 +229,90 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-users"></i>
-            <span>Personnel</span>
+            <span>Gestion du Personnel</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">4</span>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel administratif</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Personnel permanent</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Personnel contractel</a></li>
-            <li><a href="/employes/create"><i class="fa fa-circle-o"></i> Ajouter</a></li>
+            @if(session('statut') == 'admin' || session('statut') == 'superAdmin')
+                <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel administratif</a></li>
+            @endif
+            <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel permanent</a></li>
+            <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel contractel</a></li>
+            @if(session('statut') == 'admin' || session('statut') == 'superAdmin')
+                <li><a href="/employes/create"><i class="fa fa-circle-o"></i> Ajouter</a></li>
+            @endif
+            @if(session('statut') == 'coordo')
+                <li><a href="#"><i class="fa fa-circle-o"></i> Ventilation</a></li>
+            @endif
           </ul>
         </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
-            <span>Coordinations</span>
+            <span>Gestion des Conges</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/coordinationPoles"><i class="fa fa-circle-o"></i> Liste des Pôles</a></li>
-            <li><a href="/coordinationDepartementales"><i class="fa fa-circle-o"></i> Coordinations Departementales</a></li>
-            <li><a href="/coordinationPoles/create"><i class="fa fa-circle-o"></i> Ajouter un Pôle</a></li>
-            <li><a href="/coordinationDepartementales/create"><i class="fa fa-circle-o"></i> Ajouter une coordination</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Calendrier</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Planification</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Personnel en conge</a></li>
           </ul>
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-map"></i> <span>Corps de Métier</span>
+            <i class="fa fa-laptop"></i>
+            <span>Gestion Contre-Pointage</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/corpsMetier"><i class="fa fa-circle-o"></i> Les corps de métier</a></li>
-            <li><a href="/fonctions"><i class="fa fa-circle-o"></i> Les fonctions</a></li>
-            <li><a href="/corpsMetier/create"><i class="fa fa-circle-o"></i> Ajouter un corps</a></li>
-            <li><a href="/fonctions/create"><i class="fa fa-circle-o"></i> Ajouter une fonction</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Absences</a></li>
           </ul>
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-map"></i> <span>Services</span>
+            <i class="fa fa-laptop"></i>
+            <span>Gestion Petits Materiels</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/services"><i class="fa fa-circle-o"></i> Les services</a></li>
-            <li><a href="/cellules"><i class="fa fa-circle-o"></i> Les cellules</a></li>
-            <li><a href="/services/create"><i class="fa fa-circle-o"></i> Ajouter un service</a></li>
-            <li><a href="/cellules/create"><i class="fa fa-circle-o"></i> Ajouter une cellule</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Etat</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Ventilation</a></li>
           </ul>
         </li>
+
         @if(Auth::user() && session('statut') === 'superAdmin')
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-cog"></i>
+              <span>Parametrage</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/coordinationPoles"><i class="fa fa-circle-o"></i> Pôles</a></li>
+              <li><a href="/coordinationDepartementales"><i class="fa fa-circle-o"></i> Coordinations Departementales</a></li>
+              <li><a href="/communes"><i class="fa fa-circle-o"></i> Communes</a></li>
+              <li><a href="/circuits"><i class="fa fa-circle-o"></i> Circuits </a></li>
+              <li><a href="/corpsMetier"><i class="fa fa-circle-o"></i> Corps de Metier</a></li>
+              <li><a href="/fonctions"><i class="fa fa-circle-o"></i> Fonctions</a></li>
+              <li><a href="/services"><i class="fa fa-circle-o"></i> Services</a></li>
+              <li><a href="/cellules"><i class="fa fa-circle-o"></i> Cellules de service </a></li>
+              <li><a href="/banques"><i class="fa fa-circle-o"></i> Banques </a></li>
+            </ul>
+          </li>
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-user"></i> <span>Utilisateurs</span>
+            <i class="fa fa-user"></i> <span>Gestion Utilisateurs</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -312,30 +336,6 @@
           <ul class="treeview-menu">
             <li><a href="#"><i class="fa fa-circle-o"></i> Personnel permanent</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Personnel contractuel</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="/banques">
-            <i class="fa fa-envelope"></i> <span>Les Banques</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
-            </span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-map"></i> <span>Circonscriptions</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="/communes"><i class="fa fa-circle-o"></i> Les Communes</a></li>
-            <li><a href="/circuits"><i class="fa fa-circle-o"></i> Les Circuits</a></li>
-            <li><a href="/communes/create"><i class="fa fa-circle-o"></i>Ajouter une commune</a></li>
-            <li><a href="/circuits/create"><i class="fa fa-circle-o"></i>Ajouter un circuits</a></li>
           </ul>
         </li>
 
