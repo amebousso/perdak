@@ -95,7 +95,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="/dist/img/default-user.png" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Developers
@@ -137,7 +137,7 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="/dist/img/default-user.png" class="user-image" alt="User Image">
               <span class="hidden-xs">
                 @if(Auth::user())
                   {{ Auth::user()->name }}
@@ -148,7 +148,7 @@
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="/dist/img/default-user.png" class="img-circle" alt="User Image">
 
                 <p>
                   @if(Auth::user())
@@ -197,7 +197,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="/dist/img/default-user.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           @if(Auth::user())
@@ -248,46 +248,6 @@
             @endif
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-laptop"></i>
-            <span>Gestion des Conges</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Calendrier</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Planification</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Personnel en conge</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-laptop"></i>
-            <span>Gestion Contre-Pointage</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Absences</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-laptop"></i>
-            <span>Gestion Petits Materiels</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Etat</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Ventilation</a></li>
-          </ul>
-        </li>
-
         @if(Auth::user() && session('statut') === 'superAdmin')
           <li class="treeview">
             <a href="#">
@@ -336,6 +296,45 @@
           <ul class="treeview-menu">
             <li><a href="#"><i class="fa fa-circle-o"></i> Personnel permanent</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Personnel contractuel</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>Gestion des Conges</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Calendrier</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Planification</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Personnel en conge</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>Gestion Contre-Pointage</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Absences</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>Gestion Petits Materiels</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Etat</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Ventilation</a></li>
           </ul>
         </li>
 
