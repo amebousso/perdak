@@ -34,9 +34,16 @@
                 <li class="list-group-item">
                   <b>Rôle</b> <a class="pull-right">{{ $user->role->libelle }}</a>
                 </li>
-                <li class="list-group-item">
-                  <b>Coordination</b> <a class="pull-right">{{ $user->departement->libelle }}</a>
-                </li>
+                @if(session('statut') == 'coordo')
+                  <li class="list-group-item">
+                    <b>Coordination</b> <a class="pull-right">{{ $user->departement->libelle }}</a>
+                  </li>
+                @endif
+                @if(session('statut') == 'coordoPole')
+                  <li class="list-group-item">
+                    <b>Coordination</b> <a class="pull-right">{{ $user->departement->pole->libelle }}</a>
+                  </li>
+                @endif
               </ul>
 
             </div>

@@ -49,6 +49,11 @@ Route::get('/employe/sousdossier', 'EmployeController@sousDossier');
 Route::post('/employe/sousdossier', 'EmployeController@sousDossier');
 Route::post('/employe/{id}', 'EmployeController@afficherEmploye');
 Route::get('/employe/{id}', 'EmployeController@afficherEmploye');
+<<<<<<< HEAD
 Route::get('/appercu', 'EmployeController@appercuImprimer');
 Route::post('/appercu', 'EmployeController@appercuImprimer');
 Route::get('generatepdf', 'EmployeController@printPdf')->name('generatepdf');
+=======
+
+Route::get('quickstat', 'AccueilController@quickStat');
+>>>>>>> 1115b3f4bef56097d70025e4fd28a9efb0a2be28

@@ -143,42 +143,6 @@
       <!--/.col (left) -->
       <!-- right column -->
         <div class="col-md-6">
-        <!-- Form Element sizes -->
-        <div class="box box-success">
-          <div class="box-header with-border">
-            <h3 class="box-title">Circuit d'affectation</h3>
-          </div>
-          <div class="box-body">
-            <div class="form-group">
-              <label>Coordination de Pôle</label>
-              <select class="form-control" id="pole">
-                <option>:::: Sélectionne le pôle ::::</option>
-                <?php foreach ($poles as $pole): ?>
-                  <option value="{!! $pole->id !!}">{!! $pole->libelle !!}</option>
-                <?php endforeach; ?>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Coordination départementale</label>
-              <select class="form-control" id="departement">
-                <option>::: Sélectionne la Coordination :::</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Commune</label>
-              <select class="form-control" id="commune">
-                <option>::: Commune :::</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Circuit d'affectation</label>
-              <select class="form-control" name="circuit_id" id="circuit">
-                <option>::: Circuit :::</option>
-              </select>
-            </div>
-          </div>
-          <!-- /.box-body -->
-        </div>
         <!-- /.box -->
         <!-- Horizontal Form -->
         <div class="box box-info">
@@ -237,30 +201,6 @@
         </div>
         <!-- /.box -->
         <!-- Form Element sizes -->
-        <div class="box box-success">
-          <div class="box-header with-border">
-            <h3 class="box-title">Information bancaire</h3>
-          </div>
-          <div class="box-body">
-            <div class="form-group">
-              <label>Banque</label>
-              <select class="form-control" name="banque">
-                <option>::: Sélectionne la banque :::</option>
-                <?php foreach ($banques as $banque): ?>
-                  <option value="{!! $banque->id !!}">{!! $banque->libelle !!}</option>
-                <?php endforeach; ?>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputCompte">Numéro de compte</label><br>
-              <input type="text" name="codeGuichet" placeholder="Guichet" size="20">
-              <input type="number" name="numero_compte" placeholder="Compte" size="30">
-              <input type="number" name="cleRIB" placeholder="RIB" size="2" maxlength="2">
-
-            </div>
-          </div>
-          <!-- /.box-body -->
-        </div>
         <!-- /.box -->
       </div>
       <!--/.col (right) -->
