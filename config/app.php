@@ -170,6 +170,7 @@ return [
          Collective\Html\HtmlServiceProvider::class,
          Intervention\Image\ImageServiceProvider::class,
          SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+         Barryvdh\DomPDF\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -231,6 +232,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

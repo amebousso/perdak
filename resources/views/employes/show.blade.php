@@ -37,7 +37,7 @@
   </section>
   <!-- Main content -->
   <section class="content">
-    <div class="row">
+    <div class="row" id="rowContent">
       <div class="col-md-3">
         <!-- Profile Image -->
         <div class="box box-primary">

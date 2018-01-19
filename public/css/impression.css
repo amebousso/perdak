@@ -1,11 +1,14 @@
 body { /* Modifications : la couleur de fond de page - la police - l'unité utilisée pour la taille de la police  */
   background-color :#fff;
-  font-size :15pt;
+  font-size :9px;
   font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight: 400;
+  width: 100%;
+  height: auto;
+  display:block;
 }
 
-.content-header, .row, .main-header, .main-sidebar, .main-footer {
+.content-header, #rowContent, .main-header, .main-sidebar, .main-footer {
   display: none;
 }
 .badgeUser{
@@ -16,3 +19,37 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
     visibility: visible;
     padding-left: 0px;
 }
+
+.print {
+  display: none;
+}
+.col-md-6 {
+    width: 50%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+b{
+  font-size: 9px;
+}
+a{
+  font-size: 9px;
+}
+h5{
+  font-size: 9px;
+}
+h1{
+  font-size: 13pt
+}
+.list-group-item {
+    padding: 2px 15px;
+
+}
+.profile-user-img {
+    margin: 0 auto;
+    width: 70px;
+    padding: 0px;
+     border: 1px solid #d2d6de;
+   }

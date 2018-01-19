@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use File;
+use PDF;
 
 use App\Adresse;
 use App\Employe;
@@ -316,6 +317,37 @@ class EmployeController extends Controller
       $employe = Employe::find($id);
 
       return view('employes.ticket', compact('employe'));
+    }
+
+    public function appercuImprimer(Request $request)
+    {
+      $employes = $request->input('employe');
+      $resultats = Employe::whereIn('id', $employes)->get();
+      //$data['resultats'] = $resultats;
+      //if($request->has('download')){
+        	// Set extra option
+          //$resultats = $request->get('employe');
+        	//PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        	// pass view file
+            //$pdf = PDF::loadView('employes.appercu', $data);
+            // download pdf
+            //return $pdf->download('badge.pdf');
+        //}
+
+      return view('employes.appercu', compact('resultats'));
+    }
+
+    public function printPdf(Request $request)
+    {
+      //if($request->has('download')){
+        	// Set extra option
+          $resultats = $request->get('employe');
+        	PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        	// pass view file
+            $pdf = PDF::loadView('employes.appercu', $resultats);
+            // download pdf
+            return $pdf->download('badge.pdf');
+        //}
     }
 
     public function celluleServices($id)
