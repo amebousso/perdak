@@ -51,52 +51,51 @@
           <?php foreach ($resultats as $employe): ?>
             <div class="col-md-6">
               <div class="box box-primary">
-            <div class="box-body box-profile">
-              <table width="100%">
-                <tbody>
-                <tr>
-                  <td width="20%">
-                    <img class="profile-user-img img-responsive" src="/images/employes/originales/<?php if($employe->photo){echo $employe->photo->url;}else{ echo "";} ?> " alt="User profile picture">
-                  </td>
-                  <td width="80%">
-                    <p class="text-center">
-                      <img src="/images/drapeau.png" alt="" align="center" height="15" />
-                    </p>
-                    <h5 class="text-center">Ministère de Gouvernance Territoriale, du Développement et de l'Aménagement du Territoire </h5>
-                    <h1 class="text-center">UCG</h1>
-                    <h5 class="text-center">Unité de Coordination de la Gestion des Déchets Solides</h5>
-                  </td>
-
-                </tr>
-                <tr>
-                  <td width="20%">
-                    <a href="#" class="">{!! QrCode::size(80)->generate(url('/employe/'.$employe->id)); !!}</a>
-
-                  </td>
-
-                  <td width="80%">
-                    <ul class="list-group list-group-unbordered">
-                      <li class="list-group-item">
-                        <b>Prénom:</b> <a class="pull-right">{{ $employe->prenom }}</a>
-                      </li>
-                      <li class="list-group-item">
-                        <b>Nom:</b> <a class="pull-right">{{ $employe->nom }}</a>
-                      </li>
-                      <li class="list-group-item">
-                        <b>Matricule:</b> <a class="pull-right">{{ $employe->matricule }}</a>
-                      </li>
-                      <li class="list-group-item">
-                        <b>Fonction:</b> <a class="pull-right">{{ $employe->fonction->corpsDeMetier->libelle }}</a>
-                      </li>
-
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-              </table>
-            </div>
+                <div class="box-body box-profile">
+                  <table width="100%">
+                    <tbody>
+                    <tr>
+                      <td width="20%">
+                        <img class="profile-user-img img-responsive" src="/images/employes/originales/<?php if($employe->photo){echo $employe->photo->url;}else{ echo "";} ?> " alt="User profile picture">
+                      </td>
+                      <td width="80%">
+                        <p class="text-center">
+                          <img src="/images/drapeau.png" alt="" align="center" height="15" />
+                        </p>
+                        <h5 class="text-center">Ministère de Gouvernance Territoriale, du Développement et de l'Aménagement du Territoire </h5>
+                        <h1 class="text-center">UCG</h1>
+                        <h5 class="text-center">Unité de Coordination de la Gestion des Déchets Solides</h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="20%">
+                        <a href="#" class="">{!! QrCode::size(80)->generate(url('/employe/'.$employe->id)); !!}</a>
+                      </td>
+                      <td width="80%">
+                        <ul class="list-group list-group-unbordered">
+                          <li class="list-group-item">
+                            <b>Prénom:</b> <a class="pull-right">{{ $employe->prenom }}</a>
+                          </li>
+                          <li class="list-group-item">
+                            <b>Nom:</b> <a class="pull-right">{{ $employe->nom }}</a>
+                          </li>
+                          <li class="list-group-item">
+                            <b>Matricule:</b> <a class="pull-right">{{ $employe->matricule }}</a>
+                          </li>
+                          <li class="list-group-item">
+                            <b>Fonction:</b> <a class="pull-right">{{ $employe->fonction_id }}</a>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr><td>
+                      <br/>
+                    </td></tr>
+                  </tbody>
+                  </table>
+                </div>
             <!-- /.box-body -->
-          </div>
+              </div>
             </div>
           <!-- /.box -->
           <?php endforeach; ?>

@@ -48,7 +48,7 @@ class EmployeController extends Controller
                                        ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
                                        ->join('coordination_de_poles', 'coordination_departementales.pole_id', '=', 'coordination_de_poles.id')->get();
         } else{
-          $employes = Employe::all();
+          $employes = Employe::paginate(25);
         }
         return view('employes.index', compact('employes'));
     }
@@ -323,16 +323,6 @@ class EmployeController extends Controller
     {
       $employes = $request->input('employe');
       $resultats = Employe::whereIn('id', $employes)->get();
-      //$data['resultats'] = $resultats;
-      //if($request->has('download')){
-        	// Set extra option
-          //$resultats = $request->get('employe');
-        	//PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
-        	// pass view file
-            //$pdf = PDF::loadView('employes.appercu', $data);
-            // download pdf
-            //return $pdf->download('badge.pdf');
-        //}
 
       return view('employes.appercu', compact('resultats'));
     }

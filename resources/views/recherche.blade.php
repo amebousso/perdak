@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', 'Personnel UCG')
+@section('title', 'Recherche Personnel UCG')
 
 @section('content')
 <style>
@@ -23,12 +23,12 @@
   <section class="content-header">
     <h1>
       Personnel
-      <small>Liste du personnel</small>
+      <small>Résultats de recherche</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
       <li><a href="#">Personnel</a></li>
-      <li class="active">Liste du personnel</li>
+      <li class="active">Résultats recherche</li>
     </ol>
   </section>
 
@@ -53,9 +53,7 @@
           <form class="" action="/appercu" method="post">
             {{ csrf_field() }}
             <div class="box-header">
-              <h3 class="box-title">Le personnel </h3>
-              <a href="/employes/create" class="btn btn-success pull-right">Ajouter un personnel</a>
-
+              <h3 class="box-title">Résultats recherche : {{ $word }}</h3>
               <input type="submit" class="btn btn-primary pull-right" value="Imprimer les badges">
             </div>
             <!-- /.box-header -->
@@ -165,7 +163,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      
+
                     </div>
                   </div>
 
@@ -187,19 +185,8 @@
 @endsection
 @section('script')
 <!-- DataTables -->
-<script src="/bower_components/datatables/jquery.dataTables.min.js"></script>
-<script src="/bower_components/datatables/dataTables.bootstrap.min.js"></script>
 <script>
   $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
 
     $('#employes').click(function (e) {
 

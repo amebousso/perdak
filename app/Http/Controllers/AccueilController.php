@@ -170,5 +170,15 @@ class AccueilController extends Controller
 
     }
 
+    public function recherche(Request $request)
+    {
+      $word = $request->get('q');
+      $employes = Employe::where('prenom', 'like', '%'.$request->get('q').'%')
+                            ->orwhere('nom', 'like', '%'.$request->get('q').'%')
+                            ->orwhere('statut', 'like', '%'.$request->get('q').'%')
+                            ->orwhere('matricule', 'like', '%'.$request->get('q').'%')
+                            ->paginate(45);
 
+      return view('recherche', compact('employes', 'word'));//response()->json($personnels);
+    }
 }

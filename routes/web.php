@@ -55,3 +55,5 @@ Route::post('/appercu', 'EmployeController@appercuImprimer');
 Route::get('generatepdf', 'EmployeController@printPdf')->name('generatepdf');
 
 Route::get('quickstat', 'AccueilController@quickStat');
+Route::get('/recherche', 'AccueilController@recherche');
+Route::post('/recherche', 'AccueilController@recherche');
