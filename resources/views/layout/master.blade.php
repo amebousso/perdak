@@ -170,7 +170,7 @@
                 <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel administratif</a></li>
             @endif
             <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel permanent</a></li>
-            <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel contractel</a></li>
+            <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel journalier</a></li>
             @if(session('statut') == 'admin' || session('statut') == 'superAdmin')
                 <li><a href="/employes/create"><i class="fa fa-circle-o"></i> Ajouter</a></li>
             @endif

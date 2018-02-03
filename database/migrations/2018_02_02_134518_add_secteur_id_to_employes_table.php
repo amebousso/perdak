@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddStatutToEmployesTable extends Migration
+class AddSecteurIdToEmployesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class AddStatutToEmployesTable extends Migration
     public function up()
     {
         Schema::table('employes', function (Blueprint $table) {
-            $table->string('statut')->after('lieuNaissance')->default('permanent');
+            $table->integer('secteur_id')->unsigned()->nullable();
+            $table->foreign('secteur_id')->references('id')->on('secteur_interventions')
+                      ->onUpdate('cascade');
         });
     }
 
@@ -26,7 +28,7 @@ class AddStatutToEmployesTable extends Migration
     public function down()
     {
         Schema::table('employes', function (Blueprint $table) {
-            $table->dropColumn('statut');
+            //
         });
     }
 }

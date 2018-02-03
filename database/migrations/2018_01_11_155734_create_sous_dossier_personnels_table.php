@@ -18,7 +18,7 @@ class CreateSousDossierPersonnelsTable extends Migration
             $table->string('libelle');
             $table->integer('dossierPersonnel_id')->unsigned();
             $table->foreign('dossierPersonnel_id')->references('id')->on('dossier_personnels')
-                      ->onCascade('cascade')
+                      ->onUpdate('cascade')
                       ->onDelete('cascade');
             $table->timestamps();
         });

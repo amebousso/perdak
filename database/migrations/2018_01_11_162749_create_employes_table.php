@@ -17,24 +17,35 @@ class CreateEmployesTable extends Migration
             $table->increments('id');
             $table->string('prenom');
             $table->string('nom');
+            $table->string('sexe');
             $table->string('dateNaissance');
             $table->string('lieuNaissance');
-            $table->string('matricule');
-            $table->string('cni');
-            $table->string('profession');
-            $table->string('ipress');
-            $table->string('sexe');
-            $table->string('situationMatrimoniale');
-            $table->string('nombreEnfants');
-            $table->string('niveauEtude');
+            $table->enum('type', ['terrain', 'topmanegement'])->nullable();
+            $table->enum('contrat', ['journalier', 'stagiaire', 'cdd', 'cdi'])->nullable();
+            $table->string('cni')->nullable();
+            $table->string('matricule')->nullable();
+            $table->date('dateEmbauche')->nullable();
+            $table->string('profession')->nullable();
+            $table->string('ipres')->nullable();
+            $table->string('situationMatrimoniale')->nullable();
+            $table->string('nombreEnfants')->nullable();
+            $table->string('niveauEtude')->nullable();
+            $table->string('tailleTenue')->nullable();
+            $table->string('pointureBottePluie')->nullable();
+            $table->string('pointureBotteSecurite')->nullable();
+            $table->integer('etat')->unsigned()->default(0);
 
-            $table->integer('fonction_id')->unsigned();
+            $table->integer('fonction_id')->unsigned()->nullable();
             $table->foreign('fonction_id')->references('id')->on('fonctions')
-                      ->onCascade('cascade');
+                      ->onUpdate('cascade');
 
-            $table->integer('cellule_id')->unsigned();
+            $table->integer('cellule_id')->unsigned()->nullable();
             $table->foreign('cellule_id')->references('id')->on('cellules')
-                      ->onCascade('cascade');
+                      ->onUpdate('cascade');
+
+            $table->integer('circuit_id')->unsigned()->nullable();
+            $table->foreign('circuit_id')->references('id')->on('circuits')
+                                ->onUpdate('cascade');
 
             $table->timestamps();
         });

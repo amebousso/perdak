@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\SecteurIntervention;
 
 class Employe extends Model
 {
   protected $fillable = [
-      'prenom', 'nom', 'dateNaissance', 'lieuNaissance', 'matricule', 'cni', 'profession', 'ipress', 'sexe', 'situationMatrimoniale', 'nombreEnfants', 'niveauEtude', 'fonction_id', 'cellule_id', 'circuit_id', 'statut', 'dateEmbauche', 'tailleTenue', 'pointureBottePluie', 'pointureBotteSecurite'
+      'prenom', 'nom', 'dateNaissance', 'lieuNaissance', 'matricule', 'cni', 'profession', 'ipress', 'sexe',
+       'situationMatrimoniale', 'nombreEnfants', 'niveauEtude', 'fonction_id', 'cellule_id', 'circuit_id',
+       'statut', 'dateEmbauche', 'tailleTenue', 'pointureBottePluie', 'pointureBotteSecurite', 'secteur_id'
   ];
 
   public function adresse()
@@ -43,5 +46,10 @@ class Employe extends Model
   public function circuit()
   {
       return $this->belongsTo('App\Circuit');
+  }
+
+  public function secteur()
+  {
+      return $this->belongsTo(App\SecteurIntervention::class);
   }
 }

@@ -18,7 +18,7 @@ class CreateCoordinationDepartementalesTable extends Migration
             $table->string('libelle');
             $table->integer('pole_id')->unsigned();
             $table->foreign('pole_id')->references('id')->on('coordination_de_poles')
-                      ->onCascade('cascade')
+                      ->onUpdate('cascade')
                       ->onDelete('cascade');
             $table->timestamps();
         });

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCorpsDeMetiersTable extends Migration
+class CreateSecteurInterventionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCorpsDeMetiersTable extends Migration
      */
     public function up()
     {
-        Schema::create('corps_de_metiers', function (Blueprint $table) {
+        Schema::create('secteur_interventions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('libelle');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateCorpsDeMetiersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('corps_de_metiers');
+        Schema::dropIfExists('secteur_interventions');
     }
 }

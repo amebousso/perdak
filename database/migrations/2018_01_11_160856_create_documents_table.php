@@ -20,7 +20,7 @@ class CreateDocumentsTable extends Migration
             $table->string('date');
             $table->integer('sousDossier_id')->unsigned();
             $table->foreign('sousDossier_id')->references('id')->on('sous_dossier_personnels')
-                      ->onCascade('cascade')
+                      ->onUpdate('cascade')
                       ->onDelete('cascade');
             $table->timestamps();
         });

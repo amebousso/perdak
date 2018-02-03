@@ -20,7 +20,7 @@ class CreateInfosBancairesTable extends Migration
             $table->string('cleRIB');
             $table->integer('banque_id')->unsigned();
             $table->foreign('banque_id')->references('id')->on('banques')
-                      ->onCascade('cascade')
+                      ->onUpdate('cascade')
                       ->onDelete('cascade');
             $table->timestamps();
         });

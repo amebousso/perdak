@@ -21,7 +21,7 @@ class CreatePhotosTable extends Migration
             $table->string('hauteur');
             $table->integer('employe_id')->unsigned();
             $table->foreign('employe_id')->references('id')->on('employes')
-                      ->onCascade('cascade')
+                      ->onUpdate('cascade')
                       ->onDelete('cascade');
             $table->timestamps();
         });

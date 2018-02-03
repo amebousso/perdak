@@ -19,7 +19,7 @@ class CreateCircuitsTable extends Migration
             $table->string('libelle');
             $table->integer('commune_id')->unsigned();
             $table->foreign('commune_id')->references('id')->on('communes')
-                      ->onCascade('cascade')
+                      ->onUpdate('cascade')
                       ->onDelete('cascade');
             $table->timestamps();
         });

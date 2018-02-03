@@ -16,11 +16,6 @@ class CreateFonctionsTable extends Migration
         Schema::create('fonctions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('libelle');
-            $table->integer('corpsdemetier_id')->unsigned();
-
-            $table->foreign('corpsdemetier_id')->references('id')->on('corps_de_metiers')
-                      ->onCascade('cascade')
-                      ->onDelete('cascade');
             $table->timestamps();
         });
     }

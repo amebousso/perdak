@@ -18,7 +18,7 @@ class CreateCommunesTable extends Migration
             $table->string('libelle');
             $table->integer('departement_id')->unsigned();
             $table->foreign('departement_id')->references('id')->on('coordination_departementales')
-                      ->onCascade('cascade')
+                      ->onUpdate('cascade')
                       ->onDelete('cascade');
             $table->timestamps();
         });

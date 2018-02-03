@@ -19,7 +19,7 @@ class CreateCellulesTable extends Migration
             $table->integer('service_id')->unsigned();
 
             $table->foreign('service_id')->references('id')->on('services')
-                      ->onCascade('cascade')
+                      ->onUpdate('cascade')
                       ->onDelete('cascade');
             $table->timestamps();
         });

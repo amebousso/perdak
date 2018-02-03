@@ -19,9 +19,9 @@ class CreateCircuitEmployeTable extends Migration
             $table->integer('circuit_id')->unsigned()->nullable();
 
             $table->foreign('employe_id')->references('id')->on('employes')
-                      ->onCascade('cascade');
+                      ->onUpdate('cascade');
             $table->foreign('circuit_id')->references('id')->on('circuits')
-                      ->onCascade('cascade');
+                      ->onUpdate('cascade');
         });
     }
 
