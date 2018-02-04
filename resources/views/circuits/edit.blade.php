@@ -42,12 +42,16 @@
               {{ Form::select('commune_id', $communes, $circuit->commune_id, array('class' => 'form-control')) }}
             </div>
             <div class="form-group">
-              <label for="exampleInputlibelle">Nom du circuit</label>
-              {{ Form::text('libelle', null, array('class' => 'form-control')) }}
+              <label>Type du Circuit</label>
+              {{ Form::select('type', $type, $circuit->type, array('class' => 'form-control')) }}
             </div>
             <div class="form-group">
               <label for="exampleInputcode">Code du circuit</label>
               {{ Form::text('code', null, array('class' => 'form-control')) }}
+            </div>
+            <div class="form-group">
+              <label for="exampleInputlibelle">Nom du circuit</label>
+              {{ Form::text('libelle', null, array('class' => 'form-control')) }}
             </div>
           </div>
           <!-- /.box-body -->

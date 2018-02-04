@@ -16,7 +16,6 @@ use App\Cellule;
 use App\Photo;
 use App\CoordinationDePole;
 use App\CoordinationDepartementale;
-use App\CorpsDeMetier;
 use App\Fonction;
 use App\Commune;
 use App\Circuit;
@@ -35,22 +34,76 @@ class EmployeController extends Controller
        $this->middleware('auth')->except('afficherEmploye');
      }
 
-    public function index(Request $request)
+    public function index(Request $request, $type=null)
     {
         $statut = session( 'statut') ? session( 'statut') : '';
         if($statut == 'coordo') {
-          $employes = Employe::select()->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
-                                       ->join('communes', 'circuits.commune_id', '=', 'communes.id')
-                                       ->where('communes.departement_id', (int)$request->user()->zone_id)->get();
+            if($type ==  'permanent') {
+                $employes = Employe::select('*')->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                                ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                                ->where('communes.departement_id', (int)$request->user()->zone_id)
+                                                ->where('employes.type', 'terrain')
+                                                ->where('employes.contrat', 'cdd')->orWhere('employes.contrat', 'cdi')
+                                                ->paginate(25);
+            }else if($type ==  'journalier') {
+                $employes = Employe::select('*')->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                                ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                                ->where('communes.departement_id', (int)$request->user()->zone_id)
+                                                ->where('employes.type', 'terrain')
+                                                ->where('employes.contrat', 'journalier')
+                                                ->paginate(25);
+            }else {
+                $employes = Employe::select('*')->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                                ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                                ->where('communes.departement_id', (int)$request->user()->zone_id)
+                                                ->where('employes.type', 'terrain')
+                                                ->paginate(25);
+            }
         } else if($statut == 'coordoPole') {
-          $employes = Employe::select()->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+            if($type == 'permanent') {
+                $employes = Employe::select('*')->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                        ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                        ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
-                                       ->join('coordination_de_poles', 'coordination_departementales.pole_id', '=', 'coordination_de_poles.id')->get();
+                                       ->join('coordination_de_poles', 'coordination_departementales.pole_id', '=', 'coordination_de_poles.id')
+                                       ->where('employes.type', 'terrain')
+                                       ->where('employes.contrat', 'cdd')->orWhere('employes.contrat', 'cdi')
+                                       ->paginate(25);
+            } else if($type == 'journalier') {
+                $employes = Employe::select('*')->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                     ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                     ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
+                                     ->join('coordination_de_poles', 'coordination_departementales.pole_id', '=', 'coordination_de_poles.id')
+                                     ->where('employes.type', 'terrain')
+                                     ->where('employes.contrat', 'journalier')
+                                     ->paginate(25);
+            } else {
+                $employes = Employe::select('*')->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                   ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                   ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
+                                   ->join('coordination_de_poles', 'coordination_departementales.pole_id', '=', 'coordination_de_poles.id')
+                                   ->where('employes.type', 'terrain')
+                                   ->paginate(25);
+            }
         } else{
-          $employes = Employe::paginate(25);
+            if($type == 'administratif') {
+                $employes = Employe::where('type', 'topmanagement')
+                                    ->where('contrat', 'cdd')->orWhere('contrat', 'cdi')
+                                    ->paginate(25);
+            }
+            else if($type == 'permanent') {
+                $employes = Employe::where('type', 'terrain')
+                                    ->where('contrat', 'cdd')->orWhere('contrat', 'cdi')
+                                    ->paginate(25);
+            } else if($type == 'journalier') {
+                $employes = Employe::where('type', 'terrain')
+                                    ->where('contrat', 'journalier')
+                                    ->paginate(25);
+            } else {
+                $employes = Employe::paginate(25);
+            }
         }
-        return view('employes.index', compact('employes'));
+        $complement = ($type == null) ? '' : ucfirst($type);
+        return view('employes.index', compact('employes', 'complement'));
     }
 
     /**
@@ -63,10 +116,9 @@ class EmployeController extends Controller
         $banques = Banque::all();
         $services = Service::all();
         $poles = CoordinationDePole::all();
-        //$departementales = CoordinationDepartementale::all();
-        $corps = CorpsDeMetier::all();
+        $fonctions = Fonction::all();
 
-        return view('employes.create', compact('banques', 'services', 'poles', 'departementales', 'corps'));
+        return view('employes.create', compact('banques', 'services', 'poles', 'departementales', 'fonctions'));
     }
 
     /**
@@ -186,11 +238,10 @@ class EmployeController extends Controller
         $departements = CoordinationDepartementale::all()->pluck('libelle', 'id');
         $communes = Commune::all()->pluck('libelle', 'id');
         $circuits = Circuit::all()->pluck('libelle', 'id');
-        $corps = CorpsDeMetier::all()->pluck('libelle', 'id');
         $cellules = Cellule::all()->pluck('libelle', 'id');
         $fonctions = Fonction::all()->pluck('libelle', 'id');
 
-        return view('employes.edit', compact('employe', 'banques', 'services', 'poles', 'corps', 'cellules', 'fonctions', 'departements', 'communes', 'circuits'));
+        return view('employes.edit', compact('employe', 'banques', 'services', 'poles', 'cellules', 'fonctions', 'departements', 'communes', 'circuits'));
     }
 
     /**
@@ -348,18 +399,18 @@ class EmployeController extends Controller
       return response()->json($cellules);
     }
 
-    public function fonctionsCorps($id)
+    /*public function fonctionsCorps($id)
     {
       # code...
       $fonctions = Fonction::all()->where('corpsdemetier_id', $id);
 
       return response()->json($fonctions);
-    }
+    }*/
 
     public function departementPoles($id)
     {
       # code...
-      $departements = CoordinationDepartementale::all()->where('pole_id', $id);
+      $departements = CoordinationDepartementale::select('id', 'libelle')->where('pole_id', $id)->get();
 
       return response()->json($departements);
     }
@@ -367,7 +418,7 @@ class EmployeController extends Controller
     public function communeDepartements($id)
     {
       # code...
-      $communes = Commune::all()->where('departement_id', $id);
+      $communes = Commune::select('id', 'libelle')->where('departement_id', $id)->get();
 
       return response()->json($communes);
     }

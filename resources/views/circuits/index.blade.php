@@ -46,6 +46,7 @@
                 <tr>
                   <th>Libellé</th>
                   <th>Code circuit</th>
+                  <th>Type de Circuit</th>
                   <th>Commune</th>
                   <th></th>
                 </tr>
@@ -55,6 +56,7 @@
                 <tr>
                   <td>{{ $circuit->libelle }}</td>
                   <td>{{ $circuit->code }}</td>
+                  <td>{{ $circuit->type }}</td>
                   <td>{{ $circuit->commune->libelle }}</td>
                   <td>{{ link_to_route('circuits.edit', 'Modifier', [$circuit->id], ["class" => "btn btn-info"]) }} </td>
                 </tr>
@@ -64,6 +66,7 @@
                 <tr>
                   <th>Libellé</th>
                   <th>Code circuit</th>
+                  <th>Type de Circuit</th>
                   <th>Commune</th>
                   <th></th>
                 </tr>

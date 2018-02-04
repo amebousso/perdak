@@ -27,9 +27,10 @@ Route::resource('coordinationDepartementales', 'CoordinationDepartementaleContro
 Route::resource('coordinationPoles', 'CoordinationPoleController');
 Route::resource('services', 'ServiceController');
 Route::resource('cellules', 'CelluleController');
-Route::resource('corpsMetier', 'CorpsMetierController');
 Route::resource('fonctions', 'FonctionController');
 Route::resource('users', 'UserController');
+
+Route::get('/personnel/{type}', 'EmployeController@index');
 
 Route::get('/celluleService/{id}', 'EmployeController@celluleServices');
 Route::get('/fonctionCorps/{id}', 'EmployeController@fonctionsCorps');

@@ -37,11 +37,6 @@
           <!-- /.box-header -->
           <div class="box-body">
             <div class="form-group">
-              <label>Corps de Métier</label>
-              {{ Form::select('corpsdemetier_id', $corpsDeMetiers, $fonction->corpsdemetier_id, array('class' => 'form-control'))}}
-
-            </div>
-            <div class="form-group">
               <label for="exampleInputlibelle">Nom de la fonction</label>
               {{ Form::text('libelle', null, array('class' => 'form-control')) }}
             </div>

@@ -107,11 +107,6 @@
 
               </div>
               <div class="form-group">
-                <label>Corps de Métier</label>
-                {{ Form::select('corps', $corps, $employe->fonction->corpsDeMetier->id, ['class' => 'form-control', 'id' => 'corps']) }}
-
-              </div>
-              <div class="form-group">
                 <label>Fonction</label>
                 {{ Form::select('fonction_id', $fonctions, $employe->fonction->id, ['class' => 'form-control', 'id' => 'fonction']) }}
 

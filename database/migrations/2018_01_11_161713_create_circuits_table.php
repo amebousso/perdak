@@ -17,6 +17,7 @@ class CreateCircuitsTable extends Migration
             $table->increments('id');
             $table->string('code');
             $table->string('libelle');
+            $table->enum('type', ['balayage', 'collecte', 'desensablement', 'precollecte']);
             $table->integer('commune_id')->unsigned();
             $table->foreign('commune_id')->references('id')->on('communes')
                       ->onUpdate('cascade')

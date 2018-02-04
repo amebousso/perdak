@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Commune;
+use App\CoordinationDePole;
+//use App\Commune;
 use App\Circuit;
 
 class CircuitController extends Controller
@@ -32,9 +33,9 @@ class CircuitController extends Controller
      */
     public function create()
     {
-        $communes = Commune::all();
+        $poles = CoordinationDePole::all();
 
-        return view('circuits.create', compact('communes'));
+        return view('circuits.create', compact('poles'));
     }
 
     /**

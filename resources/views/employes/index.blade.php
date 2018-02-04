@@ -53,8 +53,10 @@
           <form class="" action="/appercu" method="post">
             {{ csrf_field() }}
             <div class="box-header">
-              <h3 class="box-title">Le personnel </h3>
+              <h3 class="box-title">Le personnel {{ $complement }}</h3>
+              @if(session('statut') == 'admin' || session('statut') == 'superAdmin')
               <a href="/employes/create" class="btn btn-success pull-right">Ajouter un personnel</a>
+              @endif
 
               <input type="submit" class="btn btn-primary pull-right" value="Imprimer les badges">
             </div>
@@ -69,7 +71,7 @@
                     <th>Matricule</th>
                     <th>CNI</th>
                     <th>Date Naissance</th>
-                    <th>Profession</th>
+                    <th>Fonction</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -82,7 +84,7 @@
                     <td>{{ link_to('employes/'. $employe->id, $employe->matricule, ['class' => 'primary']) }}</td>
                     <td>{{ $employe->cni }}</td>
                     <td>{{ $employe->dateNaissance }}</td>
-                    <td>{{ $employe->profession }}</td>
+                    <td>{{ $employe->fonction->libelle }}</td>
                     <td>
                       {{ link_to_route('employes.edit', 'Modifier', [$employe->id], ["class" => "btn btn-info"]) }}
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{$employe->id}}">Voir le Badge</button>
@@ -99,7 +101,7 @@
                     <th>Matricule</th>
                     <th>CNI</th>
                     <th>Date Naissance</th>
-                    <th>Profession</th>
+                    <th>Fonction</th>
                     <th></th>
                   </tr>
                 </tfoot>
@@ -165,7 +167,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      
+
                     </div>
                   </div>
 

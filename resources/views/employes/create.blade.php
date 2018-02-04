@@ -101,18 +101,12 @@
                 </select>
               </div>
               <div class="form-group">
-                <label>Corps de Métier</label>
-                <select class="form-control" name="corps" id="corps">
-                  <option>:::: Sélectionne de corps de métier ::::</option>
-                  <?php foreach ($corps as $corp): ?>
-                    <option value="{!! $corp->id !!}">{!! $corp->libelle !!}</option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <div class="form-group">
                 <label>Fonction</label>
                 <select class="form-control" name="fonction_id" id="fonction">
                   <option>:::Fonction:::</option>
+                  <?php foreach ($fonctions as $fonction): ?>
+                    <option value="{!! $fonction->id !!}">{!! $fonction->libelle !!}</option>
+                  <?php endforeach; ?>
                 </select>
               </div>
               <div class="form-group">
@@ -124,7 +118,7 @@
                 <input type="text" name="profession" class="form-control" id="exampleInputProfession" placeholder="Entrer la profession">
               </div>
               <div class="form-group">
-                <label for="exampleInputIpress">Numéro IPRESS</label>
+                <label for="exampleInputIpress">Numéro IPRES</label>
                 <input type="text" name="ipress" class="form-control" id="exampleInputIpress" placeholder="Numéro IPRESS">
               </div>
               <div class="form-group">
@@ -225,11 +219,6 @@
   			celluleUpdate(service_id);
   		});
 
-  		$('#corps').on('change', function(e){
-  			var corps_id = e.target.value;
-
-  			fonctionUpdate(corps_id);
-  		});
   		 // Requête Ajax pour les departements
 	    function celluleUpdate(celluleId) {
 	        $.get('{{ url('celluleService') }}/'+ celluleId, function(data) {

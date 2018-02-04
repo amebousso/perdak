@@ -45,7 +45,6 @@
               <thead>
                 <tr>
                   <th>Libellé</th>
-                  <th>Corps de Métier</th>
                   <th></th>
                 </tr>
               </thead>
@@ -53,7 +52,6 @@
               <tbody>
                 <tr>
                   <td>{{ $fonction->libelle }}</td>
-                  <td>{{ $fonction->corpsDeMetier->libelle }}</td>
                   <td>{{ link_to_route('fonctions.edit', 'Modifier', [$fonction->id], ["class" => "btn btn-info"]) }} </td>
                 </tr>
               </tbody>
@@ -61,7 +59,6 @@
               <tfoot>
                 <tr>
                   <th>Libellé</th>
-                  <th>Corps de Métier</th>
                   <th></th>
                 </tr>
               </tfoot>

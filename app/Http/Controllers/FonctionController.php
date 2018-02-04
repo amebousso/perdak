@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Fonction;
-use App\CorpsDeMetier;
 
 class FonctionController extends Controller
 {
@@ -32,8 +31,7 @@ class FonctionController extends Controller
      */
     public function create()
     {
-        $corpsMetiers = CorpsDeMetier::all();
-        return view('fonctions.create', compact('corpsMetiers'));
+        return view('fonctions.create');
     }
 
     /**
@@ -46,7 +44,6 @@ class FonctionController extends Controller
     {
         $fonction = new Fonction;
         $fonction->libelle = $request->input('libelle');
-        $fonction->corpsdemetier_id = $request->input('corpsdemetier_id');
         $fonction->save();
 
         return redirect('/fonctions')->with('success', 'fonction ajoutée avec succès');
@@ -74,9 +71,8 @@ class FonctionController extends Controller
     public function edit($id)
     {
       $fonction = Fonction::find($id);
-      $corpsDeMetiers = CorpsDeMetier::all()->pluck('libelle', 'id');
 
-      return view('fonctions.edit', compact('fonction', 'corpsDeMetiers'));
+      return view('fonctions.edit', compact('fonction'));
     }
 
     /**
@@ -90,7 +86,6 @@ class FonctionController extends Controller
     {
       $fonction = Fonction::find($id);
       $fonction->libelle = $request->input('libelle');
-      $fonction->corpsdemetier_id = $request->input('corpsdemetier_id');
       $fonction->save();
 
       return redirect('/fonctions')->with('success', 'fonction mise à jour avec succes');

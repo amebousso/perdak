@@ -166,11 +166,12 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="/employes"><i class="fa fa-circle-o"></i> Tous</a></li>
             @if(session('statut') == 'admin' || session('statut') == 'superAdmin')
-                <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel administratif</a></li>
+                <li><a href="/personnel/administratif"><i class="fa fa-circle-o"></i> Personnel administratif</a></li>
             @endif
-            <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel permanent</a></li>
-            <li><a href="/employes"><i class="fa fa-circle-o"></i> Personnel journalier</a></li>
+            <li><a href="/personnel/permanent"><i class="fa fa-circle-o"></i> Personnel permanent</a></li>
+            <li><a href="/personnel/journalier"><i class="fa fa-circle-o"></i> Personnel journalier</a></li>
             @if(session('statut') == 'admin' || session('statut') == 'superAdmin')
                 <li><a href="/employes/create"><i class="fa fa-circle-o"></i> Ajouter</a></li>
             @endif
@@ -193,7 +194,6 @@
               <li><a href="/coordinationDepartementales"><i class="fa fa-circle-o"></i> Coordinations Departementales</a></li>
               <li><a href="/communes"><i class="fa fa-circle-o"></i> Communes</a></li>
               <li><a href="/circuits"><i class="fa fa-circle-o"></i> Circuits </a></li>
-              <li><a href="/corpsMetier"><i class="fa fa-circle-o"></i> Corps de Metier</a></li>
               <li><a href="/fonctions"><i class="fa fa-circle-o"></i> Fonctions</a></li>
               <li><a href="/services"><i class="fa fa-circle-o"></i> Services</a></li>
               <li><a href="/cellules"><i class="fa fa-circle-o"></i> Cellules de service </a></li>
