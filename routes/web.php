@@ -11,6 +11,26 @@
 |
 */
 
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    return "Cache cleared";
+});
+
+Route::get('/miseAjourTablePhoto', function(){
+  $employes = App\Employe::whereBetween('id', [1219, 1575])->get();
+  foreach ($employes as $employe) {
+      $url = $employe->cni.'.png';
+
+      $photo = new App\Photo;
+      $photo->url = $url;
+      $photo->extension = 'png';
+      $photo->employe_id = $employe->id;
+      $photo->save();
+  }
+
+  return ("Table photos mise a jour avec succes!!!");
+});
+
 Route::get('/admin', 'AccueilController@index');
 
 Route::get('/', function () {

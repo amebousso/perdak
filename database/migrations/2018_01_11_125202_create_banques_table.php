@@ -16,7 +16,7 @@ class CreateBanquesTable extends Migration
         Schema::create('banques', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
-            $table->string('iban');
+            $table->string('iban')->nullable();
             $table->string('libelle');
             $table->timestamps();
         });

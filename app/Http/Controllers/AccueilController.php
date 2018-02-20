@@ -42,22 +42,45 @@ class AccueilController extends Controller
         $personnelGenre = [];
         $personnelGenreStatut = [];
         $personnelDakar = [];
-        if(session('statut') == 'superAdmin' || session('statut') == 'admin') {
+        if(session('statut') == 'superAdmin' || session('statut') == 'admin' || session('statut') == 'coordoNat') {
             //Stats par genre
-            $personnelGenre[0]['label'] = 'Permanents';
-            $personnelGenre[0]['value'] = (int) Employe::where('statut', 'permanent')->count();
+            $personnelGenre[0]['label'] = 'Personnel Suppot Administratif et Technique';
+            $personnelGenre[0]['value'] = (int) Employe::where('type', 'support administratif et technique')->count();
 
-            $personnelGenre[1]['label'] = 'Journaliers';
-            $personnelGenre[1]['value'] = (int) Employe::where('statut', 'journalier')->count();
+            $personnelGenre[1]['label'] = 'Personnel Terrain permanent';
+            $personnelGenre[1]['value'] = (int) Employe::where('type', 'terrain')
+                                                        ->where('contrat', 'cdi')->orwhere('contrat', 'cdd')
+                                                        ->count();
+
+            $personnelGenre[2]['label'] = 'Personnel Terrain Journalier';
+            $personnelGenre[2]['value'] = (int) Employe::where('type', 'terrain')
+                                                        ->where('contrat', 'journalier')
+                                                        ->count();
 
             //Stats par statut et par genre
-            $personnelGenreStatut[0]['y'] = 'Permanents';
-            $personnelGenreStatut[0]['a'] = (int) Employe::where('statut', 'permanent')->where('sexe', 'Masculin')->count();
-            $personnelGenreStatut[0]['b'] = (int) Employe::where('statut', 'permanent')->where('sexe', 'Feminin')->count();
+            $personnelGenreStatut[0]['y'] = 'Personnel Support Administratif et Technique';
+            $personnelGenreStatut[0]['a'] = (int) Employe::where('type', 'support administratif et technique')->where('sexe', 'M')->count();
+            $personnelGenreStatut[0]['b'] = (int) Employe::where('type', 'support administratif et technique')->where('sexe', 'F')->count();
 
-            $personnelGenreStatut[1]['y'] = 'Journaliers';
-            $personnelGenreStatut[1]['a'] = (int) Employe::where('statut', 'journalier')->where('sexe', 'Masculin')->count();
-            $personnelGenreStatut[1]['b'] = (int) Employe::where('statut', 'journalier')->where('sexe', 'Feminin')->count();
+            $personnelGenreStatut[1]['y'] = 'Personnel Terrain Permanent';
+            $personnelGenreStatut[1]['a'] = (int) Employe::where('type', 'terrain')
+                                                          ->where('sexe', 'M')
+                                                          ->where('contrat', 'cdi')->orWhere('contrat', 'cdd')
+                                                          ->count();
+            $personnelGenreStatut[1]['b'] = (int) Employe::where('type', 'terrain')
+                                                          ->where('sexe', 'F')
+                                                          ->where('contrat', 'cdi')->orWhere('contrat', 'cdd')
+                                                          ->count();
+
+            $personnelGenreStatut[2]['y'] = 'Personnel Terrain Journalier';
+            $personnelGenreStatut[2]['a'] = (int) Employe::where('type', 'terrain')
+                                                          ->where('sexe', 'M')
+                                                          ->where('contrat', 'journalier')
+                                                          ->count();
+            $personnelGenreStatut[2]['b'] = (int) Employe::where('type', 'terrain')
+                                                          ->where('sexe', 'F')
+                                                          ->where('contrat', 'journalier')
+                                                          ->count();
 
             //Stats personnel de Dakar par coordination departementale
             $poleDakar = CoordinationDePole::find(1);
@@ -74,16 +97,26 @@ class AccueilController extends Controller
         }else {
           if(session('statut') == 'coordoPole') {
             //Stats par genre
-            $personnelGenre[0]['label'] = 'Permanents';
-            $personnelGenre[0]['value'] = (int) Employe::where('statut', 'permanent')
+            $personnelGenre[0]['label'] = 'Personnel Support Administratif et Technique';
+            $personnelGenre[0]['value'] = (int) Employe::where('type', 'support administratif et technique')
                                                         ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                                         ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                         ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
                                                         ->where('coordination_departementales.pole_id', $request->user()->departement->pole->id)
                                                         ->count();
 
-            $personnelGenre[1]['label'] = 'Journaliers';
-            $personnelGenre[1]['value'] = (int) Employe::where('statut', 'journalier')
+            $personnelGenre[1]['label'] = 'Personnel Terrain Permanent';
+            $personnelGenre[1]['value'] = (int) Employe::where('type', 'terrain')
+                                                        ->where('contrat', 'cdi')->orwhere('contrat', 'cdd')
+                                                        ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                                        ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                                        ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
+                                                        ->where('coordination_departementales.pole_id', $request->user()->departement->pole->id)
+                                                        ->count();
+
+            $personnelGenre[2]['label'] = 'Personnel Terrain Journalier';
+            $personnelGenre[2]['value'] = (int) Employe::where('type', 'terrain')
+                                                        ->where('contrat', 'journalier')
                                                         ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                                         ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                         ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
@@ -91,28 +124,46 @@ class AccueilController extends Controller
                                                         ->count();
 
             //Stats par genre et par statut(permanent ou journalier)
-            $personnelGenreStatut[0]['y'] = 'Permanents';
-            $personnelGenreStatut[0]['a'] = (int) Employe::where('statut', 'permanent')->where('sexe', 'Masculin')
+            $personnelGenreStatut[0]['y'] = 'Personnel Support Administratif et Technique';
+            $personnelGenreStatut[0]['a'] = (int) Employe::where('type', 'support administratif et technique')->where('sexe', 'M')
                                                           ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                                           ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                           ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
                                                           ->where('coordination_departementales.pole_id', $request->user()->departement->pole->id)
                                                           ->count();
-            $personnelGenreStatut[0]['b'] = (int) Employe::where('statut', 'permanent')->where('sexe', 'Feminin')
+            $personnelGenreStatut[0]['b'] = (int) Employe::where('type', 'support administratif et technique')->where('sexe', 'F')
                                                           ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                                           ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                           ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
                                                           ->where('coordination_departementales.pole_id', $request->user()->departement->pole->id)
                                                           ->count();
 
-            $personnelGenreStatut[1]['y'] = 'Journaliers';
-            $personnelGenreStatut[1]['a'] = (int) Employe::where('statut', 'journalier')->where('sexe', 'Masculin')
+            $personnelGenreStatut[1]['y'] = 'Personnel Terrain Permanent';
+            $personnelGenreStatut[1]['a'] = (int) Employe::where('type', 'terrain')->where('sexe', 'M')
+                                                          ->where('contrat', 'cdi')->orWhere('contrat', 'cdd')
                                                           ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                                           ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                           ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
                                                           ->where('coordination_departementales.pole_id', $request->user()->departement->pole->id)
                                                           ->count();
-            $personnelGenreStatut[1]['b'] = (int) Employe::where('statut', 'journalier')->where('sexe', 'Feminin')
+            $personnelGenreStatut[1]['b'] = (int) Employe::where('type', 'terrain')->where('sexe', 'F')
+                                                          ->where('contrat', 'cdi')->orWhere('contrat', 'cdd')
+                                                          ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                                          ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                                          ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
+                                                          ->where('coordination_departementales.pole_id', $request->user()->departement->pole->id)
+                                                          ->count();
+
+            $personnelGenreStatut[2]['y'] = 'Personnel Terrain Journalier';
+            $personnelGenreStatut[2]['a'] = (int) Employe::where('type', 'terrain')->where('sexe', 'M')
+                                                          ->where('contrat', 'journalier')
+                                                          ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                                          ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                                          ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
+                                                          ->where('coordination_departementales.pole_id', $request->user()->departement->pole->id)
+                                                          ->count();
+            $personnelGenreStatut[2]['b'] = (int) Employe::where('type', 'terrain')->where('sexe', 'F')
+                                                          ->where('contrat', 'journalier')
                                                           ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                                           ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                           ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
@@ -120,40 +171,65 @@ class AccueilController extends Controller
                                                           ->count();
           }else {
             //Stats par genre
-            $personnelGenre[0]['label'] = 'Permanents';
-            $personnelGenre[0]['value'] = (int) Employe::where('statut', 'permanent')
+            $personnelGenre[0]['label'] = 'Personnel Support Administratif et Technique';
+            $personnelGenre[0]['value'] = (int) Employe::where('type', 'support administratif et technique')
                                                         ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                                         ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                         ->where('communes.departement_id', $request->user()->departement->id)
                                                         ->count();
 
-            $personnelGenre[1]['label'] = 'Journaliers';
-            $personnelGenre[1]['value'] = (int) Employe::where('statut', 'journalier')
+            $personnelGenre[1]['label'] = 'Personnel Terrain Permanent';
+            $personnelGenre[1]['value'] = (int) Employe::where('type', 'terrain')
+                                                        ->where('contrat', 'cdi')->orWhere('contrat', 'cdd')
+                                                        ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                                        ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                                        ->where('communes.departement_id', $request->user()->departement->id)
+                                                        ->count();
+
+            $personnelGenre[2]['label'] = 'Personnel Terrain Journalier';
+            $personnelGenre[2]['value'] = (int) Employe::where('type', 'terrain')
+                                                        ->where('contrat', 'journalier')
                                                         ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                                         ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                         ->where('communes.departement_id', $request->user()->departement->id)
                                                         ->count();
 
             //Stats par genre et par statut(permanent ou journalier)
-            $personnelGenreStatut[0]['y'] = 'Permanents';
-            $personnelGenreStatut[0]['a'] = (int) Employe::where('statut', 'permanent')->where('sexe', 'Masculin')
+            $personnelGenreStatut[0]['y'] = 'Personnel Support Administratif et Technique';
+            $personnelGenreStatut[0]['a'] = (int) Employe::where('type', 'support administratif et technique')->where('sexe', 'M')
                                                           ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                                           ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                           ->where('communes.departement_id', $request->user()->departement->id)
                                                           ->count();
-            $personnelGenreStatut[0]['b'] = (int) Employe::where('statut', 'permanent')->where('sexe', 'Feminin')
+            $personnelGenreStatut[0]['b'] = (int) Employe::where('type', 'support administratif et technique')->where('sexe', 'F')
                                                           ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                                           ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                           ->where('communes.departement_id', $request->user()->departement->id)
                                                           ->count();
 
-            $personnelGenreStatut[1]['y'] = 'Journaliers';
-            $personnelGenreStatut[1]['a'] = (int) Employe::where('statut', 'journalier')->where('sexe', 'Masculin')
+            $personnelGenreStatut[1]['y'] = 'Personnel Terrain Permanent';
+            $personnelGenreStatut[1]['a'] = (int) Employe::where('type', 'terrain')->where('sexe', 'M')
+                                                          ->where('contrat', 'cdi')->orWhere('contrat', 'cdd')
                                                           ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                                           ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                           ->where('communes.departement_id', $request->user()->departement->id)
                                                           ->count();
-            $personnelGenreStatut[1]['b'] = (int) Employe::where('statut', 'journalier')->where('sexe', 'Feminin')
+            $personnelGenreStatut[1]['b'] = (int) Employe::where('type', 'terrain')->where('sexe', 'F')
+                                                          ->where('contrat', 'cdi')->orWhere('contrat', 'cdd')
+                                                          ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                                          ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                                          ->where('communes.departement_id', $request->user()->departement->id)
+                                                          ->count();
+
+            $personnelGenreStatut[2]['y'] = 'Personnel Terrain Journalier';
+            $personnelGenreStatut[2]['a'] = (int) Employe::where('type', 'terrain')->where('sexe', 'M')
+                                                          ->where('contrat', 'journalier')
+                                                          ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
+                                                          ->join('communes', 'circuits.commune_id', '=', 'communes.id')
+                                                          ->where('communes.departement_id', $request->user()->departement->id)
+                                                          ->count();
+            $personnelGenreStatut[2]['b'] = (int) Employe::where('type', 'terrain')->where('sexe', 'F')
+                                                          ->where('contrat', 'journalier')
                                                           ->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
                                                           ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                           ->where('communes.departement_id', $request->user()->departement->id)
@@ -175,7 +251,8 @@ class AccueilController extends Controller
       $word = $request->get('q');
       $employes = Employe::where('prenom', 'like', '%'.$request->get('q').'%')
                             ->orwhere('nom', 'like', '%'.$request->get('q').'%')
-                            ->orwhere('statut', 'like', '%'.$request->get('q').'%')
+                            ->orwhere('cni', 'like', '%'.$request->get('q').'%')
+                            ->orwhere('type', 'like', '%'.$request->get('q').'%')
                             ->orwhere('matricule', 'like', '%'.$request->get('q').'%')
                             ->paginate(45);
 

@@ -83,7 +83,7 @@
                             <b>Matricule:</b> <a class="pull-right">{{ $employe->matricule }}</a>
                           </li>
                           <li class="list-group-item">
-                            <b>Fonction:</b> <a class="pull-right">{{ $employe->fonction_id }}</a>
+                            <b>Fonction:</b> <a class="pull-right">{{ $employe->fonction->libelle }}</a>
                           </li>
                         </ul>
                       </td>

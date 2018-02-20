@@ -12,7 +12,7 @@ class SecteurInterventionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $secteurs = ['Balayage', 'Collecte', 'Polyvalent', 'Surveillance Depot', 'Superviseur', 'Chef de Zone'];
+        $secteurs = ['Balayage', 'Collecte', 'Polyvalent', 'Surveillance Depot'];
 
         foreach ($secteurs as $secteur) {
             SecteurIntervention::create(

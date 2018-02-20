@@ -84,7 +84,11 @@
                     <td>{{ link_to('employes/'. $employe->id, $employe->matricule, ['class' => 'primary']) }}</td>
                     <td>{{ $employe->cni }}</td>
                     <td>{{ $employe->dateNaissance }}</td>
-                    <td>{{ $employe->fonction->libelle }}</td>
+                    @if($employe->fonction_id != null)
+                        <td>{{ $employe->fonction->libelle }}</td>
+                    @else
+                        <td></td>
+                    @endif
                     <td>
                       {{ link_to_route('employes.edit', 'Modifier', [$employe->id], ["class" => "btn btn-info"]) }}
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{$employe->id}}">Voir le Badge</button>
@@ -153,7 +157,7 @@
                                       <b>Matricule:</b> <a class="pull-right">{{ $employe->matricule }}</a>
                                     </li>
                                     <li class="list-group-item">
-                                      <b>Fonction:</b> <a class="pull-right">{{ $employe->fonction_id }}</a>
+                                      <b>Fonction:</b> <a class="pull-right">{{ $employe->fonction->libelle }}</a>
                                     </li>
                                   </ul>
                                 </td>

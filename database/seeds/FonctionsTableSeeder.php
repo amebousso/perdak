@@ -12,11 +12,15 @@ class FonctionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $fonctions = ['Coordonnateur National', 'Coordonnateur de Pole', 'Coordonnateur Departemental', 'Responsable Administratif',
-                     'Responsable Financier', 'Responsable Technique', 'Responsable Cellule', 'Responsable SI', 'Responsable SIG',
-                     'Contrôleur Interne', 'Comptable','Assistant Direction', 'Assistant Technique', 'Assistant suivi', 'Assistant RH',
-                     'Architecte Logiciel', 'Architecte Reseaux', 'Technicien de Surface', 'CST', 'Inspecteur', 'Geomaticien',
-                     'Chef Parc Automobile', 'Chauffeur', 'Ambassadrice', 'Vigile', 'Photographe', 'Cameraman-Monteur', 'Cadre Gestion'];
+        $fonctions = ["COORDONNATEUR NATIONAL", "RESPONSABLE TECHNIQUE", "COORDONNATEUR DE POLE", "COORDONNATEUR DEPARTEMENTAL",
+        "TECHNICIEN DE SURFACE", "RESPONSABLE FINANCIER", "RESPONSABLE ADMINISTRATIF", "RESPONSABLE SUIVI EVALUATION",
+        "CHEF DE ZONE", "CHEF DE SECTEUR", "OPERATEUR", "CHAUDRONNIER", "SURVEILLANT DE DEPOT", "CONTROLEUR", "SECRETAIRE",
+        "CHEF SERVICE D'EXPLOITATION", "AMBASSADRICE", "CHAUFFEUR", "CHEF DE DEPARTEMENT", "GARDIEN", "SUPERVISEUR",
+        "CHEF DE SECTEUR", "INSPECTEUR", "EMPLOYE", "ASSISTANT RH", "ASSISTANT TECHNIQUE", "ASSISTANTE ADMINISTRATIVE",
+         "COORDONNATEUR", "CHEF DE  SECTEUR", "COURSIER", "ASSISTANT ADMINISTRATIF", "AGENT DE SAISIE",
+         "ADMINISTRATIF FINANCIER COMPTABLE", "GUIDEUR", "ASSISTANTE DE DIRECTION", "GERANT MUTUELLE", "ENTRETIEN LOCAUX",
+         "COMPTABLE IPM", "INGENIEUR EN INFORMATIQUE", "INGENIEUR TELECOM&RESEAUX", "CHEF DE PROJET", "RESPONSABLE SIG",
+         "COORDONNATEUR CELLULE"];
 
         foreach ($fonctions as $fonction) {
             Fonction::create(

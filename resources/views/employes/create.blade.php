@@ -20,188 +20,99 @@
 
   <!-- Main content -->
   <section class="content">
-    <div class="row">
-      {!! Form::open(['route' => 'employes.store', 'role' => 'form', 'file' => 'true', 'enctype' => 'multipart/form-data']) !!}
-      @if(session()->has('success'))
-      <div class="alert alert-success col-md-8">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Success!</strong> {{ session('success') }}
-      </div>
-      @endif
-      <!-- left column -->
-        <div class="col-md-6">
-        <!-- general form elements -->
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">Information du personnel</h3>
-          </div>
-          <!-- /.box-header -->
-          <!-- form start -->
-          <div class="box-body">
-              <div class="form-group">
-                <label for="exampleInputPrenom">Prénom</label>
-                <input type="text" name="prenom" class="form-control" id="exampleInputPrenom" placeholder="Entrer le prénom">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputNom">Nom</label>
-                <input type="text" name="nom" class="form-control" id="exampleInputNom" placeholder="Entrer le nom">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputNaissance">Date de naissance</label>
-                <input type="date" name="dateNaissance" class="form-control" id="exampleInputNaissance" placeholder="Date de naissance">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputLieu">Lieu de Naissance</label>
-                <input type="text" name="lieuNaissance" class="form-control" id="exampleInputLieu" placeholder="Lieu de naissance">
-              </div>
-              <div class="form-group">
-                <label>Sexe</label>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="sexe" value="M"> Masculin
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="sexe" value="F"> Féminin
-                  </label>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Situation Matrimoniale</label>
-                <select class="form-control" name="situationMatrimoniale">
-                  <option value="Marié(e)">Marié(e)</option>
-                  <option value="Célibataire">Célibataire</option>
-                  <option value="Divorcé(e)">Divorcé(e)</option>
-                  <option value="Veuf/Veuve">Veuve/Veuf</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEnfant">Nombre d'enfants</label>
-                <input type="number" name="nombreEnfant" class="form-control" id="exampleInputEnfant" placeholder="Nombre d'enfant">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputMatricule">Matricule</label>
-                <input type="text" name="matricule" class="form-control" id="exampleInputMatricule" placeholder="Entrer le matricule">
-              </div>
-              <div class="form-group">
-                <label>Service</label>
-                <select class="form-control" name="service" id="service">
-                  <option>:::: Sélectionne un service :::::</option>
-                  <?php foreach ($services as $service): ?>
-                    <option value="{!! $service->id !!}">{!! $service->libelle !!}</option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Cellule</label>
-                <select class="form-control" name="cellule_id" id="cellule">
-                  <option>::: Cellule :::</option>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+              @component('components.card')
+                 @slot('title')
+                     @lang('Ajouter un nouvel employé')
+                 @endslot
+                 <form method="POST" action="{{ route('employes.store') }}" enctype="multipart/form-data">
+                     {{ csrf_field() }}
+                     <div class="form-group">
+                          <label for="type">Type d'employé</label>
+                          <select id="type" name="type" class="form-control">
+                              <option value="terrain">Personnel de Nettoiement</option>
+                              <option value="support administratif et technique">Personnel Support Administratif et Technique</option>
+                          </select>
+                      </div>
 
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Fonction</label>
-                <select class="form-control" name="fonction_id" id="fonction">
-                  <option>:::Fonction:::</option>
-                  <?php foreach ($fonctions as $fonction): ?>
-                    <option value="{!! $fonction->id !!}">{!! $fonction->libelle !!}</option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputCNI">Numéro de CNI</label>
-                <input type="text" name="cni" class="form-control" id="exampleInputCNI" placeholder="Entrer le numero CNI">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputProfession">Profession</label>
-                <input type="text" name="profession" class="form-control" id="exampleInputProfession" placeholder="Entrer la profession">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputIpress">Numéro IPRES</label>
-                <input type="text" name="ipress" class="form-control" id="exampleInputIpress" placeholder="Numéro IPRESS">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEtude">Niveau d'étude</label>
-                <input type="text" name="niveauEtude" class="form-control" id="exampleInputEtude" placeholder="Niveau d'étude">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputFile">Photo de l'employé</label>
-                <input type="file" name="photo" id="exampleInputFile">
-              </div>
-            </div>
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-      </div>
-      <!--/.col (left) -->
-      <!-- right column -->
-        <div class="col-md-6">
-        <!-- /.box -->
-        <!-- Horizontal Form -->
-        <div class="box box-info">
-          <div class="box-header with-border">
-            <h3 class="box-title">Adresse du personnel</h3>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <div class="form-group">
-              <label>Pays</label>
-              <select class="form-control" name="pays">
-                <option value="Sénégal">Sénégal</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Région</label>
-              <select class="form-control" name="region" id="region">
-                <option value="Dakar">Dakar</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Département</label>
-              <select class="form-control" name="departement">
-                <option value="Dakar">Dakar</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Commune</label>
-              <select class="form-control" name="commune">
-                <option value="Médina">Médina</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputCode">Code postal</label>
-              <input type="text" name="codePostal" class="form-control" id="exampleInputCode" placeholder="Code Postal">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputCompte">Quartier</label>
-              <input type="text" name="quartier" class="form-control" id="exampleInputQuartier" placeholder="Quartier">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputTéléphone1">Téléphone 1</label>
-              <input type="text" name="telephone1" class="form-control" id="exampleInputTéléphone1" placeholder="Téléphone 1">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputTéléphone2">Téléphone 2</label>
-              <input type="text" name="telephone2" class="form-control" id="exampleInputTéléphone2" placeholder="Téléphone 2">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputTéléphone3">Téléphone 3</label>
-              <input type="text" name="telephone3" class="form-control" id="exampleInputTéléphone3" placeholder="Téléphone 3">
-            </div>
+                      <div class="form-group">
+                           <label for="contrat">Contrat de Travail</label>
+                           <select id="contrat" name="contrat" class="form-control">
+                              <option value="journalier">JOURNALIER</option>
+                              <option value="cdd">CDD</option>
+                              <option value="cdi">CDI</option>
+                           </select>
+                       </div>
 
-          </div>
-            <!-- /.box-body -->
+                      @include('partials.form-group', [
+                         'title' => __('Prénom'),
+                         'type' => 'text',
+                         'name' => 'prenom',
+                         'required' => true,
+                         ])
+
+                      @include('partials.form-group', [
+                          'title' => __('Nom'),
+                          'type' => 'text',
+                          'name' => 'nom',
+                          'required' => true,
+                          ])
+
+                       <div class="form-group">
+                          <label>Sexe</label>
+                          <div class="radio">
+                              <label>
+                                <input type="radio" name="sexe" value="M"> Masculin
+                              </label>
+                            </div>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" name="sexe" value="F"> Féminin
+                              </label>
+                            </div>
+                        </div>
+
+                        @include('partials.form-group', [
+                            'title' => __('Date de Naissance'),
+                            'type' => 'date',
+                            'name' => 'dateNaissance',
+                            'required' => true,
+                            ])
+
+                        @include('partials.form-group', [
+                            'title' => __('Lieu de Naissance'),
+                            'type' => 'text',
+                            'name' => 'lieuNaissance',
+                            'required' => true,
+                            ])
+
+                        @include('partials.form-group', [
+                            'title' => __('Numéro Carte d\'Identité'),
+                            'type' => 'text',
+                            'name' => 'cni',
+                            'required' => true,
+                            ])
+
+                        <div class="form-group{{ $errors->has('photo') ? ' is-invalid' : '' }}">
+                           <label class="custom-file">
+                               <input type="file" id="photo" name="photo" class="form-control{{ $errors->has('photo') ? ' is-invalid ' : '' }}custom-file-input" required>
+                               <span class="custom-file-control form-control-file"></span>
+                               @if ($errors->has('photo'))
+                                   <div class="invalid-feedback">
+                                       {{ $errors->first('image') }}
+                                   </div>
+                               @endif
+                           </label>
+                       </div>
+                       @component('components.button')
+                           @lang('Enregister')
+                       @endcomponent
+                 </form>
+             @endcomponent
+            </div>
         </div>
-        <!-- /.box -->
-        <!-- Form Element sizes -->
-        <!-- /.box -->
-      </div>
-      <!--/.col (right) -->
-        <div class="box-footer">
-        <button type="submit" class="btn btn-primary col-md-3">Valider les données</button>
-      </div>
-      {!! Form::close() !!}
     </div>
     <!-- /.row -->
   </section>
@@ -212,6 +123,29 @@
 @section('script')
 	<script type="text/javascript">
 		$(function() {
+      $('input[type="file"]').on('change',function(){
+              let fileName = $(this).val().replace(/^.*[\\\/]/, '')
+              $(this).next('.form-control-file').html(fileName)
+      })
+      // Chargement du Contrat
+      $('#type').on('change', function(e) {
+          var type = e.target.value;
+          var data = [];
+          if(type == "terrain") {
+              data = ["journalier", "cdd", "cdi"];
+          } else {
+              data = ["stagiaire", "cdd", "cdi"];
+          }
+
+          $('#contrat').empty();
+          $.each(data, function(index, contrat) {
+              $('#contrat').append($('<option>', {
+                  value: contrat,
+                  text : contrat.toUpperCase()
+              }));
+          });
+      })
+
   		// Changement de région
   		$('#service').on('change', function(e) {
   			var service_id = e.target.value;

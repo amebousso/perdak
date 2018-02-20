@@ -43,7 +43,7 @@ class EmployeController extends Controller
                                                 ->join('communes', 'circuits.commune_id', '=', 'communes.id')
                                                 ->where('communes.departement_id', (int)$request->user()->zone_id)
                                                 ->where('employes.type', 'terrain')
-                                                ->where('employes.contrat', 'cdd')->orWhere('employes.contrat', 'cdi')
+                                                ->where('employes.contrat', 'cdi')->orWhere('employes.contrat', 'cdd')
                                                 ->paginate(25);
             }else if($type ==  'journalier') {
                 $employes = Employe::select('*')->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
@@ -66,7 +66,7 @@ class EmployeController extends Controller
                                        ->join('coordination_departementales', 'communes.departement_id', '=', 'coordination_departementales.id')
                                        ->join('coordination_de_poles', 'coordination_departementales.pole_id', '=', 'coordination_de_poles.id')
                                        ->where('employes.type', 'terrain')
-                                       ->where('employes.contrat', 'cdd')->orWhere('employes.contrat', 'cdi')
+                                       ->where('employes.contrat', 'cdi')->orWhere('employes.contrat', 'cdd')
                                        ->paginate(25);
             } else if($type == 'journalier') {
                 $employes = Employe::select('*')->join('circuits', 'employes.circuit_id', '=', 'circuits.id')
@@ -86,13 +86,13 @@ class EmployeController extends Controller
             }
         } else{
             if($type == 'administratif') {
-                $employes = Employe::where('type', 'topmanagement')
-                                    ->where('contrat', 'cdd')->orWhere('contrat', 'cdi')
+                $employes = Employe::where('type', 'support administratif et technique')
+                                    ->where('contrat', 'cdi')->orWhere('contrat', 'cdd')
                                     ->paginate(25);
             }
             else if($type == 'permanent') {
                 $employes = Employe::where('type', 'terrain')
-                                    ->where('contrat', 'cdd')->orWhere('contrat', 'cdi')
+                                    ->where('contrat', 'cdi')->orWhere('contrat', 'cdd')
                                     ->paginate(25);
             } else if($type == 'journalier') {
                 $employes = Employe::where('type', 'terrain')
@@ -130,30 +130,24 @@ class EmployeController extends Controller
     public function store(Request $request)
     {
         $employe = new Employe;
-        $infobanque = new InfosBancaire;
-        $adresse = new Adresse;
         $photo = new Photo;
         $dossier = new DossierPersonnel;
+        /*$infobanque = new InfosBancaire;
+        $adresse = new Adresse;*/
 
+        $employe->type = $request->input('type');
+        $employe->contrat = $request->input('contrat');
         $employe->prenom = $request->input('prenom');
         $employe->nom = $request->input('nom');
         $employe->dateNaissance = $request->input('dateNaissance');
         $employe->lieuNaissance = $request->input('lieuNaissance');
-        $employe->matricule = $request->input('matricule');
         $employe->cni = $request->input('cni');
-        $employe->profession = $request->input('profession');
-        $employe->ipress = $request->input('ipress');
         $employe->sexe = $request->input('sexe');
-        $employe->situationMatrimoniale = $request->input('situationMatrimoniale');
-        $employe->nombreEnfants = $request->input('nombreEnfant');
-        $employe->niveauEtude = $request->input('niveauEtude');
-        $employe->fonction_id = $request->input('fonction_id');
-        $employe->cellule_id = $request->input('cellule_id');
-        $employe->circuit_id = $request->input('circuit_id');
+
 
         $employe->save();
 
-        $infobanque->codeGuichet = $request->input('codeGuichet');
+        /*$infobanque->codeGuichet = $request->input('codeGuichet');
         $infobanque->numero_compte = $request->input('numero_compte');
         $infobanque->cleRIB = $request->input('cleRIB');
         $infobanque->banque_id = $request->input('banque');
@@ -172,7 +166,7 @@ class EmployeController extends Controller
         $adresse->telephone3 = $request->input('telephone3');
         $adresse->employe_id = $employe->id;
 
-        $adresse->save();
+        $adresse->save();*/
 
         if ($request->hasFile('photo')) {
               # code...
@@ -181,7 +175,7 @@ class EmployeController extends Controller
               // start count how many uploaded
 
               $ext = $file->getClientOriginalExtension();
-              $filename = $employe->matricule.'_'.$employe->prenom.'.'.$ext;
+              $filename = $employe->cni.'.'.$ext;
               $path = public_path('images/employes/profiles/'. $filename);
               $destinationPath = public_path('images/employes/originales/');
               Image::make($file->getRealPath())->resize(240, 240)->save($path);
@@ -197,7 +191,7 @@ class EmployeController extends Controller
 
               $photo->save();
           }
-          $nomDossier = $employe->matricule.'_'. $employe->prenom.'_'.$employe->nom;
+          $nomDossier = $employe->cni.'_'. $employe->prenom.'_'.$employe->nom;
           $path = public_path('dossiers/'.$nomDossier);
           File::makeDirectory($path, 0777, true);
 
