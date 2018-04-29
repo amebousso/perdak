@@ -49,9 +49,9 @@
             <p class="text-muted text-center">{{ $employe->fonction->libelle }}</p>
 
             <ul class="list-group list-group-unbordered">
-              <li class="list-group-item">
-                <b>Cellule</b> <a class="pull-right">{{ $employe->cellule->libelle }}</a>
-              </li>
+              <!--li class="list-group-item">
+                <b>Cellule</b> <a class="pull-right">$employe->cellule->libelle </a>
+              </li-->
               <li class="list-group-item">
                 <b>Matricule</b> <a class="pull-right">{{ $employe->matricule }}</a>
               </li>
@@ -84,10 +84,10 @@
 
             <strong><i class="fa fa-map-marker margin-r-5"></i> Adresse</strong>
 
-            <p class="text-muted">
-              {{ $employe->adresse->quartier }}, {{ $employe->adresse->commune }},
-              {{ $employe->adresse->departement }}, {{ $employe->adresse->region }}
-            </p>
+            <!--p class="text-muted">
+              $employe->adresse->quartier }}, $employe->adresse->commune,
+              $employe->adresse->departement , $employe->adresse->region
+            </p-->
 
             <hr>
 
@@ -144,8 +144,8 @@
                 </div>
                 <div class="box-body">
                   <div class="example">
-                 			<div id="fileTreeDemo_1" class="demo"></div>
-                 	 </div>
+                      <div id="fileTreeDemo_1" class="demo"></div>
+                   </div>
                 </div>
                 <!-- /.box-body -->
               </div>
@@ -217,7 +217,7 @@
                     <b>Matricule:</b> <a class="pull-right">{{ $employe->matricule }}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Fonction:</b> <a class="pull-right">{{ $employe->fonction->corpsDeMetier->libelle }}</a>
+                    <b>Fonction:</b> <a class="pull-right">{{ $employe->fonction->libelle }}</a>
                   </li>
 
                 </ul>

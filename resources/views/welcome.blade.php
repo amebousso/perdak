@@ -28,14 +28,12 @@
           <div class="nav-tabs-custom">
             <!-- Tabs within a box -->
             <ul class="nav nav-tabs pull-right">
-              <li><a href="#personnel-genrestatut" data-toggle="tab">Area</a></li>
-              <li  class="active"><a href="#personnel-sexe" data-toggle="tab">Personnel par Statut</a></li>
-              <li class="pull-left header"><i class="fa fa-users"></i> Personnel</li>
+              <li class="pull-left header">Repartion du Personnel par Type et par Genre</li>
             </ul>
             <div class="tab-content no-padding">
               <!-- Morris chart - Sales -->
-              <div class="chart tab-pane" id="personnel-genrestatut" style="position: relative; height: 300px;"></div>
-              <div class="chart tab-pane  active" id="personnel-sexe" style="position: relative; height: 300px;"></div>
+              <div class="chart tab-pane  active" id="personnel-genrestatut" style="position: relative; height: 350px;"></div>
+              <div class="chart tab-pane" id="personnel-sexe" style="position: relative; height: 300px;"></div>
             </div>
           </div>
           <!-- /.nav-tabs-custom -->
@@ -43,48 +41,11 @@
           <!-- solid sales graph -->
           <div class="nav-tabs-custom">
             <div class="box-header">
-              <i class="fa fa-th"></i>
-
               <h3 class="box-title">Répartition du Personnel dans le Pole de Dakar</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                </button>
-              </div>
             </div>
             <div class="box-body border-radius-none">
-              <div class="chart" id="personnelDakar" style="height: 250px;"></div>
+              <div class="chart" id="personnelDakar" style="height: 443px;"></div>
             </div>
-            <!-- /.box-body -->
-            <!--div class="box-footer no-border">
-              <div class="row">
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Mail-Orders</div>
-                </div>
-                <!-- ./col -->
-                <!--div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Online</div>
-                </div>
-                <!-- ./col -->
-                <!--div class="col-xs-4 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">In-Store</div>
-                </div>
-                <!-- ./col -->
-              <!--/div>
-              <!-- /.row -->
-            <!--/div>
-            <!-- /.box-footer -->
           </div>
           <!-- /.box -->
         </section>
@@ -93,44 +54,33 @@
         <section class="col-lg-5 connectedSortable">
 
           <!-- Map box -->
-          <div class="box box-solid bg-light-blue-gradient">
+          <div class="box box-solid">
             <div class="box-header">
               <!-- tools box -->
-              <div class="pull-right box-tools">
-                <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip"
-                        title="Date range">
-                  <i class="fa fa-calendar"></i></button>
-                <button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse"
-                        data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
-                  <i class="fa fa-minus"></i></button>
-              </div>
               <!-- /. tools -->
-
-              <i class="fa fa-map-marker"></i>
-
               <h3 class="box-title">
-                Circuits
+                Répartition du personnel par Type
               </h3>
             </div>
             <div class="box-body">
-              <div id="world-map" style="height: 250px; width: 100%;"></div>
+              <div id="personnelType" style="height: 250px; width: 100%;"></div>
             </div>
             <!-- /.box-body-->
             <div class="box-footer no-border">
-              <div class="row">
+              <div class="row" style="font-weight: bold">
                 <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <div id="sparkline-1"></div>
-                  <div class="knob-label">Visitors</div>
+                  <div id="pat" style=" color: #3c8dbc"></div>
+                  <div class="knob-label" style=" color: #3c8dbc">Personnel Administratif, Technique</div>
                 </div>
                 <!-- ./col -->
                 <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <div id="sparkline-2"></div>
-                  <div class="knob-label">Online</div>
+                  <div id="ptp" style=" color: #f56954"></div>
+                  <div class="knob-label" style=" color: #f56954">Personnel de Terrain permanent</div>
                 </div>
                 <!-- ./col -->
                 <div class="col-xs-4 text-center">
-                  <div id="sparkline-3"></div>
-                  <div class="knob-label">Exists</div>
+                  <div id="ptj" style=" color: #00a65a"></div>
+                  <div class="knob-label" style=" color: #00a65a">Personnel de Terrain Journalier</div>
                 </div>
                 <!-- ./col -->
               </div>
@@ -140,35 +90,16 @@
           <!-- /.box -->
 
           <!-- Calendar -->
-          <div class="box box-solid bg-green-gradient">
+          <div class="box box-solid">
             <div class="box-header">
-              <i class="fa fa-calendar"></i>
-
-              <h3 class="box-title">Calendrier</h3>
+              <h3 class="box-title">Repartiton du personnel de terrain département</h3>
               <!-- tools box -->
-              <div class="pull-right box-tools">
-                <!-- button with a dropdown -->
-                <div class="btn-group">
-                  <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-bars"></i></button>
-                  <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="#">Add new event</a></li>
-                    <li><a href="#">Clear events</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">View calendar</a></li>
-                  </ul>
-                </div>
-                <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                </button>
-              </div>
               <!-- /. tools -->
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
               <!--The calendar -->
-              <div id="calendar" style="width: 100%"></div>
+              <div id="circuit" style="width: 100%"></div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer text-black">

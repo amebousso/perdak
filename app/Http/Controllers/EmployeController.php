@@ -226,15 +226,32 @@ class EmployeController extends Controller
     public function edit($id)
     {
         $employe = Employe::find($id);
-        $banques = Banque::all()->pluck('libelle', 'id');
-        $services = Service::all()->pluck('libelle', 'id');
-        $poles = CoordinationDePole::all()->pluck('libelle', 'id');
-        $departements = CoordinationDepartementale::all()->pluck('libelle', 'id');
-        $communes = Commune::all()->pluck('libelle', 'id');
-        $circuits = Circuit::all()->pluck('libelle', 'id');
-        $cellules = Cellule::all()->pluck('libelle', 'id');
-        $fonctions = Fonction::all()->pluck('libelle', 'id');
 
+        if ($employe->infosBancaire) {
+          $banques = Banque::all()->pluck('libelle', 'id');
+        } else {
+          $banques = Banque::all();
+        }
+        if ($employe->cellule_id) {
+          $services = Service::all()->pluck('libelle', 'id');
+          $cellules = Cellule::all()->pluck('libelle', 'id');
+        } else {
+          $services = Service::all();
+        }
+        if ($employe->circuit_id) {
+          $poles = CoordinationDePole::all()->pluck('libelle', 'id');
+          $departements = CoordinationDepartementale::all()->pluck('libelle', 'id');
+          $communes = Commune::all()->pluck('libelle', 'id');
+          $circuits = Circuit::all()->pluck('libelle', 'id');
+        } else {
+          $poles = CoordinationDePole::all();
+        }
+        if ($employe->fonction_id) {
+          $fonctions = Fonction::all()->pluck('libelle', 'id');
+        } else {
+          $fonctions = Fonction::all();
+        }
+        
         return view('employes.edit', compact('employe', 'banques', 'services', 'poles', 'cellules', 'fonctions', 'departements', 'communes', 'circuits'));
     }
 

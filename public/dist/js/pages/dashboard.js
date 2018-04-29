@@ -181,8 +181,47 @@ $(function () {
         gridTextSize     : 10
       });*/
 
+      //BAR CHART
+      var histoChart = function(data, container, origine) {
+        var label = []
+        if(origine === undefined) {
+          label = data[0].b === undefined ? ['Effectif'] : ['Hommes', 'Femmes']
+        } else {
+          label = data[0].b === undefined ? ['Effectif'] : ['Permanent', 'Journalier']
+        }
+        return new Morris.Bar({
+          element: container,
+          resize: true,
+          data: data,
+          barColors: ['#00a65a', '#f56954'],
+          xkey: 'y',
+          ykeys: data[0].b === undefined ? ['a'] : ['a', 'b'],
+          labels: label,
+          hideHover: 'auto'
+        })
+      }
+
       // Donut Chart
-      var donut = new Morris.Donut({
+      var donutChart = function(data, container) {
+        return new Morris.Donut({
+          element  : container,
+          resize   : true,
+          colors   : ['#3c8dbc', '#f56954', '#00a65a'],
+          data     : data,
+          hideHover: 'auto'
+        });
+      }
+
+      var donutW = donutChart(data[0], "personnelType");
+      $("#pat").html(data[0][0].value)
+      $("#ptp").html(data[0][1].value)
+      $("#ptj").html(data[0][2].value)
+      var bar = histoChart(data[1], "personnel-genrestatut");
+      var bar1 = histoChart(data[2], "personnelDakar");
+      var barPersonnel = histoChart(data[3], "circuit", "employe")
+
+      // Donut Chart
+    /*  var donut = new Morris.Donut({
         element  : 'personnel-sexe',
         resize   : true,
         colors   : ['#3c8dbc', '#f56954', '#00a65a'],
@@ -211,15 +250,17 @@ $(function () {
         xkey: 'y',
         ykeys: ['a'],
         hideHover: 'auto'
-      });
+      });*/
 
       // Fix for charts under tabs
       $('.box ul.nav a').on('shown.bs.tab', function () {
         area.redraw();
         donut.redraw();
+        donutW.redraw();
         line.redraw();
         bar.redraw();
         bar1.redraw();
+        barPersonnel.redraw();
       });
     }
   });

@@ -58,14 +58,14 @@
                 <label>Sexe</label>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="sexe" value="Masculin" <?php if ($employe->sexe === "Masculin"): ?>
+                    <input type="radio" name="sexe" value="Masculin" <?php if ($employe->sexe === "M"): ?>
                       checked="checked"
                     <?php endif; ?>> Masculin
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="sexe" value="Féminin" <?php if ($employe->sexe === "Feminin"): ?>
+                    <input type="radio" name="sexe" value="Féminin" <?php if ($employe->sexe === "F"): ?>
                       checked="checked"
                     <?php endif; ?>> Féminin
                   </label>
@@ -96,21 +96,52 @@
                 <label for="exampleInputMatricule">Matricule</label>
                 {{ Form::text('matricule', null, ['class' => 'form-control']) }}
               </div>
-              <div class="form-group">
-                <label>Service</label>
-                {{ Form::select('service', $services, $employe->cellule->service->id, ['class' => 'form-control', 'id' => 'service']) }}
+              @if($employe->cellule_id)
+                <div class="form-group">
+                  <label>Service</label>
+                  {{ Form::select('service', $services, $employe->cellule->service->id, ['class' => 'form-control', 'id' => 'service']) }}
 
-              </div>
-              <div class="form-group">
-                <label>Cellule</label>
-                {{ Form::select('cellule_id', $cellules, $employe->cellule->id, ['class' => 'form-control', 'id' => 'cellule']) }}
+                </div>
+                <div class="form-group">
+                  <label>Cellule</label>
+                  {{ Form::select('cellule_id', $cellules, $employe->cellule->id, ['class' => 'form-control', 'id' => 'cellule']) }}
 
-              </div>
-              <div class="form-group">
-                <label>Fonction</label>
-                {{ Form::select('fonction_id', $fonctions, $employe->fonction->id, ['class' => 'form-control', 'id' => 'fonction']) }}
+                </div>
+              @else
+                <div class="form-group">
+                  <label>Service</label>
+                  <select id="service" class="form-control" name="service">
+                    <option>::::Choisir le Service::::</option>
+                    @foreach($services as $service)
+                      <option value="{!! $service->id !!}">{!! $service->libelle !!}</option>
+                    @endforeach
+                  </select>
+                </div>
 
-              </div>
+                <div class="form-group">
+                  <label>Cellule</label>
+                  <select id="cellule" class="form-control" name="cellule_id">
+                    <option>::::Choisir la cellule::::</option>
+                  </select>
+                </div>
+              @endif
+
+              @if($employe->fonction_id)
+                <div class="form-group">
+                  <label>Fonction</label>
+                  {{ Form::select('fonction_id', $fonctions, $employe->fonction->id, ['class' => 'form-control', 'id' => 'fonction']) }}
+                </div>
+              @else
+                <div class="form-group">
+                  <label>Fonction</label>
+                  <select class="form-control" name="fonction_id">
+                    <option>::::Choisir la Fonction::::</option>
+                    @foreach($fonctions as $fonction)
+                      <option value="{!! $fonction->id !!}">{!! $fonction->libelle !!}</option>
+                    @endforeach
+                  </select>
+                </div>
+              @endif
               <div class="form-group">
                 <label for="exampleInputCNI">Numéro de CNI</label>
                 {{ Form::text('cni', null, ['class' => 'form-control']) }}
@@ -144,28 +175,63 @@
           <div class="box-header with-border">
             <h3 class="box-title">Circuit d'affectation</h3>
           </div>
-          <div class="box-body">
-            <div class="form-group">
-              <label>Coordination de Pôle</label>
-              {{ Form::select('pole', $poles, $employe->circuit->commune->coordinationDepartement->coordinationPole->id, ['class' => 'form-control', 'id' => 'pole']) }}
+          @if($employe->circuit_id)
+            <div class="box-body">
+              <div class="form-group">
+                <label>Coordination de Pôle</label>
+                {{ Form::select('pole', $poles, $employe->circuit->commune->coordinationDepartement->coordinationPole->id, ['class' => 'form-control', 'id' => 'pole']) }}
 
-            </div>
-            <div class="form-group">
-              <label>Coordination départementale</label>
-              {{ Form::select('departement', $departements, $employe->circuit->commune->coordinationDepartement->id, ['class' => 'form-control', 'id' => 'departement']) }}
+              </div>
+              <div class="form-group">
+                <label>Coordination départementale</label>
+                {{ Form::select('departement', $departements, $employe->circuit->commune->coordinationDepartement->id, ['class' => 'form-control', 'id' => 'departement']) }}
 
-            </div>
-            <div class="form-group">
-              <label>Commune</label>
-              {{ Form::select('commune', $communes, $employe->circuit->commune->id, ['class' => 'form-control', 'id' => 'commune']) }}
+              </div>
+              <div class="form-group">
+                <label>Commune</label>
+                {{ Form::select('commune', $communes, $employe->circuit->commune->id, ['class' => 'form-control', 'id' => 'commune']) }}
 
-            </div>
-            <div class="form-group">
-              <label>Circuit d'affectation</label>
-              {{ Form::select('circuit_id', $circuits, $employe->circuit->id, ['class' => 'form-control', 'id' => 'circuit']) }}
+              </div>
+              <div class="form-group">
+                <label>Circuit d'affectation</label>
+                {{ Form::select('circuit_id', $circuits, $employe->circuit->id, ['class' => 'form-control', 'id' => 'circuit']) }}
 
+              </div>
             </div>
-          </div>
+          @else
+            <div class="box-body">
+              <div class="form-group">
+                <label>Coordination de Pôle</label>
+                <select class="form-control" id="pole" name="pole">
+                  <option>::::Choisir le Pole::::</option>
+                  @foreach($poles as $pole)
+                    <option value="{!! $pole->id !!}">{!! $pole->libelle !!}</option>
+                  @endforeach
+                </select>
+
+              </div>
+              <div class="form-group">
+                <label>Coordination départementale</label>
+                <select class="form-control" id="departement" name="departement">
+                  <option>::::Choisir le Département::::</option>
+                </select>
+
+              </div>
+              <div class="form-group">
+                <label>Commune</label>
+                <select class="form-control" id="commune" name="commune">
+                  <option>::::Choisir la Commune::::</option>
+                </select>
+
+              </div>
+              <div class="form-group">
+                <label>Circuit d'affectation</label>
+                <select class="form-control" id="circuit" name="circuit_id">
+                  <option>::::Choisir le Circuit::::</option>
+                </select>
+              </div>
+            </div>
+          @endif
           <!-- /.box-body -->
         </div>
         <!-- /.box -->
@@ -202,23 +268,23 @@
             </div>
             <div class="form-group">
               <label for="exampleInputCode">Code postal</label>
-              {{ Form::text('codePostal', $employe->adresse->codePostal, ['class' => 'form-control']) }}
+              {{ Form::text('codePostal', $employe->adresse ? $$employe->adresse->codePostal : "", ['class' => 'form-control']) }}
             </div>
             <div class="form-group">
               <label for="exampleInputCompte">Quartier</label>
-              {{ Form::text('quartier', $employe->adresse->quartier, ['class' => 'form-control']) }}
+              {{ Form::text('quartier', $employe->adresse ? $employe->adresse->quartier : "", ['class' => 'form-control']) }}
             </div>
             <div class="form-group">
               <label for="exampleInputTéléphone1">Téléphone 1</label>
-              {{ Form::text('telephone1', $employe->adresse->telephone1, ['class' => 'form-control']) }}
+              {{ Form::text('telephone1', $employe->adresse ? $employe->adresse->telephone1 : "", ['class' => 'form-control']) }}
             </div>
             <div class="form-group">
               <label for="exampleInputTéléphone2">Téléphone 2</label>
-              {{ Form::text('telephone2', $employe->adresse->telephone2, ['class' => 'form-control']) }}
+              {{ Form::text('telephone2', $employe->adresse ? $employe->adresse->telephone2 : "", ['class' => 'form-control']) }}
             </div>
             <div class="form-group">
               <label for="exampleInputTéléphone3">Téléphone 3</label>
-              {{ Form::text('telephone3', $employe->adresse->telephone3, ['class' => 'form-control']) }}
+              {{ Form::text('telephone3', $employe->adresse ? $employe->adresse->telephone3 : "", ['class' => 'form-control']) }}
             </div>
 
           </div>
@@ -233,15 +299,22 @@
           <div class="box-body">
             <div class="form-group">
               <label>Banque</label>
-              {{ Form::select('banque', $banques, $employe->infosBancaire->banque->id, ['class' => 'form-control', 'id' => 'corps']) }}
-
+              @if($employe->infosBancaire)
+                {{ Form::select('banque', $banques, $employe->infosBancaire->banque->id, ['class' => 'form-control', 'id' => 'corps']) }}
+              @else
+                <select class="form-control" name="banque">
+                  <option>::::Choisir la Banque::::</option>
+                  @foreach($banques as $banque)
+                    <option value="{!! $banque->id !!}">{!! $banque->libelle !!}</option>
+                  @endforeach
+                </select>
+              @endif
             </div>
             <div class="form-group">
               <label for="exampleInputCompte">Numéro de compte</label><br>
-              {{ Form::text('codeGuichet', $employe->infosBancaire->codeGuichet, []) }}
-              {{ Form::number('numero_compte', $employe->infosBancaire->numero_compte, []) }}
-              {{ Form::number('cleRIB', $employe->infosBancaire->cleRIB, []) }}
-
+              {{ Form::text('codeGuichet', $employe->infosBancaire ? $employe->infosBancaire->codeGuichet : "", []) }}
+              {{ Form::number('numero_compte', $employe->infosBancaire ? $employe->infosBancaire->numero_compte : "", []) }}
+              {{ Form::number('cleRIB', $employe->infosBancaire ? $employe->infosBancaire->cleRIB : "", []) }}
             </div>
           </div>
           <!-- /.box-body -->

@@ -20,7 +20,7 @@ class CreateEmployesTable extends Migration
             $table->string('sexe');
             $table->string('dateNaissance');
             $table->string('lieuNaissance');
-            $table->enum('type', ['terrain', 'topmanegement'])->nullable();
+            $table->enum('type', ['terrain', 'support administratif et technique'])->nullable();
             $table->enum('contrat', ['journalier', 'stagiaire', 'cdd', 'cdi'])->nullable();
             $table->string('cni')->nullable();
             $table->string('matricule')->nullable();
