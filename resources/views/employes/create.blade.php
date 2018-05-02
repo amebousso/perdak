@@ -20,99 +20,85 @@
 
   <!-- Main content -->
   <section class="content">
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-              @component('components.card')
-                 @slot('title')
-                     @lang('Ajouter un nouvel employé')
-                 @endslot
-                 <form method="POST" action="{{ route('employes.store') }}" enctype="multipart/form-data">
-                     {{ csrf_field() }}
-                     <div class="form-group">
-                          <label for="type">Type d'employé</label>
-                          <select id="type" name="type" class="form-control">
-                              <option value="terrain">Personnel de Nettoiement</option>
-                              <option value="support administratif et technique">Personnel Support Administratif et Technique</option>
-                          </select>
-                      </div>
-
-                      <div class="form-group">
-                           <label for="contrat">Contrat de Travail</label>
-                           <select id="contrat" name="contrat" class="form-control">
-                              <option value="journalier">JOURNALIER</option>
-                              <option value="cdd">CDD</option>
-                              <option value="cdi">CDI</option>
-                           </select>
-                       </div>
-
-                      @include('partials.form-group', [
-                         'title' => __('Prénom'),
-                         'type' => 'text',
-                         'name' => 'prenom',
-                         'required' => true,
-                         ])
-
-                      @include('partials.form-group', [
-                          'title' => __('Nom'),
-                          'type' => 'text',
-                          'name' => 'nom',
-                          'required' => true,
-                          ])
-
-                       <div class="form-group">
-                          <label>Sexe</label>
-                          <div class="radio">
-                              <label>
-                                <input type="radio" name="sexe" value="M"> Masculin
-                              </label>
-                            </div>
-                            <div class="radio">
-                              <label>
-                                <input type="radio" name="sexe" value="F"> Féminin
-                              </label>
-                            </div>
-                        </div>
-
-                        @include('partials.form-group', [
-                            'title' => __('Date de Naissance'),
-                            'type' => 'date',
-                            'name' => 'dateNaissance',
-                            'required' => true,
-                            ])
-
-                        @include('partials.form-group', [
-                            'title' => __('Lieu de Naissance'),
-                            'type' => 'text',
-                            'name' => 'lieuNaissance',
-                            'required' => true,
-                            ])
-
-                        @include('partials.form-group', [
-                            'title' => __('Numéro Carte d\'Identité'),
-                            'type' => 'text',
-                            'name' => 'cni',
-                            'required' => true,
-                            ])
-
-                        <div class="form-group{{ $errors->has('photo') ? ' is-invalid' : '' }}">
-                           <label class="custom-file">
-                               <input type="file" id="photo" name="photo" class="form-control{{ $errors->has('photo') ? ' is-invalid ' : '' }}custom-file-input" required>
-                               <span class="custom-file-control form-control-file"></span>
-                               @if ($errors->has('photo'))
-                                   <div class="invalid-feedback">
-                                       {{ $errors->first('image') }}
-                                   </div>
-                               @endif
-                           </label>
-                       </div>
-                       @component('components.button')
-                           @lang('Enregister')
-                       @endcomponent
-                 </form>
-             @endcomponent
+    <div class="row">
+      {!! Form::open(['route' => 'employes.store', 'role' => 'form']) !!}
+      @if(session()->has('success'))
+      <div class="alert alert-success col-md-8">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> {{ session('success') }}
+      </div>
+      @endif
+      <!-- right column -->
+      <div class="col-md-8">
+        <!-- Horizontal Form -->
+        <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Information de l'Employé</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="form-group">
+              <label>Type d'employé</label>
+              <select id="type" name="type" class="form-control">
+                <option value="terrain">Personnel de Nettoiement</option>
+                <option value="support administratif et technique">Personnel Support Administratif et Technique</option>
+              </select>
             </div>
+            <div class="form-group">
+              <label>Contrat de Travail</label>
+              <select id="contrat" name="contrat" class="form-control">
+                <option value="journalier">Journalier</option>
+                <option value="cdd">CDD</option>
+                <option value="cdi">CDI</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputlibelle">Prénom</label>
+              <input type="text" name="prenom" class="form-control" id="exampleInputlibelle" placeholder="Prénom de l'employé">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputlibelle">Nom</label>
+              <input type="text" name="nom" class="form-control" id="exampleInputlibelle" placeholder="Nom de l'employé">
+            </div>
+            <div class="form-group">
+              <label>Sexe</label>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sexe" id="inlineRadio1" value="M">
+                <label class="form-check-label" for="inlineRadio1">Masculin</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sexe" id="inlineRadio2" value="F">
+                <label class="form-check-label" for="inlineRadio2">Féminin</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputDate">Date de Naissance</label>
+                <input type="date" class="form-control" name="dateNaissance" id="inputDate" placeholder="Date de Naissance de l'employé">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputLieu">Lieu de Naissance</label>
+                <input type="text" class="form-control" name="lieuNaissance" id="inputLieu" placeholder="Lieu de Naissance de l'employé">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputlibelle">Numéro de la carte d'identité nationale ou du passeport</label>
+              <input type="text" name="cni" class="form-control" id="exampleInputlibelle" placeholder="Numéro CNI">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputFile">Photo de l'employé</label>
+              <input type="file" name="photo" id="exampleInputFile">
+            </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Valider les données</button>
+          </div>
         </div>
+        <!-- /.box -->
+      </div>
+      <!--/.col (right) -->
+      {!! Form::close() !!}
     </div>
     <!-- /.row -->
   </section>
